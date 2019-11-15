@@ -50,7 +50,7 @@ public class Register extends HttpServlet {
 		ResultSet rs = null;
 		
 		try {
-			conn = DriverManager.getConnection("jdbc:mysql://google/foodapp?cloudSqlInstance=<Instance connection name>&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false&user=user&password=wQHL223i4LJhEuCl1");
+			conn = DriverManager.getConnection("jdbc:mysql://google/foodapp?cloudSqlInstance=groupproject-258805:us-central1:project201&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false&user=anthonyuser&password=wQHL223i4LJhEuCl1");
 			st = conn.prepareStatement("SELECT * from users WHERE username=?");
 			st.setString(1, username);
 			rs = st.executeQuery();
