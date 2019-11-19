@@ -17,6 +17,7 @@ public class Recipe {
 		JsonObject recipe = obj.get("recipe").getAsJsonObject();
 		label = recipe.getAsJsonPrimitive("label").getAsString();
 		source = recipe.getAsJsonPrimitive("source").getAsString();
+		image = recipe.getAsJsonPrimitive("image").getAsString();
 		JsonArray health = recipe.getAsJsonArray("healthLabels");
 		if (health.size() > 0) {
 			healthLabels = new String[health.size()];
