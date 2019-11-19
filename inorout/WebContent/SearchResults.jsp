@@ -140,10 +140,10 @@
 	    <a href="HomePage.jsp" class="btn btn-default homeButton" id="titleHome">in-or-out</a>
 	    </div>
 	    <div class="searchSection">
-		  <form action="Search.java">
+		  <form action="Search">
 		  <div class="col-sm-3">
 		    <div class="form-group">
-		      <input type="text" class="form-control" id="foodSearch" placeholder="Find fries, sushi, pizza..." name="foodSearch">
+		      <input type="text" class="form-control" id="foodSearch" placeholder="Find fries, sushi, pizza..." name="searchTerm">
 		    </div>
 		  </div>
 		    <div class="col-sm-3">
