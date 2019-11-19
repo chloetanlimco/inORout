@@ -18,6 +18,7 @@
 	position: relative;
 	font-size: 6vh;
 	top: 4vh;
+	width: 15vh;
 }
 .signupbutton
 {
@@ -54,6 +55,15 @@
 	background-color: #9AADF2 ! important;
 	border-color: black ! important;
 	color: white ! important;
+}
+#error_msg
+{
+	font-family: 'Lustria';
+	font-weight: bold;
+	color: white;
+	font-size: 5vh;
+	position: relative;
+	top: 42vh;
 }
 
 
