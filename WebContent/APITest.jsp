@@ -16,7 +16,10 @@
 	if (list != null) {
 		System.out.println(list[0].getId());
 	}
-	%>
+	Recipe[] recipe = (Recipe[]) request.getAttribute("EdamamResults");
+	if (recipe != null) {
+		System.out.println(recipe.length);
+	}%>
 	
 </body>
 </html>

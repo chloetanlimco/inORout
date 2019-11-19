@@ -121,6 +121,7 @@ public class Search extends HttpServlet {
 			// figure out what to iterate up to
 			for (int i = 0; i < 10; i++) {
 				Recipe r = new Recipe(recipes.get(i).getAsJsonObject());
+				EdamamResults.add(r);
 			}
 		}
 		
