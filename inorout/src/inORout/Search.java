@@ -61,7 +61,7 @@ public class Search extends HttpServlet {
 		else
 		{
 		
-		searchTerm = "sushi"; // DELETE THIS
+		
 		
 		// read in config file with API keys
 		String YelpBearerId = "";
@@ -152,6 +152,7 @@ public class Search extends HttpServlet {
 		request.setAttribute("EdamamResults", EResults); 
 		request.setAttribute("searchType", request.getParameter("searchType"));
 		request.setAttribute("searchTerm", searchTerm);
+		System.out.println(request.getParameter("searchType"));
 		
 		// send it back
 		// CHANGE THIS TO CORRECT PAGE FOR REDIRECT

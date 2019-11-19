@@ -5,13 +5,13 @@ import com.google.gson.JsonObject;
 
 public class Recipe {
 	
-	private String label;
-	private String image;
-	private String source;
-	private String[] healthLabels;
-	private String[] cautions;
-	private String[] ingredientLines;
-	private double calories;
+	public String label;
+	public String image;
+	public String source;
+	public String[] healthLabels;
+	public String[] cautions;
+	public String[] ingredientLines;
+	public double calories;
 	
 	public Recipe(JsonObject obj) {
 		JsonObject recipe = obj.get("recipe").getAsJsonObject();

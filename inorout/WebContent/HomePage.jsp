@@ -65,7 +65,7 @@
 	</div>
   	<div class="jumbotron mainBox">
 		  <div class="container searchSection">
-		  <form action="Search.java">
+		  <form action="Search">
 		  <div class="row">
 		  <div class="col-sm-8">
 		    <div class="form-group">
