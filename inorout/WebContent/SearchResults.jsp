@@ -111,7 +111,7 @@
 		for(int i =0; i < max; i++)
 		{%>
 			recF.innerHTML += "<div class=\"row\">";
-			recF.innerHTML += " <div class=\"col-sm-4 \"> <input type=\"submit\" class= \"img-thumbnail image\"name= \"restaurant\" value=\"" 
+			recF.innerHTML += " <div class=\"col-sm-4 \"> <input type=\"submit\" class= \"img-thumbnail image\"name= \"recipe\" value=\"" 
 				+ "<%=recipes[i].getSource()%>" + "\" style=\"background-image: url('"+ 
 				"<%=recipes[i].getImage()%>" + "');\">";
 			recF.innerHTML+= "</div>";
