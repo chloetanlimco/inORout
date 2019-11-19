@@ -1,0 +1,90 @@
+@charset "UTF-8";
+
+#titleHome
+{
+	border: none;
+	font-family: 'Lustria';
+	position: relative;
+	font-size: 5vh;
+	background-color: #FC9D90 ! important;
+}
+.header
+{
+	position: relative;
+	height: 15vh;
+	background-color: #FC9D90;
+	padding: 0 ! important;
+	margin: 0 ! important;
+}
+.loginbutton
+{
+	font-family: 'Lustria';
+	position: relative;
+	font-size: 6vh;
+	top: 2vh;
+	background-color: #FC9D90 ! important;
+	border-color: black !important;
+}
+.signupbutton
+{
+	font-family: 'Lustria';
+	position: relative;
+	font-size: 6vh;
+	top: 2vh;
+	background-color: #FC9D90 ! important;
+	border-color: black !important;
+}
+
+.mainBox
+{
+	height: 100vh;
+	border: none;
+	border-radius: 0 !important;
+	padding: 0 ! important;
+	margin-bottom: 0 ! important;
+	margin-right: 0 ! important;
+	margin-left: 0 ! important; 
+  	background-size:cover;
+  	background-color: white ! important;
+
+}
+.searchSection
+{
+	text-align: center;
+	position: relative;
+	top: 2vh;
+}
+.searchButton
+{
+	font-family: 'Lustria';
+	background-color: #9AADF2 ! important;
+	border-color: black ! important;
+	color: white ! important;
+}
+.filterBar
+{
+	position: relative;
+	height: 65vh;
+	font-family: 'Lustria';
+	margin-top: 0vh ! important; 
+	padding: 0vh ! important;
+}
+.filterButton
+{
+	background-color: transparent ! important;
+	border-color: black ! important;
+	margin: 1vh ! important;
+	background-color: #9AADF2 ! important;
+	color: white ! important;
+	font-family: 'Lustria';
+	text-align: center ! important;
+	left: 50vh ! important;
+}
+.parentCenter
+{
+	margin: auto;
+	display: block;
+}
+
+
+

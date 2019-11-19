@@ -1,0 +1,60 @@
+@charset "UTF-8";
+
+#titleHome
+{
+	border: none;
+	font-family: 'Lustria';
+	position: relative;
+	font-size: 7vh;
+}
+.header
+{
+	position: relative;
+	height: 15vh;
+}
+.loginbutton
+{
+	font-family: 'Lustria';
+	position: relative;
+	font-size: 6vh;
+	top: 4vh;
+}
+.signupbutton
+{
+	font-family: 'Lustria';
+	position: relative;
+	font-size: 6vh;
+	top: 4vh;
+}
+.mainBox
+{
+	height: 100vh;
+	border: none;
+	border-radius: 0 !important;
+	padding: 0 ! important;
+	margin-bottom: 0 ! important;
+	margin-right: 0 ! important;
+	margin-left: 0 ! important; 
+	background-image: url(homepagefood.png);
+	background-repeat: no-repeat;
+  	display: block;
+  	background-size:cover;
+  	background-color: white ! important;
+
+}
+.searchSection
+{
+	text-align: center;
+	position: relative;
+	top: 40vh;
+}
+.searchButton
+{
+	font-family: 'Lustria';
+	background-color: #9AADF2 ! important;
+	border-color: black ! important;
+	color: white ! important;
+}
+
+
+
