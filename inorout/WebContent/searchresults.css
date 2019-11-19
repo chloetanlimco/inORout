@@ -83,20 +83,6 @@
 	left: 50vh ! important;
 }
 
-.column {
-  float: left;
-  width: 20%;
-}
-.col {
-  float: left;
-}
-.left {
-  width: 25%;
-}
-
-.right {
-  width: 75%;
-}
 
 .row:after {
   content: "";
@@ -121,6 +107,26 @@
 #recipeDiv
 {
 	font-family: 'Lustria';
+	color: black;
+}
+.row
+{
+	font-family: 'Lustria' ! important;
+	color: black;
+}
+.image
+{
+	position: relative;
+	width: 20vh;
+	height:20vh ! important;
+	font-size: 0.00001vh;
+	background-repeat: no-repeat;
+  	display: block;
+  	background-size:cover;
+}
+h4, h5
+{
+	font-family: 'Lustria' ! important;
 	color: black;
 }
 

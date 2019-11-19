@@ -89,15 +89,15 @@
 		}
 		for(int i =0; i < max; i++)
 		{%>
-			resF.innerHTML += "<div class=\"row\"> <div class=\"col-sm-6 col-left\">";
-			resF.innerHTML += "<input type=\"submit\" class= \"img-thumbnail\"name= \"restaurant\" value=\"" 
+			resF.innerHTML += "<div class=\"row\">";
+			resF.innerHTML += " <div class=\"col-sm-6\"> <input type=\"submit\" class= \"img-thumbnail image\"name= \"restaurant\" value=\"" 
 				+ "<%=restaurants[i].getId()%>" + "\" style=\"background-image: url('"+ 
 				"<%=restaurants[i].getImageUrl()%>" + "');\">";
 			resF.innerHTML+= "</div>";
-			resF.innerHTML += " <div class=\"col-sm-6 col-right\">";
-			resF.innerHTML += "<h3>" + "<%=restaurants[i].getName()%>" + "</h3> <br/>";
-			resF.innerHTML += "<h4>" + "<%=restaurants[i].getRating()%>" + "</h4><br/>";
-			resF.innerHTML += "<h4>" + "<%=restaurants[i].getPrice()%>" + "</h4><br/>";
+			resF.innerHTML += " <div class=\"col-sm-6\">";
+			resF.innerHTML += "<h4>" + "<%=restaurants[i].getName()%>" + "</h4> <br/>";
+			resF.innerHTML += "<h5>" + "<%=restaurants[i].getRating()%>" + "</h5><br/>";
+			resF.innerHTML += "<h5>" + "<%=restaurants[i].getPrice()%>" + "</h5><br/>";
 			
 			resF.innerHTML+= "<br/> </div> </div>";
 		<%}%>
@@ -110,12 +110,12 @@
 		}
 		for(int i =0; i < max; i++)
 		{%>
-			recF.innerHTML += "<div class=\"row\"> <div class=\"col-sm-6 col-left\">";
-			recF.innerHTML += "<input type=\"submit\" class= \"img-thumbnail\"name= \"restaurant\" value=\"" 
+			recF.innerHTML += "<div class=\"row\"> <div class=\"col-sm-6 \">";
+			recF.innerHTML += "<input type=\"submit\" class= \"img-thumbnail image\"name= \"restaurant\" value=\"" 
 				+ "<%=recipes[i].getSource()%>" + "\" style=\"background-image: url('"+ 
 				"<%=recipes[i].getImage()%>" + "');\">";
 			recF.innerHTML+= "</div>";
-			recF.innerHTML += " <div class=\"col-sm-6 col-right\">";
+			recF.innerHTML += " <div class=\"col-sm-6\">";
 			recF.innerHTML += "<h3>" + "<%=recipes[i].getLabel()%>" + "</h3> <br/>";
 			recF.innerHTML += "<h4>" + "<%=recipes[i].getCalories()%>" + "</h4><br/>";
 			
