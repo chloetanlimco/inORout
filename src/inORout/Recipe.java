@@ -51,6 +51,13 @@ public class Recipe {
 		}
 		
 		calories = recipe.getAsJsonPrimitive("calories").getAsDouble();
+		
+		System.out.println(label);
+		System.out.println(source);
+		System.out.println(healthLabels[0]);
+		System.out.println(cautions[0]);
+		System.out.println(ingredientLines[0]);
+		System.out.println(calories);
 	}
 
 	public String getLabel() {
