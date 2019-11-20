@@ -1,4 +1,3 @@
-
 package inORout;
 
 import com.google.gson.JsonArray;
@@ -7,13 +6,13 @@ import com.google.gson.JsonObject;
 
 public class Business {
 	
-	private String id;
-	private String name;
-	private String image_url;
-	private String display_address;
-	private String price;
-	private double rating;
-	private String display_phone;
+	public String id;
+	public String name;
+	public String image_url;
+	public String display_address;
+	public String price;
+	public double rating;
+	public String display_phone;
 	
 	public Business(JsonObject obj) {
 		// parse
