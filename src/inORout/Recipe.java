@@ -5,18 +5,19 @@ import com.google.gson.JsonObject;
 
 public class Recipe {
 	
-	private String label;
-	private String image;
-	private String source;
-	private String[] healthLabels;
-	private String[] cautions;
-	private String[] ingredientLines;
-	private double calories;
+	public String label;
+	public String image;
+	public String source;
+	public String[] healthLabels;
+	public String[] cautions;
+	public String[] ingredientLines;
+	public double calories;
 	
 	public Recipe(JsonObject obj) {
 		JsonObject recipe = obj.get("recipe").getAsJsonObject();
 		label = recipe.getAsJsonPrimitive("label").getAsString();
 		source = recipe.getAsJsonPrimitive("source").getAsString();
+		image = recipe.getAsJsonPrimitive("image").getAsString();
 		JsonArray health = recipe.getAsJsonArray("healthLabels");
 		if (health.size() > 0) {
 			healthLabels = new String[health.size()];
@@ -51,13 +52,6 @@ public class Recipe {
 		}
 		
 		calories = recipe.getAsJsonPrimitive("calories").getAsDouble();
-		
-		System.out.println(label);
-		System.out.println(source);
-		System.out.println(healthLabels[0]);
-		System.out.println(cautions[0]);
-		System.out.println(ingredientLines[0]);
-		System.out.println(calories);
 	}
 
 	public String getLabel() {
