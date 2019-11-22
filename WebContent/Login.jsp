@@ -64,9 +64,11 @@ body {
 <body>
 	<div id="filter">
 		<div id="header">
+		<div style="padding-top: 25px;">
 			<a href="HomePage.jsp">
 		    	<span style="margin-left: 10%; margin-top: 100px; width: 10%; font-size: 50px; color: black;">in-or-out</span>
 		    </a>
+		</div>
 	    </div>
 	    <!-- This div made vertically centering easier -->
 	    <div class="mainTextParent">
