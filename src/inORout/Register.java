@@ -40,7 +40,7 @@ public class Register extends HttpServlet {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		String confirmpass = request.getParameter("confirmpass");
-		String next = "/FinalProjectRegister.jsp";
+		String next = "/Register.jsp";
 
 		String error = "";
 		if (!password.contentEquals(confirmpass)) {
@@ -68,8 +68,7 @@ public class Register extends HttpServlet {
 				// log in user
 				request.getSession().setAttribute("Current User", username);
 				
-				// CHANGE THIS TO Profile.jsp when it's coded!!
-				next = "/HomePage.jsp";
+				next = "/Profile.jsp";
 			}
 		}
 		catch (SQLException sqle) {

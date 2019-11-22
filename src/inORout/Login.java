@@ -34,7 +34,7 @@ public class Login extends HttpServlet {
 		/* Front End change these values based on forms */
 		String username = request.getParameter("username").trim();
 		String password = request.getParameter("password").trim();
-		String next = "/HomePage.jsp";
+		String next = "/Profile.jsp";
 		HttpSession session = request.getSession();
 		
 		String error = "";
@@ -47,7 +47,7 @@ public class Login extends HttpServlet {
 			conn = DriverManager.getConnection("jdbc:mysql://google/foodapp?cloudSqlInstance=groupproject-258805:us-central1:project201&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false&user=anthonyuser&password=wQHL223i4LJhEuCl1");
 			
 			//check if user exists
-			ps = conn.prepareStatement("SELECT * FROM Users WHERE username=?");
+			ps = conn.prepareStatement("SELECT * FROM User WHERE username=?");
 			ps.setString(1, username);
 			rs = ps.executeQuery();
 			//if user doesn't already exist
