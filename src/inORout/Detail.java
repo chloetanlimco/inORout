@@ -50,6 +50,7 @@ public class Detail extends HttpServlet {
 		String searchType = request.getParameter("searchType");
 		String restaurant = request.getParameter("restaurant");
 		String recipe = request.getParameter("recipe");
+		String username = (String) request.getSession().getAttribute("Current User");
 		
 		String error = "";
 		String next = "Detail.jsp";
@@ -74,6 +75,7 @@ public class Detail extends HttpServlet {
 		//restaurant details
 		Business b = null;
 		Recipe r = null;
+		boolean fav = false;
 		if (searchType.contains("Restaurant")) {
 
 			URL url = new URL("https://api.yelp.com/v3/businesses/" + restaurant);
@@ -130,12 +132,51 @@ public class Detail extends HttpServlet {
 //			}
 		}
 		
+		//see if restaurant or recipe in user's favorites
+		// if username already taken
+		Connection conn = null;
+		PreparedStatement st = null;
+		ResultSet rs = null;
+		try {
+			conn = DriverManager.getConnection("jdbc:mysql://google/foodapp?cloudSqlInstance=groupproject-258805:us-central1:project201&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false&user=anthonyuser&password=wQHL223i4LJhEuCl1");
+			st = conn.prepareStatement("SELECT * from Favorite WHERE userID=(SELECT userID from User WHERE username=?)");
+			st.setString(1, username);
+			rs = st.executeQuery();
+			
+			while (rs.next()) {
+				//if recipe already in favorites
+				if (rs.getString("name").contentEquals(r.label) || rs.getString("name").contentEquals(b.name)) {
+					fav = true;
+				}
+			}
+		}
+		catch (SQLException sqle) {
+			System.out.println(sqle.getMessage());
+		}
+		finally {
+			try {
+				if (conn != null) {
+					conn.close();
+				}
+				if (st != null) {
+					st.close();
+				}
+				if (rs != null) {
+					rs.close();
+				}
+			}
+			catch (SQLException sqle) {
+				System.out.println(sqle.getMessage());
+			}
+		}
+		
 		/* Front End grab this value to display error */ 
-		request.setAttribute("login-error", error);
+		request.setAttribute("detail-error", error);
 		
 		//detail results
-		request.setAttribute("business", b);
-		request.setAttribute("recipe", r);
+		request.setAttribute("business", b); //business object
+		request.setAttribute("recipe", r); //restaurant object
+		request.setAttribute("favorite", fav); //boolean
 		
 		RequestDispatcher dispatch = getServletContext().getRequestDispatcher(next);
 		
