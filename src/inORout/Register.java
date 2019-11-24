@@ -68,7 +68,7 @@ public class Register extends HttpServlet {
 				// log in user
 				request.getSession().setAttribute("Current User", username);
 				
-				next = "/Profile.jsp";
+				next = "/HomePage.jsp";
 			}
 		}
 		catch (SQLException sqle) {

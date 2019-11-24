@@ -4,7 +4,7 @@
 <html lang="en">
 
 <head>
-	<title>Results</title>
+	<title>Detail</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" type="text/css" href="searchresults.css" />
@@ -17,29 +17,25 @@
 			let div = document.getElementById("buttonLog");
 			if ("<%=session.getAttribute("Current user ")%>" == "null") {
 				let el = document.createElement("input");
-				el.type = "submit";
 				el.name = "logChoice";
 				el.value = "Login";
 				el.className = "btn btn-default btn-lg loginbutton";
 				div.appendChild(el);
-	
+
 				let el2 = document.createElement("input");
-				el2.type = "submit";
 				el2.name = "logChoice";
 				el2.value = "Signup";
 				el2.className = "btn btn-default btn-lg loginbutton";
 				div.appendChild(el2);
-	
+
 			} else {
 				let ell = document.createElement("input");
-				ell.type = "submit";
 				ell.name = "logChoice";
 				ell.value = "Profile";
 				ell.className = "btn btn-default btn-lg loginbutton";
 				div.appendChild(ell);
-	
+
 				let el = document.createElement("input");
-				el.type = "submit";
 				el.name = "logChoice";
 				el.value = "Signout";
 				el.className = "btn btn-default btn-lg loginbutton";
@@ -49,34 +45,27 @@
 
 		function loadResults() {
 			var type = "<%=request.getAttribute("searchType ") %>";
-
 			type = type.substring(0, type.length - 1);
 			if (type == "Search by Restaurant") {
-				let el = document.getElementById("restaurantTab");
-				el.className = "active";
 				let div = document.getElementById("restaurantDiv");
 				div.className = "tab-pane fade in active";
 				let div2 = document.getElementById("recipeDiv");
 				div2.className = "tab-pane fade";
 
 			} else {
-				let el = document.getElementById("recipeTab");
-				el.className = "active";
 				let div = document.getElementById("recipeDiv");
 				div.className = "tab-pane fade in active";
 				let div2 = document.getElementById("restaurantDiv");
 				div2.className = "tab-pane fade";
 			}
-
 			var searchTerm = "<%=request.getAttribute("searchTerm ") %>";
 			searchTerm = searchTerm.substring(0, searchTerm.length - 1);
 			var searchType = "<%=request.getAttribute("searchType ") %>";
 			searchType = searchType.substring(0, searchType.length - 1); 
 			<% 
-			Business[] restaurants = (Business[]) request.getAttribute("YelpResults");
-			Recipe[] recipes = (Recipe[]) request.getAttribute("EdamamResults"); 
+			Business restaurant = (Business) request.getAttribute("business");
+			Recipe recipe = (Recipe) request.getAttribute("recipe"); 
 			%>
-
 			let recF = document.getElementById("recipeForm");
 			let resF = document.getElementById("restaurantForm");
 
@@ -85,73 +74,39 @@
 			resF.innerHTML = "<input type=\"hidden\" name=\"searchTerm\"value = \"" + searchTerm + "\"> ";
 			resF.innerHTML += "<input type=\"hidden\" name=\"searchType\"value = \"" + searchType + "\"> "; 
 			<%
-			int max = restaurants.length;
-			if (max > 10) {
-				max = 10;
-			}
-			for (int i = 0; i < max; i++) {
+			if (restaurant != null) {
 			%>
 				resF.innerHTML += "<div class=\"row\">";
 				resF.innerHTML += " <div class=\"col-sm-4\"> <input type=\"submit\" class= \"img-thumbnail image\"name= \"restaurant\" value=\"" +
-					"<%=restaurants[i].getId()%>" + "\" style=\"background-image: url('" +
-					"<%=restaurants[i].getImageUrl()%>" + "');\">";
+					"<%=restaurant.getId()%>" + "\" style=\"background-image: url('" +
+					"<%=restaurant.getImageUrl()%>" + "');\">";
 				resF.innerHTML += "</div>";
 				resF.innerHTML += " <div class=\"col-sm-8\">";
-				resF.innerHTML += "<h4>" + "<%=restaurants[i].getName()%>" + "</h4> <br/>";
-				resF.innerHTML += "<h5>" + "<%=restaurants[i].getRating()%>" + "</h5><br/>";
-				resF.innerHTML += "<h5>" + "<%=restaurants[i].getPrice()%>" + "</h5>";
+				resF.innerHTML += "<h4>" + "<%=restaurant.getName()%>" + "</h4> <br/>";
+				resF.innerHTML += "<h5>" + "<%=restaurant.getRating()%>" + "</h5><br/>";
+				resF.innerHTML += "<h5>" + "<%=restaurant.getPrice()%>" + "</h5><br/>";
 
-				resF.innerHTML += "</div> </div>"; 
+				resF.innerHTML += "<br/> <br/></div> </div>"; 
 			<%
 			}
-			%>
-
-			<%
-			max = recipes.length;
-			System.out.print(recipes.length);
-			if (max > 10) {
-				max = 10;
-			}
-			for (int i = 0; i < max; i++) {
+			else if (recipe != null) {
 			%>
 				recF.innerHTML += "<div class=\"row\">";
 				recF.innerHTML += " <div class=\"col-sm-4 \"> <input type=\"submit\" class= \"img-thumbnail image\"name= \"recipe\" value=\"" +
-					"<%=recipes[i].getUri()%>" + "\" style=\"background-image: url('" +
-					"<%=recipes[i].getImage()%>" + "');\">";
+					"<%=recipe.getUri()%>" + "\" style=\"background-image: url('" +
+					"<%=recipe.getImage()%>" + "');\">";
 				recF.innerHTML += "</div>";
 				recF.innerHTML += " <div class=\"col-sm-8\">";
-				recF.innerHTML += "<h4>" + "<%=recipes[i].getLabel()%>" + "</h4> <br/>";
-				recF.innerHTML += "<h5> Calories: " + "<%=recipes[i].getCalories()%>" + "</h5><br/>";
+				recF.innerHTML += "<h4>" + "<%=recipe.getLabel()%>" + "</h4> <br/>";
+				recF.innerHTML += "<h5> Calories: " + "<%=recipe.getCalories()%>" + "</h5><br/>";
 
 				recF.innerHTML += "<br/> <br/></div></div>"; 
 			<%
 			} 
 			%>
 
-
 		}
-<<<<<<< HEAD
-		for(int i =0; i < max; i++)
-		{%>
-			recF.innerHTML += "<div class=\"row\">";
-			recF.innerHTML += " <div class=\"col-sm-4 \"> <input type=\"submit\" class= \"img-thumbnail image\"name= \"recipe\" value=\"" 
-				+ "<%=recipes[i].getSource()%>" + "\" style=\"background-image: url('"+ 
-				"<%=recipes[i].getImage()%>" + "');\">";
-			recF.innerHTML+= "</div>";
-			recF.innerHTML += " <div class=\"col-sm-8\">";
-			recF.innerHTML += "<h4>" + "<%=recipes[i].getLabel()%>" + "</h4> <br/>";
-			recF.innerHTML += "<h5> Calories: " + "<%=recipes[i].getCalories()%>" + "</h5><br/>";
-			
-			recF.innerHTML+= "<br/> <br/></div></div>";
-		<%}%>
-			
-			
-		
-		
-	}
-=======
 
->>>>>>> 35c97169304a7b5fb2c320c305507cd1d57399a0
 	</script>
 </head>
 

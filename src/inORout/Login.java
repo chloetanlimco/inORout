@@ -34,7 +34,7 @@ public class Login extends HttpServlet {
 		/* Front End change these values based on forms */
 		String username = request.getParameter("username").trim();
 		String password = request.getParameter("password").trim();
-		String next = "/Profile.jsp";
+		String next = "/HomePage.jsp";
 		HttpSession session = request.getSession();
 		
 		String error = "";

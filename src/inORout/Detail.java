@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -50,10 +52,14 @@ public class Detail extends HttpServlet {
 		String searchType = request.getParameter("searchType");
 		String restaurant = request.getParameter("restaurant");
 		String recipe = request.getParameter("recipe");
+		String encodedLink = null;
+		if (recipe != null) {
+    		encodedLink = URLEncoder.encode(recipe, StandardCharsets.UTF_8.toString());
+    	}
 		String username = (String) request.getSession().getAttribute("Current User");
 		
 		String error = "";
-		String next = "Detail.jsp";
+		String next = "/Detail.jsp";
 		
 		// read in config file with API keys
 		String YelpBearerId = "";
@@ -90,28 +96,17 @@ public class Detail extends HttpServlet {
 			JsonObject jsonObject = (JsonObject)jsonParser.parse(
 				      new InputStreamReader(yelpCon.getInputStream(), "UTF-8"));
 			
-			int total = jsonObject.getAsJsonPrimitive("total").getAsInt();
-			
 			/* Need to check if returned as array or single object */
 			JsonArray businesses = jsonObject.getAsJsonArray("businesses");
 			b  = new Business(businesses.get(0).getAsJsonObject());
 			
-			
-			// maximum 20 elements to return - can change this if you want
-//			for (int i = 0; i < ((total < 20) ? total : 20); i++) {
-//				// if not closed
-//				if (!businesses.get(i).getAsJsonObject().getAsJsonPrimitive("is_closed").getAsBoolean()) {
-//					Business b = new Business(businesses.get(i).getAsJsonObject());
-//					YelpResults.add(b);
-//				}
-//			}
 		}
 		//recipe details
 		/* Might not need if we want to forward to original site */
 		else {
 			
 			/* Not sure for this search, source might just give original site? */
-			String params = "r=" + recipe + "&app_key=" + app_key + "&app_id=" + app_id;
+			String params = "r=" + encodedLink + "&app_key=" + app_key + "&app_id=" + app_id;
 			URL url = new URL("https://api.edamam.com/search?" + params);
 			
 			HttpURLConnection edamamCon = (HttpURLConnection) url.openConnection(); 
@@ -119,17 +114,13 @@ public class Detail extends HttpServlet {
 			
 			// parsing JSON
 			JsonParser jsonParser = new JsonParser();
-			JsonObject jsonObject = (JsonObject)jsonParser.parse(
+			JsonArray jsonObject = (JsonArray) jsonParser.parse(
 				      new InputStreamReader(edamamCon.getInputStream(), "UTF-8"));
+			JsonObject obj = jsonObject.get(0).getAsJsonObject();
+			System.out.println(obj);
+//			JsonArray recipes = jsonObject.getAsJsonArray("hits");
+			r = new Recipe(obj, "detail");
 			
-			JsonArray recipes = jsonObject.getAsJsonArray("hits");
-			r = new Recipe(recipes.get(0).getAsJsonObject());
-			
-			// figure out what to iterate up to
-//			for (int i = 0; i < 10; i++) {
-//				Recipe r = new Recipe(recipes.get(i).getAsJsonObject());
-//				EdamamResults.add(r);
-//			}
 		}
 		
 		//see if restaurant or recipe in user's favorites
