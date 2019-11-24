@@ -15,8 +15,7 @@
 	<script>
 		function profile() {
 			let div = document.getElementById("buttonLog");
-			if ("<%=session.getAttribute("
-				Current user ")%>" == "null") {
+			if ("<%=session.getAttribute("Current user ")%>" == "null") {
 				let el = document.createElement("input");
 				el.name = "logChoice";
 				el.value = "Login";
@@ -45,8 +44,7 @@
 		}
 
 		function loadResults() {
-			var type = "<%=request.getAttribute("
-			searchType ") %>>";
+			var type = "<%=request.getAttribute("searchType ") %>";
 			type = type.substring(0, type.length - 1);
 			if (type == "Search by Restaurant") {
 				let el = document.getElementById("restaurantTab");
@@ -64,29 +62,28 @@
 				let div2 = document.getElementById("restaurantDiv");
 				div2.className = "tab-pane fade";
 			}
-			var searchTerm = "<%=request.getAttribute("
-			searchTerm ") %>>";
+			var searchTerm = "<%=request.getAttribute("searchTerm ") %>";
 			searchTerm = searchTerm.substring(0, searchTerm.length - 1);
-			var searchType = "<%=request.getAttribute("
-			searchType ") %>>";
-			searchType = searchType.substring(0, searchType.length - 1); <
-			% Business[] restaurants = (Business[]) request.getAttribute("YelpResults");
-			Recipe[] recipes = (Recipe[]) request.getAttribute("EdamamResults"); %
-			>
+			var searchType = "<%=request.getAttribute("searchType ") %>";
+			searchType = searchType.substring(0, searchType.length - 1); 
+			<% 
+			Business[] restaurants = (Business[]) request.getAttribute("YelpResults");
+			Recipe[] recipes = (Recipe[]) request.getAttribute("EdamamResults"); 
+			%>
 			let recF = document.getElementById("recipeForm");
 			let resF = document.getElementById("restaurantForm");
 
 			recF.innerHTML = "<input type=\"hidden\" name=\"searchTerm\"value = \"" + searchTerm + "\"> ";
 			recF.innerHTML += "<input type=\"hidden\" name=\"searchType\"value = \"" + searchType + "\"> ";
 			resF.innerHTML = "<input type=\"hidden\" name=\"searchTerm\"value = \"" + searchTerm + "\"> ";
-			resF.innerHTML += "<input type=\"hidden\" name=\"searchType\"value = \"" + searchType + "\"> "; <
-			%
+			resF.innerHTML += "<input type=\"hidden\" name=\"searchType\"value = \"" + searchType + "\"> "; 
+			<%
 			int max = restaurants.length;
 			if (max > 10) {
 				max = 10;
 			}
 			for (int i = 0; i < max; i++) {
-				% >
+			%>
 				resF.innerHTML += "<div class=\"row\">";
 				resF.innerHTML += " <div class=\"col-sm-4\"> <input type=\"submit\" class= \"img-thumbnail image\"name= \"restaurant\" value=\"" +
 					"<%=restaurants[i].getId()%>" + "\" style=\"background-image: url('" +
@@ -95,37 +92,34 @@
 				resF.innerHTML += " <div class=\"col-sm-8\">";
 				resF.innerHTML += "<h4>" + "<%=restaurants[i].getName()%>" + "</h4> <br/>";
 				resF.innerHTML += "<h5>" + "<%=restaurants[i].getRating()%>" + "</h5><br/>";
-				resF.innerHTML += "<h5>" + "<%=restaurants[i].getPrice()%>" + "</h5><br/>";
+				resF.innerHTML += "<h5>" + "<%=restaurants[i].getPrice()%>" + "</h5>";
 
-				resF.innerHTML += "<br/> <br/></div> </div>"; <
-				%
-			} % >
+				resF.innerHTML += "</div> </div>"; 
+			<%
+			}
+			%>
 
-			<
-			%
+			<%
 			max = recipes.length;
 			System.out.print(recipes.length);
 			if (max > 10) {
 				max = 10;
 			}
 			for (int i = 0; i < max; i++) {
-				% >
+			%>
 				recF.innerHTML += "<div class=\"row\">";
 				recF.innerHTML += " <div class=\"col-sm-4 \"> <input type=\"submit\" class= \"img-thumbnail image\"name= \"recipe\" value=\"" +
-					"<%=recipes[i].getSource()%>" + "\" style=\"background-image: url('" +
+					"<%=recipes[i].getUri()%>" + "\" style=\"background-image: url('" +
 					"<%=recipes[i].getImage()%>" + "');\">";
 				recF.innerHTML += "</div>";
 				recF.innerHTML += " <div class=\"col-sm-8\">";
 				recF.innerHTML += "<h4>" + "<%=recipes[i].getLabel()%>" + "</h4> <br/>";
 				recF.innerHTML += "<h5> Calories: " + "<%=recipes[i].getCalories()%>" + "</h5><br/>";
 
-				recF.innerHTML += "<br/> <br/></div></div>"; <
-				%
-			} % >
-
-
-
-
+				recF.innerHTML += "<br/> <br/></div></div>"; 
+			<%
+			} 
+			%>
 
 		}
 
