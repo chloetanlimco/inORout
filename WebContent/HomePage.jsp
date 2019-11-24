@@ -22,7 +22,7 @@
 				div.appendChild(el);
 
 				let el2 = document.createElement("input");
-				el.type = "submit";
+				el2.type = "submit";
 				el2.name = "logChoice";
 				el2.value = "Signup";
 				el2.className = "btn btn-default btn-lg loginbutton";
@@ -30,7 +30,7 @@
 
 			} else {
 				let ell = document.createElement("input");
-				el.type = "submit";
+				ell.type = "submit";
 				ell.name = "logChoice";
 				ell.value = "Profile";
 				ell.className = "btn btn-default btn-lg loginbutton";
