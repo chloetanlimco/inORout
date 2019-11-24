@@ -13,7 +13,7 @@
 	<script>
 		function profile() {
 			let div = document.getElementById("buttonLog");
-			if ("<%=session.getAttribute("Current user ")%>" == "null") {
+			if ("<%=session.getAttribute("Current user")%>" == "null") {
 				let el = document.createElement("input");
 				el.type = "submit";
 				el.name = "logChoice";
@@ -27,7 +27,6 @@
 				el2.value = "Signup";
 				el2.className = "btn btn-default btn-lg loginbutton";
 				div.appendChild(el2);
-
 			} else {
 				let ell = document.createElement("input");
 				ell.type = "submit";
