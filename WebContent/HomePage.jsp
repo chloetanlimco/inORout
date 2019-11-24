@@ -60,7 +60,7 @@
 					</div>
 					<div class="col-sm-4"></div>
 					<div class="col-sm-4">
-						<form action="Logger.java" id="buttonLog">
+						<form action="Logger" id="buttonLog">
 						</form>
 					</div>
 				</div>
