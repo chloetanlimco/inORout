@@ -48,22 +48,33 @@ public class AddRemFav extends HttpServlet {
 			error += "Login to add to Favorites!";
 		}
 		else {
-			
 			Connection conn = null;
 			PreparedStatement st = null;
+			
 			try {
 				conn = DriverManager.getConnection("jdbc:mysql://google/foodapp?cloudSqlInstance=groupproject-258805:us-central1:project201&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false&user=anthonyuser&password=wQHL223i4LJhEuCl1");
-				if (restaurant != null) {
-					st = conn.prepareStatement("INSERT INTO Restaurant (userID, restaurantID) VALUES(?,?)");
-					st.setString(1, username);
-					st.setString(2, restaurant);
+				PreparedStatement ps = conn.prepareStatement("SELECT userID from User WHERE username=?");
+				
+				ps.setString(1, request.getSession().getAttribute("Current user").toString());
+				int userID;
+				
+				ResultSet userObj = ps.executeQuery();
+				if (userObj.next()) {
+					userID = userObj.getInt("userID");
+					
+					if (restaurant != null) {
+						st = conn.prepareStatement("INSERT INTO Restaurant (userID, restaurantID) VALUES(?,?)");
+						st.setInt(1, userID);
+						st.setString(2, restaurant);
+					}
+					else {
+						st = conn.prepareStatement("INSERT INTO Recipe (userID, restaurantID) VALUES(?,?)");
+						st.setInt(1, userID);
+						st.setString(2, recipe);
+					}
+					st.executeUpdate();
 				}
-				else {
-					st = conn.prepareStatement("INSERT INTO Recipe (userID, restaurantID) VALUES(?,?)");
-					st.setString(1, username);
-					st.setString(2, recipe);
-				}
-				st.executeUpdate();
+				
 			}
 			catch (SQLException sqle) {
 				System.out.println(sqle.getMessage());
