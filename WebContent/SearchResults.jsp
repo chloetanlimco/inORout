@@ -88,7 +88,13 @@
 			max =10;
 		}
 		for(int i =0; i < max; i++)
-		{%>
+		{
+			if(restaurants[i].getName().contains("\""))
+			{
+				continue;
+			}
+		%>
+		
 			resF.innerHTML += "<div class=\"row\">";
 			resF.innerHTML += " <div class=\"col-sm-4\"> <input type=\"submit\" class= \"img-thumbnail image\"name= \"restaurant\" value=\"" 
 				+ "<%=restaurants[i].getId()%>" + "\" style=\"background-image: url('"+ 
@@ -109,7 +115,12 @@
 			max =10;
 		}
 		for(int i =0; i < max; i++)
-		{%>
+		{
+			if(recipes[i].getLabel().contains("\""))
+			{
+				continue;
+			}
+		%>
 			recF.innerHTML += "<div class=\"row\">";
 			recF.innerHTML += " <div class=\"col-sm-4 \"> <input type=\"submit\" class= \"img-thumbnail image\"name= \"recipe\" value=\"" 
 				+ "<%=recipes[i].getSource()%>" + "\" style=\"background-image: url('"+ 
