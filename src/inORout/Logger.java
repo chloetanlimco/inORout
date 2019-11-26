@@ -70,9 +70,10 @@ public class Logger extends HttpServlet {
 		}
 		else if(logChoice.equals("Profile"))
 		{
-			RequestDispatcher dispatch = getServletContext().getRequestDispatcher("/Profile.jsp");
+			//RequestDispatcher dispatch = getServletContext().getRequestDispatcher("/Profile.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("Profile");
 			try {
-				dispatch.forward(request, response);
+				rd.forward(request, response);
 			} catch (IOException e) {
 				e.printStackTrace();
 			} catch (ServletException e) {
@@ -81,7 +82,7 @@ public class Logger extends HttpServlet {
 		}
 		else if(logChoice.equals("Signout"))
 		{
-			request.getSession().setAttribute("Current User", null);
+			request.getSession().setAttribute("Current user", null);
 			RequestDispatcher dispatch = getServletContext().getRequestDispatcher("/HomePage.jsp");
 			try {
 				dispatch.forward(request, response);
