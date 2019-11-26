@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+*{
+	font-family: Lustria;
+	margin-left: 10px;
+}
 #titleHome
 {
 	border: none;
@@ -67,23 +71,15 @@
 {
 	position: relative;
 	height: 65vh;
-	width: 100%;
 	font-family: 'Lustria';
 	margin-top: 0vh ! important; 
-	padding: 0px 5px ! important;
-}
-.filterBar h3 {
-	padding: 10px 5px 0px;
-}
-.parentCenter form {
-	width: 100%;
-	text-align: center;
+	padding: 0vh ! important;
 }
 .filterButton
 {
 	background-color: transparent ! important;
-	border-color: 3px black ! important;
-	margin: 1vh auto ! important;
+	border-color: black ! important;
+	margin: 1vh ! important;
 	background-color: #9AADF2 ! important;
 	color: white ! important;
 	font-family: 'Lustria';
@@ -96,6 +92,7 @@
   content: "";
   display: table;
   clear: both;
+  
 }
 .parentCenter
 {
@@ -120,18 +117,18 @@
 {
 	font-family: 'Lustria' ! important;
 	color: black;
-	padding: 10px;
+	margin-bottom:35px; 
+	margin-top:10px;
 }
-.row .col-sm-4 {
-	text-align: center;
+.grid{
+	padding-left: 50px;
 }
 .image
 {
-	margin: 0 auto;
-	background-color: red;
+	margin-top:10vh;
 	position: relative;
-	width: 20vh;
-	height:20vh ! important;
+	width: 50vh;
+	height:50vh ! important;
 	font-size: 0.00001vh;
 	background-repeat: no-repeat;
   	display: block;
@@ -142,5 +139,9 @@ h4, h5
 	font-family: 'Lustria' ! important;
 	color: black;
 }
-
-
+#res{
+	margin-top:10vh;
+}
+#resdetails{
+	margin-top:10vh;
+}

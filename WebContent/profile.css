@@ -1,5 +1,8 @@
 @charset "UTF-8";
 
+*{
+	font-family: Lustria;
+}
 #titleHome
 {
 	border: none;
@@ -37,18 +40,9 @@
 	width: 15vh;
 }
 
-.mainBox
+.main
 {
-	height: 100vh;
-	border: none;
-	border-radius: 0 !important;
-	padding: 0 ! important;
-	margin-bottom: 0 ! important;
-	margin-right: 0 ! important;
-	margin-left: 0 ! important; 
-  	background-size:cover;
-  	background-color: white ! important;
-
+	margin-top:5vh;
 }
 .searchSection
 {
@@ -67,35 +61,16 @@
 {
 	position: relative;
 	height: 65vh;
-	width: 100%;
 	font-family: 'Lustria';
 	margin-top: 0vh ! important; 
-	padding: 0px 5px ! important;
+	padding: 0vh ! important;
 }
-.filterBar h3 {
-	padding: 10px 5px 0px;
-}
-.parentCenter form {
-	width: 100%;
-	text-align: center;
-}
-.filterButton
-{
-	background-color: transparent ! important;
-	border-color: 3px black ! important;
-	margin: 1vh auto ! important;
-	background-color: #9AADF2 ! important;
-	color: white ! important;
-	font-family: 'Lustria';
-	text-align: center ! important;
-	left: 50vh ! important;
-}
-
 
 .row:after {
   content: "";
   display: table;
   clear: both;
+  
 }
 .parentCenter
 {
@@ -120,15 +95,14 @@
 {
 	font-family: 'Lustria' ! important;
 	color: black;
-	padding: 10px;
+	margin-bottom:35px;
+	margin-top:10px;
 }
-.row .col-sm-4 {
-	text-align: center;
+.grid{
+	padding-left: 50px;
 }
 .image
 {
-	margin: 0 auto;
-	background-color: red;
 	position: relative;
 	width: 20vh;
 	height:20vh ! important;
@@ -142,5 +116,11 @@ h4, h5
 	font-family: 'Lustria' ! important;
 	color: black;
 }
-
-
+.testimonial-group > .row {
+  overflow-x: auto;
+  white-space: nowrap;
+}
+.testimonial-group > .row > .col-xs-2 {
+  display: inline-block;
+  float: none;
+}
