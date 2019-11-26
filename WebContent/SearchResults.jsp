@@ -139,10 +139,6 @@
 		<%}%>
 		
 			
-			
-		
-		
-	}
 
 
 			recF.innerHTML = "<input type=\"hidden\" name=\"searchTerm\"value = \"" + searchTerm + "\"> ";
