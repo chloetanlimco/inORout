@@ -146,7 +146,7 @@
 			resF.innerHTML = "<input type=\"hidden\" name=\"searchTerm\"value = \"" + searchTerm + "\"> ";
 			resF.innerHTML += "<input type=\"hidden\" name=\"searchType\"value = \"" + searchType + "\"> "; 
 			<%
-			int max = restaurants.length;
+			max = restaurants.length;
 			if (max > 10) {
 				max = 10;
 			}
