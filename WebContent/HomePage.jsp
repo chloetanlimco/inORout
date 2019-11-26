@@ -28,7 +28,6 @@
 				el2.value = "Signup";
 				el2.className = "btn btn-default btn-lg loginbutton";
 				div.appendChild(el2);
-
 			} else {
 				let ell = document.createElement("input");
 				ell.type = "submit";

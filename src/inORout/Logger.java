@@ -70,8 +70,9 @@ public class Logger extends HttpServlet {
 		}
 		else if(logChoice.equals("Profile"))
 		{
-			//RequestDispatcher dispatch = getServletContext().getRequestDispatcher("/Profile.jsp");
+
 			RequestDispatcher rd = request.getRequestDispatcher("Profile");
+
 			try {
 				rd.forward(request, response);
 			} catch (IOException e) {
@@ -92,7 +93,6 @@ public class Logger extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-		
 		
 	}
 
