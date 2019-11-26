@@ -82,12 +82,71 @@
 			let recF = document.getElementById("recipeForm");
 			let resF = document.getElementById("restaurantForm");
 
+		
+		recF.innerHTML ="<input type=\"hidden\" name=\"searchTerm\"value = \"" + searchTerm + "\"> ";
+		recF.innerHTML += "<input type=\"hidden\" name=\"searchType\"value = \"" + searchType + "\"> ";
+		resF.innerHTML ="<input type=\"hidden\" name=\"searchTerm\"value = \"" + searchTerm + "\"> ";
+		resF.innerHTML += "<input type=\"hidden\" name=\"searchType\"value = \"" + searchType + "\"> ";
+		<%
+		int max = restaurants.length;
+		if(max > 10){
+			max =10;
+		}
+		for(int i =0; i < max; i++)
+		{
+			if(restaurants[i].getName().contains("\""))
+			{
+				continue;
+			}
+		%>
+		
+			resF.innerHTML += "<div class=\"row\">";
+			resF.innerHTML += " <div class=\"col-sm-4\"> <input type=\"submit\" class= \"img-thumbnail image\"name= \"restaurant\" value=\"" 
+				+ "<%=restaurants[i].getId()%>" + "\" style=\"background-image: url('"+ 
+				"<%=restaurants[i].getImageUrl()%>" + "');\">";
+			resF.innerHTML+= "</div>";
+			resF.innerHTML += " <div class=\"col-sm-8\">";
+			resF.innerHTML += "<h4>" + "<%=restaurants[i].getName()%>" + "</h4> <br/>";
+			resF.innerHTML += "<h5>" + "<%=restaurants[i].getRating()%>" + "</h5><br/>";
+			resF.innerHTML += "<h5>" + "<%=restaurants[i].getPrice()%>" + "</h5><br/>";
+			
+			resF.innerHTML+= "<br/> <br/></div> </div>";
+		<%}%>
+		
+		<%
+		max = recipes.length;
+		System.out.print(recipes.length);
+		if(max > 10){
+			max =10;
+		}
+		for(int i =0; i < max; i++)
+		{
+			if(recipes[i].getLabel().contains("\""))
+			{
+				continue;
+			}
+		%>
+			recF.innerHTML += "<div class=\"row\">";
+			recF.innerHTML += " <div class=\"col-sm-4 \"> <input type=\"submit\" class= \"img-thumbnail image\"name= \"recipe\" value=\"" 
+				+ "<%=recipes[i].getSource()%>" + "\" style=\"background-image: url('"+ 
+				"<%=recipes[i].getImage()%>" + "');\">";
+			recF.innerHTML+= "</div>";
+			recF.innerHTML += " <div class=\"col-sm-8\">";
+			recF.innerHTML += "<h4>" + "<%=recipes[i].getLabel()%>" + "</h4> <br/>";
+			recF.innerHTML += "<h5> Calories: " + "<%=recipes[i].getCalories()%>" + "</h5><br/>";
+			
+			recF.innerHTML+= "<br/> <br/></div></div>";
+		<%}%>
+		
+			
+
+
 			recF.innerHTML = "<input type=\"hidden\" name=\"searchTerm\"value = \"" + searchTerm + "\"> ";
 			recF.innerHTML += "<input type=\"hidden\" name=\"searchType\"value = \"" + searchType + "\"> ";
 			resF.innerHTML = "<input type=\"hidden\" name=\"searchTerm\"value = \"" + searchTerm + "\"> ";
 			resF.innerHTML += "<input type=\"hidden\" name=\"searchType\"value = \"" + searchType + "\"> "; 
 			<%
-			int max = restaurants.length;
+			max = restaurants.length;
 			if (max > 10) {
 				max = 10;
 			}
