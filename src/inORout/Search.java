@@ -134,7 +134,12 @@ public class Search extends HttpServlet {
 			JsonArray recipes = jsonObject.getAsJsonArray("hits");
 			
 			// figure out what to iterate up to
-			for (int i = 0; i < 10; i++) {
+			int it=10;
+			if(recipes.size() < 10)
+			{
+				it = recipes.size();
+			}
+			for (int i = 0; i < it; i++) {
 				Recipe r = new Recipe(recipes.get(i).getAsJsonObject());
 				EdamamResults.add(r);
 			}

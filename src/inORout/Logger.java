@@ -70,10 +70,7 @@ public class Logger extends HttpServlet {
 		}
 		else if(logChoice.equals("Profile"))
 		{
-//			getServletContext().getRequestDispatcher("Profile").forward(request, response);
 			RequestDispatcher rd = request.getRequestDispatcher("Profile");
-//		    rd.forward(request, response);
-		    
 			try {
 				rd.forward(request, response);
 			} catch (IOException e) {
