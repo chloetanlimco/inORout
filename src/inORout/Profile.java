@@ -17,24 +17,28 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 import java.util.TreeMap;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.Gson;
 import java.lang.reflect.Type;
 import com.google.gson.reflect.TypeToken;
+
 /**
  * Servlet implementation class Profile
  */
 @WebServlet("/Profile")
 public class Profile extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
@@ -42,6 +46,7 @@ public class Profile extends HttpServlet {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+
 	/**
 	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -84,6 +89,7 @@ public class Profile extends HttpServlet {
 		}
 		String[] RecipeArray = RecipeIDs.toArray(new String[RecipeIDs.size()]);
 		String[] BusinessArray = BusinessIDs.toArray(new String[BusinessIDs.size()]);
+
 		// SUGGESTIONS
 		// read in config file with API keys
 		String YelpBearerId = "";
@@ -93,6 +99,7 @@ public class Profile extends HttpServlet {
 			FileReader fr = new FileReader(getServletContext().getRealPath("/WEB-INF/config.txt"));
 			Properties p = new Properties();
 			p.load(fr);
+
 			YelpBearerId = p.getProperty("Yelp");
 			app_key = p.getProperty("EdamamKey");
 			app_id = p.getProperty("EdamamId");
@@ -112,10 +119,12 @@ public class Profile extends HttpServlet {
 			// add headers
 			yelpCon.setRequestProperty("Authorization", "Bearer " + YelpBearerId);
 			yelpCon.setRequestMethod("GET");
+
 			// parsing JSON
 			JsonParser jsonParser = new JsonParser();
 			JsonObject jsonObject = (JsonObject)jsonParser.parse(
 					new InputStreamReader(yelpCon.getInputStream(), "UTF-8"));
+
 			LikedBusinesses.add(new Business(jsonObject));
 			String category = jsonObject.getAsJsonArray("categories").get(0).getAsJsonObject().get("title").getAsString();
 			String name = jsonObject.getAsJsonPrimitive("name").getAsString();
@@ -126,12 +135,15 @@ public class Profile extends HttpServlet {
 			// add headers
 			yCon.setRequestProperty("Authorization", "Bearer " + YelpBearerId);
 			yCon.setRequestMethod("GET");
+
 			// parsing JSON
 			JsonParser jP = new JsonParser();
 			JsonObject jO = (JsonObject)jP.parse(
 					new InputStreamReader(yCon.getInputStream(), "UTF-8"));
+
 			int total = jO.getAsJsonPrimitive("total").getAsInt();
 			JsonArray businesses = jO.getAsJsonArray("businesses");
+
 			// maximum 10 elements to return - can change this if you want
 			for (int j = 0; j < ((total < 10) ? total : 20); j++) {
 				// if not closed
@@ -142,6 +154,7 @@ public class Profile extends HttpServlet {
 			}
 			YObject.put(name, temp);
 		}
+    
 		// RECIPES
 		for (int i = 0; i < (RecipeArray.length > 2 ? 2 : RecipeArray.length); i++) {
 			ArrayList<Recipe> temp = new ArrayList<Recipe>();
@@ -161,18 +174,22 @@ public class Profile extends HttpServlet {
 			URL u = new URL("https://api.edamam.com/search?" + params);
 			HttpURLConnection eCon = (HttpURLConnection) url.openConnection();
 			edamamCon.setRequestMethod("GET");
+
 			// parsing JSON
 			JsonParser jP = new JsonParser();
 			JsonObject jO = (JsonObject)jP.parse(
 					new InputStreamReader(eCon.getInputStream(), "UTF-8"));
 			JsonArray recipes = jO.getAsJsonArray("hits");
+
 			// figure out what to iterate up to
 			for (int j = 0; j < 10; j++) {
 				Recipe r = new Recipe(recipes.get(j).getAsJsonObject());
 				temp.add(r);
 			}
+
 			EObject.put(name, temp);
 		}
+    
 		// PASS MAP OF SUGGESTIONS BACK
 		Gson gson = new Gson();
 		Type gsonType = new TypeToken<HashMap>(){}.getType();
@@ -190,6 +207,7 @@ public class Profile extends HttpServlet {
 		}
 		request.setAttribute("numRecipes", RecipeFav.length);
 		request.setAttribute("numBusinesses", BusinessFav.length);
+
 		// send it back
 		RequestDispatcher dispatch = getServletContext().getRequestDispatcher("/Profile.jsp");
 		try {
@@ -200,6 +218,7 @@ public class Profile extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
+
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -207,6 +226,7 @@ public class Profile extends HttpServlet {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
+
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -214,4 +234,5 @@ public class Profile extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
+
 }

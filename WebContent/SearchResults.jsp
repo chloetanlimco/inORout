@@ -82,6 +82,7 @@
 			let recF = document.getElementById("recipeForm");
 			let resF = document.getElementById("restaurantForm");
 
+
 		
 		recF.innerHTML ="<input type=\"hidden\" name=\"searchTerm\"value = \"" + searchTerm + "\"> ";
 		recF.innerHTML += "<input type=\"hidden\" name=\"searchType\"value = \"" + searchType + "\"> ";
@@ -137,8 +138,6 @@
 			
 			recF.innerHTML+= "<br/> <br/></div></div>";
 		<%}%>
-		
-			
 
 
 			recF.innerHTML = "<input type=\"hidden\" name=\"searchTerm\"value = \"" + searchTerm + "\"> ";
