@@ -8,14 +8,18 @@ public class Business {
 	
 	public String id;
 	public String name;
+	public String[] categories;
 	public String image_url;
 	public String display_address;
 	public String price;
 	public double rating;
+	public double distance;
+	public int review_count;
 	public String display_phone;
 	
 	public Business(JsonObject obj) {
 		// parse
+		System.out.println(obj);
 		id = obj.getAsJsonPrimitive("id").getAsString();
 		name = obj.getAsJsonPrimitive("name").getAsString();
 		image_url = obj.getAsJsonPrimitive("image_url").getAsString();
@@ -30,6 +34,8 @@ public class Business {
 			price = "Price unavailable.";
 		}
 		rating = obj.getAsJsonPrimitive("rating").getAsDouble();
+//		distance = obj.getAsJsonPrimitive("distance").getAsDouble();
+		review_count = obj.getAsJsonPrimitive("review_count").getAsInt();
 		display_phone = obj.getAsJsonPrimitive("phone").getAsString();
 	}
 	
@@ -55,6 +61,14 @@ public class Business {
 	
 	public double getRating() {
 		return rating;
+	}
+	
+	public double getDistance() {
+		return distance;
+	}
+	
+	public int getReviewCount() {
+		return review_count;
 	}
 	
 	public String getDisplayPhone() {

@@ -28,14 +28,13 @@
 				el.value = "Login";
 				el.className = "btn btn-default btn-lg loginbutton";
 				div.appendChild(el);
-	
+		
 				let el2 = document.createElement("input");
 				el2.type = "submit";
 				el2.name = "logChoice";
 				el2.value = "Signup";
 				el2.className = "btn btn-default btn-lg loginbutton";
 				div.appendChild(el2);
-	
 			} else {
 				let ell = document.createElement("input");
 				ell.type = "submit";
@@ -43,7 +42,7 @@
 				ell.value = "Profile";
 				ell.className = "btn btn-default btn-lg loginbutton";
 				div.appendChild(ell);
-	
+		
 				let el = document.createElement("input");
 				el.type = "submit";
 				el.name = "logChoice";
@@ -186,8 +185,7 @@
 				recF.innerHTML += "</div>";
 				recF.innerHTML += " <div class=\"col-sm-8\">";
 				recF.innerHTML += "<h4>" + "<%=recipes[i].getLabel()%>" + "</h4> <br/>";
-				recF.innerHTML += "<h5> Calories: " + "<%=recipes[i].getCalories()%>"
-				+ "</h5><br/>";
+				recF.innerHTML += "<h5> Calories: " + "<%=recipes[i].getCalories()%>" + "</h5><br/>";
 
 		recF.innerHTML += "<br/> <br/></div></div>";
 <%}%>
@@ -222,8 +220,8 @@
 							</div>
 						</form>
 					</div>
-					<div class="col-sm-3">
-						<form action="Logger.java" id="buttonLog"></form>
+					<div class="col-sm-4">
+						<form action="Logger" id="buttonLog"></form>
 					</div>
 				</div>
 			</div>

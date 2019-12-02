@@ -167,7 +167,7 @@
 		  </form>
 		  </div>
 	    <div class="col-sm-3">
-	    <form action="Logger.java" id="buttonLog">
+	    <form action="Logger" id="buttonLog">
 	    </form>
 	    </div>
 	  </div>
