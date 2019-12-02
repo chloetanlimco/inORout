@@ -68,10 +68,12 @@ public class Search extends HttpServlet {
 				keys.add(p.getProperty("EdamamKey2"));
 				keys.add(p.getProperty("EdamamKey3"));
 				keys.add(p.getProperty("EdamamKey4"));
+				keys.add(p.getProperty("EdamamKey5"));
 				ids.add(p.getProperty("EdamamId"));
 				ids.add(p.getProperty("EdamamId2"));
 				ids.add(p.getProperty("EdamamId3"));
 				ids.add(p.getProperty("EdamamId4"));
+				ids.add(p.getProperty("EdamamId5"));
 				numkeys = keys.size();
 
 			} catch (FileNotFoundException e) {
@@ -83,43 +85,58 @@ public class Search extends HttpServlet {
 
 			// YELP API CALL
 			System.out.println("here");
+			int sleeptime = 125;
 			if (!searchTerm.contentEquals("")) {
-				try {
-					HttpSession session = request.getSession();
-					String latitude = "34.0205";
-					String longitude = "-118.2856";
-					if (session.getAttribute("latitude") != null && session.getAttribute("longitude") != null) {
-						latitude = (String) session.getAttribute("latitude");
-						longitude = (String) session.getAttribute("longitude");
-					}
-					String params = "term=" + searchTerm.replace(" ", "+") + "&latitude=" + latitude + "&longitude="
-							+ longitude;
+				boolean yelpsuccess = false;
+				while (!yelpsuccess) {
+					try {
+						HttpSession session = request.getSession();
+						String latitude = "34.0205";
+						String longitude = "-118.2856";
+						if (session.getAttribute("latitude") != null && session.getAttribute("longitude") != null) {
+							latitude = (String) session.getAttribute("latitude");
+							longitude = (String) session.getAttribute("longitude");
+						}
+						String params = "term=" + searchTerm.replace(" ", "+") + "&latitude=" + latitude + "&longitude="
+								+ longitude;
 
-					URL url = new URL("https://api.yelp.com/v3/businesses/search?" + params);
+						URL url = new URL("https://api.yelp.com/v3/businesses/search?" + params);
 
-					HttpURLConnection yelpCon = (HttpURLConnection) url.openConnection();
-					// add headers
-					yelpCon.setRequestProperty("Authorization", "Bearer " + YelpBearerId);
-					yelpCon.setRequestMethod("GET");
+						HttpURLConnection yelpCon = (HttpURLConnection) url.openConnection();
+						// add headers
+						yelpCon.setRequestProperty("Authorization", "Bearer " + YelpBearerId);
+						yelpCon.setRequestMethod("GET");
 
-					// parsing JSON
-					JsonParser jsonParser = new JsonParser();
-					JsonObject jsonObject = (JsonObject) jsonParser
-							.parse(new InputStreamReader(yelpCon.getInputStream(), "UTF-8"));
+						// parsing JSON
+						JsonParser jsonParser = new JsonParser();
+						JsonObject jsonObject = (JsonObject) jsonParser
+								.parse(new InputStreamReader(yelpCon.getInputStream(), "UTF-8"));
 
-					int total = jsonObject.getAsJsonPrimitive("total").getAsInt();
-					JsonArray businesses = jsonObject.getAsJsonArray("businesses");
+						int total = jsonObject.getAsJsonPrimitive("total").getAsInt();
+						JsonArray businesses = jsonObject.getAsJsonArray("businesses");
 
-					// maximum 20 elements to return - can change this if you want
-					for (int i = 0; i < ((total < 20) ? total : 20); i++) {
-						// if not closed
-						if (!businesses.get(i).getAsJsonObject().getAsJsonPrimitive("is_closed").getAsBoolean()) {
-							Business b = new Business(businesses.get(i).getAsJsonObject());
-							YelpResults.add(b);
+						// maximum 20 elements to return - can change this if you want
+						for (int i = 0; i < ((total < 20) ? total : 20); i++) {
+							// if not closed
+							if (!businesses.get(i).getAsJsonObject().getAsJsonPrimitive("is_closed").getAsBoolean()) {
+								Business b = new Business(businesses.get(i).getAsJsonObject());
+								YelpResults.add(b);
+							}
+						}
+						yelpsuccess = true;
+					} catch (Exception e) {
+						System.out.println(e.getMessage());
+						try {
+							Thread.sleep(sleeptime);
+						} catch (InterruptedException e1) {
+							System.out.println(e.getMessage());
+						}
+						sleeptime *=2;
+						System.out.println(sleeptime);
+						if(sleeptime == 2000) {
+							break;
 						}
 					}
-				} catch (Exception e) {
-					System.out.println(e.getMessage());
 				}
 			}
 
@@ -130,8 +147,8 @@ public class Search extends HttpServlet {
 
 					if (!searchTerm.contentEquals("")) {
 
-						String params = "q=" + searchTerm.replace(" ", "+") + "&app_key=" + keys.get(current) + "&app_id="
-								+ ids.get(current);
+						String params = "q=" + searchTerm.replace(" ", "+") + "&app_key=" + keys.get(current)
+								+ "&app_id=" + ids.get(current);
 						URL url = new URL("https://api.edamam.com/search?" + params);
 
 						HttpURLConnection edamamCon = (HttpURLConnection) url.openConnection();
@@ -182,14 +199,14 @@ public class Search extends HttpServlet {
 						e.printStackTrace();
 					}
 				} catch (Exception e) {
-					current = current+1 % numkeys;
+					current = (current + 1) % numkeys;
 					System.out.println(e.getMessage());
 					System.out.println(current);
-					if(current == 0) {
+					if (current == 0) {
 						break;
 					}
 				}
-				
+
 			}
 
 		}

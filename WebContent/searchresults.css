@@ -116,20 +116,19 @@
 {
 	font-family: 'Lustria';
 	color: black;
+	text-align: left;
 }
 #recipeDiv
 {
 	font-family: 'Lustria';
 	color: black;
+	text-align:left;
 }
 .row
 {
 	font-family: 'Lustria' ! important;
 	color: black;
 	padding: 10px;
-}
-.row .col-sm-4 {
-	text-align: center;
 }
 .image
 {
@@ -157,6 +156,11 @@ h3{
 	margin-top: 10px !important;
 	padding-top: 0px !important;
 	margin-bottom: 0px !important;
+}
+.star
+{
+	height: 2vh;
+	width: 2vh;
 }
 
 .mycontainer{
