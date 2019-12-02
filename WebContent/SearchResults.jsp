@@ -102,19 +102,29 @@
 			{
 				continue;
 			}
-		%>
-		
+			String[] addy = restaurants[i].getDisplayAddress().split("\n");%>
 			resF.innerHTML += "<div class=\"row\">";
 			resF.innerHTML += " <div class=\"col-sm-4\"> <input type=\"submit\" class= \"img-thumbnail image\"name= \"restaurant\" value=\"" 
 				+ "<%=restaurants[i].getId()%>" + "\" style=\"background-image: url('"+ 
 				"<%=restaurants[i].getImageUrl()%>" + "');\">";
 			resF.innerHTML+= "</div>";
-			resF.innerHTML += " <div class=\"col-sm-8\">";
-			resF.innerHTML += "<h4>" + "<%=restaurants[i].getName()%>" + "</h4> <br/>";
-			resF.innerHTML += "<h5>" + "<%=restaurants[i].getRating()%>" + "</h5><br/>";
-			resF.innerHTML += "<h5>" + "<%=restaurants[i].getPrice()%>" + "</h5><br/>";
 			
+			var stars = "<%=restaurants[i].getRating()%>";
+   			var rate ="";
+       		for(var j=0; j < stars; j++)
+       				{
+       			rate += "<img class= \"star\" src=\"star.png\">"; 
+       				}
+			resF.innerHTML += " <div class=\"col-sm-4\"><h4>" + "<%=restaurants[i].getName()%>" + 
+			"</h4><h5 id=\"rate\">" + rate + "</h5><h5>" + 
+			"<%=restaurants[i].getPrice()%>" + "</h5>";
+   			
+       		resF.innerHTML += "</div>";
+			resF.innerHTML += " <div class=\"col-sm-4\">";
+			resF.innerHTML += "<h6>" + "<%=addy[0]%>" + "</h6> <br/>";
 			resF.innerHTML+= "<br/> <br/></div> </div>";
+			
+			
 		<%}%>
 		
 		<%
