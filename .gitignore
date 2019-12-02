@@ -1,7 +1,3 @@
 /bin/
-<<<<<<< HEAD
-/build/
-=======
 WebContent/WEB-INF/config.txt
 .DS_Store
->>>>>>> a1be121380ed67deb2b80ce81725b815756d0e7c

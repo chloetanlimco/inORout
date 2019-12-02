@@ -32,6 +32,10 @@ public class Search extends HttpServlet {
 	Vector<String> ids;
 	Vector<String> keys;
 	int numkeys;
+	Vector<Business> YelpResults;
+	Vector<Recipe> EdamamResults;
+	String YelpBearerId;
+	
 
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -51,17 +55,13 @@ public class Search extends HttpServlet {
 		} else {
 
 			// read in config file with API keys
-			String YelpBearerId = "";
-			String app_key = "";
-			String app_id = "";
+			YelpBearerId = "";
 			try {
 				FileReader fr = new FileReader(getServletContext().getRealPath("/WEB-INF/config.txt"));
 				Properties p = new Properties();
 				p.load(fr);
 
 				YelpBearerId = p.getProperty("Yelp");
-				app_key = p.getProperty("EdamamKey");
-				app_id = p.getProperty("EdamamId");
 				ids = new Vector<String>();
 				keys = new Vector<String>();
 				keys.add(p.getProperty("EdamamKey"));
@@ -84,7 +84,6 @@ public class Search extends HttpServlet {
 			Vector<Recipe> EdamamResults = new Vector<Recipe>();
 
 			// YELP API CALL
-			System.out.println("here");
 			int sleeptime = 125;
 			if (!searchTerm.contentEquals("")) {
 				boolean yelpsuccess = false;
@@ -97,32 +96,8 @@ public class Search extends HttpServlet {
 							latitude = (String) session.getAttribute("latitude");
 							longitude = (String) session.getAttribute("longitude");
 						}
-						String params = "term=" + searchTerm.replace(" ", "+") + "&latitude=" + latitude + "&longitude="
-								+ longitude;
-
-						URL url = new URL("https://api.yelp.com/v3/businesses/search?" + params);
-
-						HttpURLConnection yelpCon = (HttpURLConnection) url.openConnection();
-						// add headers
-						yelpCon.setRequestProperty("Authorization", "Bearer " + YelpBearerId);
-						yelpCon.setRequestMethod("GET");
-
-						// parsing JSON
-						JsonParser jsonParser = new JsonParser();
-						JsonObject jsonObject = (JsonObject) jsonParser
-								.parse(new InputStreamReader(yelpCon.getInputStream(), "UTF-8"));
-
-						int total = jsonObject.getAsJsonPrimitive("total").getAsInt();
-						JsonArray businesses = jsonObject.getAsJsonArray("businesses");
-
-						// maximum 20 elements to return - can change this if you want
-						for (int i = 0; i < ((total < 20) ? total : 20); i++) {
-							// if not closed
-							if (!businesses.get(i).getAsJsonObject().getAsJsonPrimitive("is_closed").getAsBoolean()) {
-								Business b = new Business(businesses.get(i).getAsJsonObject());
-								YelpResults.add(b);
-							}
-						}
+						helpers.yelpCall(this, latitude, longitude, searchTerm);
+						
 						yelpsuccess = true;
 					} catch (Exception e) {
 						System.out.println(e.getMessage());
