@@ -1,20 +1,24 @@
-<%@ page import ="inORout.Business" %>
-<%@ page import ="inORout.Recipe" %>
+<%@ page import="inORout.Business"%>
+<%@ page import="inORout.Recipe"%>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-	<title>Results</title>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" type="text/css" href="searchresults.css" />
-	<link rel="shortcut icon" href="#">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-	<link href="https://fonts.googleapis.com/css?family=Lustria&display=swap" rel="stylesheet">
-	
-	<script>
+<title>Results</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="#">
+<link rel="stylesheet" type="text/css" href="searchresults.css" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<link
+	href="https://fonts.googleapis.com/css?family=Lustria&display=swap"
+	rel="stylesheet">
+<script>
 		function profile() {
 			let div = document.getElementById("buttonLog");
 			if ("<%=session.getAttribute("Current user")%>" == "null") {
@@ -182,17 +186,13 @@
 				recF.innerHTML += "</div>";
 				recF.innerHTML += " <div class=\"col-sm-8\">";
 				recF.innerHTML += "<h4>" + "<%=recipes[i].getLabel()%>" + "</h4> <br/>";
-				recF.innerHTML += "<h5> Calories: " + "<%=recipes[i].getCalories()%>" + "</h5><br/>";
+				recF.innerHTML += "<h5> Calories: " + "<%=recipes[i].getCalories()%>"
+				+ "</h5><br/>";
 
-				recF.innerHTML += "<br/> <br/></div></div>"; 
-			<%
-			} 
-			%>
-
-
-		}
-
-	</script>
+		recF.innerHTML += "<br/> <br/></div></div>";
+<%}%>
+	}
+</script>
 </head>
 
 <body onload="profile(); loadResults();">
@@ -203,24 +203,27 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-sm-2">
-						<a href="HomePage.jsp" class="btn btn-default homeButton" id="titleHome">in-or-out</a>
+						<a href="HomePage.jsp" class="btn btn-default homeButton"
+							id="titleHome">in-or-out</a>
 					</div>
 					<div class="searchSection">
 						<form action="Search">
 							<div class="col-sm-3">
 								<div class="form-group">
-									<input type="text" class="form-control" id="foodSearch" placeholder="Find fries, sushi, pizza..." name="searchTerm">
+									<input type="text" class="form-control" id="foodSearch"
+										placeholder="Find fries, sushi, pizza..." name="searchTerm">
 								</div>
 							</div>
 							<div class="col-sm-3">
-								<input type="submit" class="btn btn-default searchButton" name="searchType" value="Search by Restaurant">
-								<input type="submit" class="btn btn-default searchButton" name="searchType" value="Search by Recipe">
+								<input type="submit" class="btn btn-default searchButton"
+									name="searchType" value="Search by Restaurant"> <input
+									type="submit" class="btn btn-default searchButton"
+									name="searchType" value="Search by Recipe">
 							</div>
 						</form>
 					</div>
 					<div class="col-sm-3">
-						<form action="Logger.java" id="buttonLog">
-						</form>
+						<form action="Logger.java" id="buttonLog"></form>
 					</div>
 				</div>
 			</div>
@@ -229,18 +232,17 @@
 			<div class="row">
 				<div class="col-sm-9" id="mainBlock">
 					<ul class="nav nav-tabs" id="tabs">
-						<li id="restaurantTab"><a data-toggle="tab" href="#restaurantDiv">Restaurants</a></li>
+						<li id="restaurantTab"><a data-toggle="tab"
+							href="#restaurantDiv">Restaurants</a></li>
 						<li id="recipeTab"><a data-toggle="tab" href="#recipeDiv">Recipes</a></li>
 					</ul>
 
 					<div class="tab-content">
 						<div id="restaurantDiv">
-							<form id="restaurantForm" action="Detail">
-							</form>
+							<form id="restaurantForm" action="Detail"></form>
 						</div>
 						<div id="recipeDiv">
-							<form id="recipeForm" action="Detail">
-							</form>
+							<form id="recipeForm" action="Detail"></form>
 						</div>
 					</div>
 
@@ -248,17 +250,71 @@
 				</div>
 				<div class="col-sm-3">
 					<div class="jumbotron filterBar">
-						<h3>Filters</h3>
 						<div class="parentCenter">
 							<form action="">
-								<input type="hidden" name="searchTerm" value=searchTerm>
-								<input type="hidden" name="searchType" value=searchType>
-								<button type="submit" class="btn btn-default btn-lg filterButton">Highest Rating</button> <br />
-								<button type="submit" class="btn btn-default btn-lg filterButton">Cost</button> <br />
-								<button type="submit" class="btn btn-default btn-lg filterButton">Vegetarian</button> <br />
-								<button type="submit" class="btn btn-default btn-lg filterButton">Vegan</button> <br />
-								<button type="submit" class="btn btn-default btn-lg filterButton">Gluten-Free</button> <br />
-								<button type="submit" class="btn btn-default btn-lg filterButton">Lactose-Free</button>
+								<input type="hidden" name="searchTerm"
+									value="<%=request.getAttribute("searchTerm")%>"> <input
+									type="hidden" name="searchType"
+									value="<%=request.getAttribute("searchType")%>">
+
+								<h3 class="text-center">Filters</h3>
+
+ 								<div class="btn-group-toggle" data-toggle="buttons">
+									<label class="btn btn-default btn-lg filterButton"> <input
+										type="checkbox" name="option" autocomplete="off"
+										value="lactose"> Vegetarian
+									</label> <label class="btn btn-default btn-lg filterButton"> <input
+										type="checkbox" name="option" autocomplete="off"
+										class="filterButton" value="vegan"> Vegan
+									</label> <br> <label class="btn btn-default btn-lg filterButton">
+										<input type="checkbox" name="option" autocomplete="off"
+										value="gluten"> Gluten-Free
+									</label> <label class="btn btn-default btn-lg filterButton"> <input
+										type="checkbox" name="option" autocomplete="off"
+										value="lactose"> Lactose-Free
+									</label>							
+								
+
+								<h3 class="text-center">Price:</h3>
+								<label class="btn btn-default btn-lg filterButton price"> <input
+									type="radio" name="price" autocomplete="off"
+									value="0"> No Preference
+								</label>
+								<br>
+								<label class="btn btn-default btn-lg filterButton price"> <input
+									type="radio" name="price" autocomplete="off"
+									value="1"> $
+								</label> <label class="btn btn-default btn-lg filterButton"> <input
+									type="radio" name="price" autocomplete="off"
+									value="2"> $$
+								</label> <label class="btn btn-default btn-lg filterButton"> <input
+									type="radio" name="price" autocomplete="off"
+									value="3"> $$$
+								</label> <label class="btn btn-default btn-lg filterButton"> <input
+									type="radio" name="price" autocomplete="off"
+									value="4"> $$$$
+								</label>
+								
+								<h3 class="text-center">Sort By:</h3>
+								<label class="btn btn-default btn-lg filterButton"> <input
+									type="radio" name="sort" autocomplete="off"
+									value="none"> No Sorting
+								</label> <label class="btn btn-default btn-lg filterButton"> <input
+									type="radio" name="sort" autocomplete="off"
+									value="distance"> Distance
+								</label> <label class="btn btn-default btn-lg filterButton"> <input
+									type="radio" name="sort" autocomplete="off"
+									value="rating"> Rating
+								</label> <label class="btn btn-default btn-lg filterButton"> <input
+									type="radio" name="sort" autocomplete="off"
+									value="review"> Review Count
+								</label>
+								</div>
+
+								
+
+								<button type="submit" class="btn btn-lg btn-primary">Submit
+									Search</button>
 							</form>
 						</div>
 					</div>
