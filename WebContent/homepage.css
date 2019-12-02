@@ -1,70 +1,97 @@
 @charset "UTF-8";
-
+*{
+	font-family: 'Lustria';
+}
 #titleHome
 {
 	border: none;
-	font-family: 'Lustria';
-	position: relative;
+	text-decoration: none;
 	font-size: 7vh;
 }
 .header
 {
-	position: relative;
-	height: 15vh;
+	margin-top:10px;
+	margin-bottom: 10px;
 }
-.loginbutton
-{
-	font-family: 'Lustria';
-	position: relative;
-	font-size: 6vh;
-	top: 4vh;
-	width: 15vh;
+
+
+.mybtn{
+	margin-left: 2px;
+	margin-right: 2px;
 }
-.signupbutton
-{
-	font-family: 'Lustria';
-	position: relative;
-	font-size: 6vh;
-	top: 4vh;
+
+.myrow{
+	text-align: center;
 }
+
+.full{
+	height: 12vh;
+	display: flex;
+  	align-items: center;
+  	justify-content: center;
+}
+
 .mainBox
 {
-	height: 100vh;
-	border: none;
-	border-radius: 0 !important;
-	padding: 0 ! important;
-	margin-bottom: 0 ! important;
-	margin-right: 0 ! important;
-	margin-left: 0 ! important; 
+	height: calc(100vh - 20px - 12vh);
 	background-image: url(homepagefood.png);
 	background-repeat: no-repeat;
-  	display: block;
   	background-size:cover;
   	background-color: white ! important;
 
 }
 .searchSection
 {
+	padding-left: 7% !important;
+	padding-right: 10% !important;
 	text-align: center;
 	position: relative;
 	top: 40vh;
 }
+.homeButton{
+	border: none;
+}
 .searchButton
 {
-	font-family: 'Lustria';
 	background-color: #9AADF2 ! important;
-	border-color: black ! important;
-	color: white ! important;
+	color: white !important;
+	border-color: Black !important;
 }
 #error_msg
 {
-	font-family: 'Lustria';
 	font-weight: bold;
 	color: white;
 	font-size: 5vh;
 	position: relative;
 	top: 42vh;
 }
+
+
+
+.mytextinput{
+	font-size: 16px!important;
+	height: 42px!important;
+}
+
+.myinput{
+	font-size: 20px!important;
+	outline: none!important;
+}
+
+.fullwidth{
+	width: 100%!important;
+}
+
+@media(max-width: 767px){
+	#buttonLog{
+	position: relative;
+	top: 0px;
+	}
+	.full{
+		height: auto;
+	}
+}
+
 
 
 

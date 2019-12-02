@@ -18,12 +18,14 @@
 		if("<%=session.getAttribute("Current user")%>" == "null")
 		{
 			let el = document.createElement("input");
+			el.type = "submit";
 			el.name = "logChoice";
 			el.value = "Login";
 			el.className = "btn btn-default btn-lg loginbutton";
 			div.appendChild(el);
 			
 			let el2 = document.createElement("input");
+			el.type = "submit";
 			el2.name = "logChoice";
 			el2.value = "Signup";
 			el2.className = "btn btn-default btn-lg loginbutton";
@@ -32,13 +34,9 @@
 		}
 		else
 		{
-			let ell = document.createElement("input");
-			ell.name = "logChoice";
-			ell.value = "Profile";
-			ell.className = "btn btn-default btn-lg loginbutton";
-			div.appendChild(ell);
 			
 			let el = document.createElement("input");
+			el.type = "submit";
 			el.name = "logChoice";
 			el.value = "Signout";
 			el.className = "btn btn-default btn-lg loginbutton";
