@@ -142,16 +142,64 @@
 			recF.innerHTML+= "<br/> <br/></div></div>";
 		<%}%>
 		
+			
+
+
+			recF.innerHTML = "<input type=\"hidden\" name=\"searchTerm\"value = \"" + searchTerm + "\"> ";
+			recF.innerHTML += "<input type=\"hidden\" name=\"searchType\"value = \"" + searchType + "\"> ";
+			resF.innerHTML = "<input type=\"hidden\" name=\"searchTerm\"value = \"" + searchTerm + "\"> ";
+			resF.innerHTML += "<input type=\"hidden\" name=\"searchType\"value = \"" + searchType + "\"> "; 
+			<%
+			max = restaurants.length;
+			if (max > 10) {
+				max = 10;
+			}
+			for (int i = 0; i < max; i++) {
+			%>
+				resF.innerHTML += "<div class=\"row\">";
+				resF.innerHTML += " <div class=\"col-sm-4\"> <input type=\"submit\" class= \"img-thumbnail image\"name= \"restaurant\" value=\"" +
+					"<%=restaurants[i].getId()%>" + "\" style=\"background-image: url('" +
+					"<%=restaurants[i].getImageUrl()%>" + "');\">";
+				resF.innerHTML += "</div>";
+				resF.innerHTML += " <div class=\"col-sm-8\">";
+				resF.innerHTML += "<h4>" + "<%=restaurants[i].getName()%>" + "</h4> <br/>";
+				resF.innerHTML += "<h5>" + "<%=restaurants[i].getRating()%>" + "</h5><br/>";
+				resF.innerHTML += "<h5>" + "<%=restaurants[i].getPrice()%>" + "</h5>";
+
+				resF.innerHTML += "</div> </div>"; 
+			<%
+			}
+			%>
+
+			<%
+			max = recipes.length;
+			System.out.print(recipes.length);
+			if (max > 10) {
+				max = 10;
+			}
+			for (int i = 0; i < max; i++) {
+			%>
+				recF.innerHTML += "<div class=\"row\">";
+				recF.innerHTML += " <div class=\"col-sm-4 \"> <input type=\"submit\" class= \"img-thumbnail image\"name= \"recipe\" value=\"" +
+					"<%=recipes[i].getUri()%>" + "\" style=\"background-image: url('" +
+					"<%=recipes[i].getImage()%>" + "');\">";
+				recF.innerHTML += "</div>";
+				recF.innerHTML += " <div class=\"col-sm-8\">";
+				recF.innerHTML += "<h4>" + "<%=recipes[i].getLabel()%>" + "</h4> <br/>";
+				recF.innerHTML += "<h5> Calories: " + "<%=recipes[i].getCalories()%>"
+				+ "</h5><br/>";
+
+		recF.innerHTML += "<br/> <br/></div></div>";
+<%}%>
 	}
 </script>
 </head>
 
 <body onload="profile(); loadResults();">
 
-	<div class="container-fluid">
+	<div class="container-fluid mycontainer">
 
 		<div class="header">
-			<div class="container">
 				<div class="row">
 					<div class="col-sm-2">
 						<a href="HomePage.jsp" class="btn btn-default homeButton"
@@ -216,7 +264,7 @@
 										value="lactose"> Vegetarian
 									</label> <label class="btn btn-default btn-lg filterButton"> <input
 										type="checkbox" name="option" autocomplete="off"
-										class="filterButton" value="vegan"> Vegan
+										value="vegan"> Vegan
 									</label> <label class="btn btn-default btn-lg filterButton">
 										<input type="checkbox" name="option" autocomplete="off"
 										value="gluten"> Gluten-Free
@@ -276,7 +324,6 @@
 					</div>
 				</div>
 			</div>
-		</div>
 
 	</div>
 	<script type="text/javascript" src="jquery.js"></script>
