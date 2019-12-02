@@ -76,7 +76,7 @@
 		<div class="mainTextParent">
 			<div class="mainText" style="margin-left: 80px;">
 
-				<form name="myform" method="GET" action="Login">
+				<form name="myform" method="POST" action="Login">
 					<div class="form-group row">
 						<label for="inputUsername" class="col-sm-2 col-form-label">Username</label>
 						<div class="col-sm-10">
