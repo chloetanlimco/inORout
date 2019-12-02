@@ -257,7 +257,7 @@
 									type="hidden" name="searchType"
 									value="<%=request.getAttribute("searchType")%>">
 
-								<h3 class="text-center">Filters</h3>
+								<h3 class="text-center">Filter By:</h3>
 
  								<div class="btn-group-toggle" data-toggle="buttons">
 									<label class="btn btn-default btn-lg filterButton"> <input
@@ -266,21 +266,23 @@
 									</label> <label class="btn btn-default btn-lg filterButton"> <input
 										type="checkbox" name="option" autocomplete="off"
 										class="filterButton" value="vegan"> Vegan
-									</label> <br> <label class="btn btn-default btn-lg filterButton">
+									</label> <label class="btn btn-default btn-lg filterButton">
 										<input type="checkbox" name="option" autocomplete="off"
 										value="gluten"> Gluten-Free
 									</label> <label class="btn btn-default btn-lg filterButton"> <input
 										type="checkbox" name="option" autocomplete="off"
 										value="lactose"> Lactose-Free
-									</label>							
+									</label>		
+								</div>					
 								
-
+								<div class="btn-group-toggle" data-toggle="buttons">
 								<h3 class="text-center">Price:</h3>
 								<label class="btn btn-default btn-lg filterButton price"> <input
 									type="radio" name="price" autocomplete="off"
 									value="0"> No Preference
 								</label>
 								<br>
+								
 								<label class="btn btn-default btn-lg filterButton price"> <input
 									type="radio" name="price" autocomplete="off"
 									value="1"> $
@@ -294,7 +296,9 @@
 									type="radio" name="price" autocomplete="off"
 									value="4"> $$$$
 								</label>
+								</div>
 								
+								<div class="btn-group-toggle" data-toggle="buttons">
 								<h3 class="text-center">Sort By:</h3>
 								<label class="btn btn-default btn-lg filterButton"> <input
 									type="radio" name="sort" autocomplete="off"
@@ -310,6 +314,7 @@
 									value="review"> Review Count
 								</label>
 								</div>
+								
 
 								
 
@@ -323,6 +328,28 @@
 		</div>
 
 	</div>
+	<script type="text/javascript" src="jquery.js"></script>
+	<script>
+	
+	if("<%=session.getAttribute("longitude")%>" == "null"){
+	
+		if (navigator.geolocation) {
+		    navigator.geolocation.getCurrentPosition(function (p) {
+			    	$.ajax({
+	                method: "POST",
+	                url: "SetLocation?",
+	                data: {
+	                    longitude: p.coords.longitude,
+	                    latitude: p.coords.latitude,
+	                }
+	            });
+
+		    });
+		}
+	}
+
+
+</script>
 
 </body>
 

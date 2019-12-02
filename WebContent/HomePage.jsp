@@ -2,16 +2,21 @@
 <html lang="en">
 
 <head>
-	<title>HomePage</title>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" type="text/css" href="homepage.css" />
-	<link rel="shortcut icon" href="#">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-	<link href="https://fonts.googleapis.com/css?family=Lustria&display=swap" rel="stylesheet">
-	<script>
+<title>HomePage</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="homepage.css" />
+<link rel="shortcut icon" href="#">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<link
+	href="https://fonts.googleapis.com/css?family=Lustria&display=swap"
+	rel="stylesheet">
+<script>
 		function profile() {
 			let div = document.getElementById("buttonLog");
 			if ("<%=session.getAttribute("Current user")%>" == "null") {
@@ -56,12 +61,12 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-sm-4">
-						<button type="button" class="btn btn-default homeButton" id="titleHome">in-or-out</button>
+						<button type="button" class="btn btn-default homeButton"
+							id="titleHome">in-or-out</button>
 					</div>
 					<div class="col-sm-4"></div>
 					<div class="col-sm-4">
-						<form action="Logger" id="buttonLog">
-						</form>
+						<form action="Logger" id="buttonLog"></form>
 					</div>
 				</div>
 			</div>
@@ -72,23 +77,49 @@
 					<div class="row">
 						<div class="col-sm-8">
 							<div class="form-group">
-								<input type="text" class="form-control" id="foodSearch" placeholder="Find fries, sushi, pizza..." name="searchTerm">
+								<input type="text" class="form-control" id="foodSearch"
+									placeholder="Find fries, sushi, pizza..." name="searchTerm">
 							</div>
 						</div>
 						<div class="col-sm-4">
-							<input type="submit" class="btn btn-default searchButton" name="searchType" value="Search by Restaurant">
-							<input type="submit" class="btn btn-default searchButton" name="searchType" value="Search by Recipe">
+							<input type="submit" class="btn btn-default searchButton"
+								name="searchType" value="Search by Restaurant"> <input
+								type="submit" class="btn btn-default searchButton"
+								name="searchType" value="Search by Recipe">
 						</div>
 					</div>
 				</form>
 			</div>
 			<div id="error_msg">
-				<%= request.getAttribute("error") != null ? request.getAttribute("error") : "" %>
+				<%=request.getAttribute("error") != null ? request.getAttribute("error") : ""%>
 			</div>
 		</div>
 
 	</div>
+	<script type="text/javascript"
+		src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+	<script type="text/javascript" src="jquery.js"></script>
+	<script>
+	
+	if("<%=session.getAttribute("longitude")%>" == "null"){
+	
+		if (navigator.geolocation) {
+		    navigator.geolocation.getCurrentPosition(function (p) {
+			    	$.ajax({
+	                method: "POST",
+	                url: "SetLocation?",
+	                data: {
+	                    longitude: p.coords.longitude,
+	                    latitude: p.coords.latitude,
+	                }
+	            });
 
+		    });
+		}
+	}
+
+
+</script>
 </body>
 
 </html>
