@@ -28,14 +28,13 @@
 				el.value = "Login";
 				el.className = "btn btn-default btn-lg loginbutton";
 				div.appendChild(el);
-	
+		
 				let el2 = document.createElement("input");
 				el2.type = "submit";
 				el2.name = "logChoice";
 				el2.value = "Signup";
 				el2.className = "btn btn-default btn-lg loginbutton";
 				div.appendChild(el2);
-	
 			} else {
 				let ell = document.createElement("input");
 				ell.type = "submit";
@@ -43,7 +42,7 @@
 				ell.value = "Profile";
 				ell.className = "btn btn-default btn-lg loginbutton";
 				div.appendChild(ell);
-	
+		
 				let el = document.createElement("input");
 				el.type = "submit";
 				el.name = "logChoice";
@@ -141,56 +140,6 @@
 			
 			recF.innerHTML+= "<br/> <br/></div></div>";
 		<%}%>
-		
-			
-
-
-			recF.innerHTML = "<input type=\"hidden\" name=\"searchTerm\"value = \"" + searchTerm + "\"> ";
-			recF.innerHTML += "<input type=\"hidden\" name=\"searchType\"value = \"" + searchType + "\"> ";
-			resF.innerHTML = "<input type=\"hidden\" name=\"searchTerm\"value = \"" + searchTerm + "\"> ";
-			resF.innerHTML += "<input type=\"hidden\" name=\"searchType\"value = \"" + searchType + "\"> "; 
-			<%
-			max = restaurants.length;
-			if (max > 10) {
-				max = 10;
-			}
-			for (int i = 0; i < max; i++) {
-			%>
-				resF.innerHTML += "<div class=\"row\">";
-				resF.innerHTML += " <div class=\"col-sm-4\"> <input type=\"submit\" class= \"img-thumbnail image\"name= \"restaurant\" value=\"" +
-					"<%=restaurants[i].getId()%>" + "\" style=\"background-image: url('" +
-					"<%=restaurants[i].getImageUrl()%>" + "');\">";
-				resF.innerHTML += "</div>";
-				resF.innerHTML += " <div class=\"col-sm-8\">";
-				resF.innerHTML += "<h4>" + "<%=restaurants[i].getName()%>" + "</h4> <br/>";
-				resF.innerHTML += "<h5>" + "<%=restaurants[i].getRating()%>" + "</h5><br/>";
-				resF.innerHTML += "<h5>" + "<%=restaurants[i].getPrice()%>" + "</h5>";
-
-				resF.innerHTML += "</div> </div>"; 
-			<%
-			}
-			%>
-
-			<%
-			max = recipes.length;
-			System.out.print(recipes.length);
-			if (max > 10) {
-				max = 10;
-			}
-			for (int i = 0; i < max; i++) {
-			%>
-				recF.innerHTML += "<div class=\"row\">";
-				recF.innerHTML += " <div class=\"col-sm-4 \"> <input type=\"submit\" class= \"img-thumbnail image\"name= \"recipe\" value=\"" +
-					"<%=recipes[i].getUri()%>" + "\" style=\"background-image: url('" +
-					"<%=recipes[i].getImage()%>" + "');\">";
-				recF.innerHTML += "</div>";
-				recF.innerHTML += " <div class=\"col-sm-8\">";
-				recF.innerHTML += "<h4>" + "<%=recipes[i].getLabel()%>" + "</h4> <br/>";
-				recF.innerHTML += "<h5> Calories: " + "<%=recipes[i].getCalories()%>"
-				+ "</h5><br/>";
-
-		recF.innerHTML += "<br/> <br/></div></div>";
-<%}%>
 	}
 </script>
 </head>
@@ -221,8 +170,8 @@
 							</div>
 						</form>
 					</div>
-					<div class="col-sm-3">
-						<form action="Logger.java" id="buttonLog"></form>
+					<div class="col-sm-4">
+						<form action="Logger" id="buttonLog"></form>
 					</div>
 				</div>
 			</div>

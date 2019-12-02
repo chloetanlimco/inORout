@@ -185,7 +185,7 @@ public class Search extends HttpServlet {
 					current = current+1 % numkeys;
 					System.out.println(e.getMessage());
 					System.out.println(current);
-					if(current == 3) {
+					if(current == 0) {
 						break;
 					}
 				}
