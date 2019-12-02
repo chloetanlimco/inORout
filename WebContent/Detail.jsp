@@ -66,17 +66,25 @@
 				recipe = (Recipe) request.getAttribute("recipe");
 				r = true;
 			}
-			boolean fav = (boolean) request.getAttribute("favorite");%>
+			boolean fav = (boolean) request.getAttribute("favorite");
+			System.out.println(b);%>
 			
 			let resF = document.getElementById("restaurantForm");
 			
 			var bizz = '${business}';
 			var rec = '${recipe}';
 			
-			if (<%=b%>){
-				resF.innerHTML += "B";
-			}
-			else if (<%=r%>){
+			<%
+			
+			if (b){ %>
+				resF.innerHTML += " <div class=\"col-sm-4\" id = \"picture\"><input type=\"submit\" class= \"img-thumbnail image\"name= \"restaurant\" value=\"" 
+					+ "<%=business.getId()%>"+ "\" style=\"background-image: url('"+ 
+					 "<%=business.getImageUrl()%>" + "');border-radius:17px;\"></div>";
+				resF.innerHTML+="<div class=\"col-sm-3\" id =res>"+"<%=business.getName()%>" +"</br>";
+			
+				resF.innerHTML += "</div>";
+			<%}
+			else if (r){%>
 				resF.innerHTML += " <div class=\"col-sm-4\" id = \"picture\"><input type=\"submit\" class= \"img-thumbnail image\"name= \"restaurant\" value=\"" 
 					+ "<%=recipe.getSource()%>"+ "\" style=\"background-image: url('"+ 
 					 "<%=recipe.getImage()%>" + "');border-radius:17px;\"></div>";
@@ -89,7 +97,7 @@
 			
 				resF.innerHTML += "</div>";
 				
-			}
+			<%}%>
 			
 		}
 		

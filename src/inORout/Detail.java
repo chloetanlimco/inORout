@@ -95,10 +95,11 @@ public class Detail extends HttpServlet {
 			JsonParser jsonParser = new JsonParser();
 			JsonObject jsonObject = (JsonObject)jsonParser.parse(
 				      new InputStreamReader(yelpCon.getInputStream(), "UTF-8"));
+			System.out.println(jsonObject);
 			
 			/* Need to check if returned as array or single object */
-			JsonArray businesses = jsonObject.getAsJsonArray("businesses");
-			b  = new Business(businesses.get(0).getAsJsonObject());
+//			JsonArray businesses = jsonObject.getAsJsonArray("businesses");
+			b  = new Business(jsonObject);
 			
 			//see if restaurant in user's favorites
 			// if username already taken
