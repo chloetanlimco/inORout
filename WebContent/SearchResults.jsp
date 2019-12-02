@@ -50,9 +50,9 @@
 		}
 
 		function loadResults() {
-			var type = "<%=request.getAttribute("searchType ") %>";
+			var type = "<%=request.getAttribute("searchType") %>";
 
-			type = type.substring(0, type.length - 1);
+			//type = type.substring(0, type.length - 1);
 			if (type == "Search by Restaurant") {
 				let el = document.getElementById("restaurantTab");
 				el.className = "active";
