@@ -110,12 +110,11 @@
 	background-repeat: no-repeat;
   	display: block;
   	background-size:cover;
-  	background-color: red;
 }
 h4, h5
 {
 	font-family: 'Lustria' ! important;
-	color: blue;
+	color: black;
 }
 .testimonial-group > .row {
   overflow-x: auto;
