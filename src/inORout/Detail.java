@@ -49,7 +49,7 @@ public class Detail extends HttpServlet {
 		
 		/* Also consider just passing objects, then no need to make a second call
 		 * unless you want to consider case where updated between pages */
-		String searchType = request.getParameter("searchType");
+//		String searchType = request.getParameter("searchType");
 		String restaurant = request.getParameter("restaurant");
 		String recipe = request.getParameter("recipe");
 		String encodedLink = null;
@@ -82,8 +82,8 @@ public class Detail extends HttpServlet {
 		Business b = null;
 		Recipe r = null;
 		boolean fav = false;
-		if (searchType.contains("Restaurant")) {
-
+		if (restaurant != null) {
+			System.out.println(restaurant);
 			URL url = new URL("https://api.yelp.com/v3/businesses/" + restaurant);
 
 			HttpURLConnection yelpCon = (HttpURLConnection) url.openConnection();
@@ -100,6 +100,44 @@ public class Detail extends HttpServlet {
 			JsonArray businesses = jsonObject.getAsJsonArray("businesses");
 			b  = new Business(businesses.get(0).getAsJsonObject());
 			
+			//see if restaurant in user's favorites
+			// if username already taken
+			Connection conn = null;
+			PreparedStatement st = null;
+			ResultSet rs = null;
+			try {
+				conn = DriverManager.getConnection("jdbc:mysql://google/foodapp?cloudSqlInstance=groupproject-258805:us-central1:project201&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false&user=anthonyuser&password=wQHL223i4LJhEuCl1");
+				st = conn.prepareStatement("SELECT * from Restaurant WHERE userID=(SELECT userID from User WHERE username=?)");
+				st.setString(1, username);
+				rs = st.executeQuery();
+				
+				while (rs.next()) {
+					//if recipe already in favorites
+					if (rs.getString("name").contentEquals(r.label) || rs.getString("name").contentEquals(b.name)) {
+						fav = true;
+					}
+				}
+			}
+			catch (SQLException sqle) {
+				System.out.println(sqle.getMessage());
+			}
+			finally {
+				try {
+					if (conn != null) {
+						conn.close();
+					}
+					if (st != null) {
+						st.close();
+					}
+					if (rs != null) {
+						rs.close();
+					}
+				}
+				catch (SQLException sqle) {
+					System.out.println(sqle.getMessage());
+				}
+			}
+			
 		}
 		//recipe details
 		/* Might not need if we want to forward to original site */
@@ -114,52 +152,52 @@ public class Detail extends HttpServlet {
 			
 			// parsing JSON
 			JsonParser jsonParser = new JsonParser();
-			JsonArray jsonObject = (JsonArray) jsonParser.parse(
-				      new InputStreamReader(edamamCon.getInputStream(), "UTF-8"));
+			JsonArray jsonObject = (JsonArray) jsonParser.parse(new InputStreamReader(edamamCon.getInputStream(), "UTF-8"));
 			JsonObject obj = jsonObject.get(0).getAsJsonObject();
 			System.out.println(obj);
 //			JsonArray recipes = jsonObject.getAsJsonArray("hits");
 			r = new Recipe(obj, "detail");
 			
-		}
-		
-		//see if restaurant or recipe in user's favorites
-		// if username already taken
-		Connection conn = null;
-		PreparedStatement st = null;
-		ResultSet rs = null;
-		try {
-			conn = DriverManager.getConnection("jdbc:mysql://google/foodapp?cloudSqlInstance=groupproject-258805:us-central1:project201&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false&user=anthonyuser&password=wQHL223i4LJhEuCl1");
-			st = conn.prepareStatement("SELECT * from Favorite WHERE userID=(SELECT userID from User WHERE username=?)");
-			st.setString(1, username);
-			rs = st.executeQuery();
-			
-			while (rs.next()) {
-				//if recipe already in favorites
-				if (rs.getString("name").contentEquals(r.label) || rs.getString("name").contentEquals(b.name)) {
-					fav = true;
-				}
-			}
-		}
-		catch (SQLException sqle) {
-			System.out.println(sqle.getMessage());
-		}
-		finally {
+			//see if recipe in user's favorites
+			// if username already taken
+			Connection conn = null;
+			PreparedStatement st = null;
+			ResultSet rs = null;
 			try {
-				if (conn != null) {
-					conn.close();
-				}
-				if (st != null) {
-					st.close();
-				}
-				if (rs != null) {
-					rs.close();
+				conn = DriverManager.getConnection("jdbc:mysql://google/foodapp?cloudSqlInstance=groupproject-258805:us-central1:project201&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false&user=anthonyuser&password=wQHL223i4LJhEuCl1");
+				st = conn.prepareStatement("SELECT * from Recipe WHERE userID=(SELECT userID from User WHERE username=?)");
+				st.setString(1, username);
+				rs = st.executeQuery();
+				
+				while (rs.next()) {
+					//if recipe already in favorites
+					if (rs.getString("name").contentEquals(r.label) || rs.getString("name").contentEquals(b.name)) {
+						fav = true;
+					}
 				}
 			}
 			catch (SQLException sqle) {
 				System.out.println(sqle.getMessage());
 			}
+			finally {
+				try {
+					if (conn != null) {
+						conn.close();
+					}
+					if (st != null) {
+						st.close();
+					}
+					if (rs != null) {
+						rs.close();
+					}
+				}
+				catch (SQLException sqle) {
+					System.out.println(sqle.getMessage());
+				}
+			}
 		}
+		
+		
 		
 		/* Front End grab this value to display error */ 
 		request.setAttribute("detail-error", error);
