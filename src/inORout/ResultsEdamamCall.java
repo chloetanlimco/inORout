@@ -41,7 +41,6 @@ public class ResultsEdamamCall extends Thread {
 				}
 				
 				URL url = new URL("https://api.edamam.com/search?" + params);
-				System.out.println(url);
 				
 				HttpURLConnection edamamCon = (HttpURLConnection) url.openConnection();
 				edamamCon.setRequestMethod("GET");
