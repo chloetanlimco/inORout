@@ -96,9 +96,11 @@
 				
 				busDetails +="<%=business.getDisplayPhone()%>";
 				
-				busDetails+= "<br><br><form action = \"AddRemFav\" method = \"GET\">";
-				busDetails += "<input type=\"hidden\" name=\"restaurant\" value=\""+"<%=business.getId()%>"+"\" />";
-				busDetails+= "<input id = \"favButton\" type =\"submit\" value = \"FAVORITE\"></form>";
+				<% if (session.getAttribute("Current user")!=null){%>
+					busDetails+= "<br><br><form action = \"AddRemFav\" method = \"GET\">";
+					busDetails += "<input type=\"hidden\" name=\"restaurant\" value=\""+"<%=business.getId()%>"+"\" />";
+					busDetails+= "<input id = \"favButton\" type =\"submit\" value = \"FAVORITE\"></form>";
+				<%}%>
 				
 				busDetails +="</div></div>";
 				
@@ -107,7 +109,6 @@
 			<%}
 			else {//RECIPE%>
 				var recipeDetails="";
-			    
 				recipeDetails += " <div class=\"col-sm-4\" id = \"picture\">";
 				recipeDetails += "<a id=\"recipePic\" href=\""+"<%=recipe.getUrl()%>"+"\"><img src=\""+"<%=recipe.getImage()%>" 
 					+"\" alt=\"" + "<%=recipe.getLabel()%>" +"\" style=\"border-radius:17px;\"></a></div>";
@@ -125,10 +126,11 @@
 				}%>
 				
 					
-				
-				recipeDetails+= "<br><form action = \"AddRemFav\" method = \"GET\">";
-				recipeDetails += "<input type=\"hidden\" name=\"recipe\" value=\""+"<%=recipe.getUri()%>"+"\" />";
-				recipeDetails+= "<input id = \"favButton\" type =\"submit\" value = \"FAVORITE\"></form>";
+				<% if (session.getAttribute("Current user")!=null){%>
+					recipeDetails+= "<br><form action = \"AddRemFav\" method = \"GET\">";
+					recipeDetails += "<input type=\"hidden\" name=\"recipe\" value=\""+"<%=recipe.getUri()%>"+"\" />";
+					recipeDetails+= "<input id = \"favButton\" type =\"submit\" value = \"FAVORITE\"></form>";
+				<%}%>
 				
 				recipeDetails +="</div>";
 				
@@ -136,13 +138,6 @@
 
 			<%}
 			%>
-			
-			if ("<%=session.getAttribute("Current user")%>" == "null"){
-				recDetailsDiv.innerHTML +="not logged in";
-			}
-			else {
-				recDetailsDiv.innerHTML +="logged in";
-			}
 			
 			 
 		}
