@@ -115,6 +115,7 @@
 			resF.innerHTML+= "</div>";
 			
 			var stars = "<%=restaurants[i].getRating()%>";
+			stars = parseInt(stars, 10);
    			var rate ="";
        		for(var j=0; j < stars; j++)
        				{
@@ -124,7 +125,7 @@
 				{
 			rate += "<img class= \"star\" src=\"greystar.png\">"; 
 				}
-       		rate += "  ";
+       		rate += "       ";
        		rate += "<%=restaurants[i].getReviewCount()%>";
        		rate += " Reviews";
 			resF.innerHTML += " <div class=\"col-sm-4\"><h4>" + "<%=restaurants[i].getName()%>" + 
@@ -132,9 +133,9 @@
 			"<%=restaurants[i].getPrice()%>" + "</h5>";
    			
        		resF.innerHTML += "</div>";
-			resF.innerHTML += " <div class=\"col-sm-4\">";
-			resF.innerHTML += "<h6>" + "<%=addy[0]%>" + "</h6> <br/>";
-			resF.innerHTML+= "<br/> <br/></div> </div>";
+			resF.innerHTML += " <div class=\"col-sm-4\"> <h6>" + "<%=addy[0]%>" +
+			"</h6> <h6> Phone: " + "<%=restaurants[i].getDisplayPhone()%>" + 
+			"</h6> <br/> <br/></div> </div>";
 			
 			
 		<%}%>
