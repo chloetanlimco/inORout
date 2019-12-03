@@ -47,12 +47,11 @@
 	{
 		var type = "<%=request.getAttribute("searchType") %>>";
 		type = type.substring(0, type.length-1);
-
 		var searchTerm = "<%=request.getAttribute("searchTerm") %>>";
 		searchTerm = searchTerm.substring(0,searchTerm.length-1);
 		var searchType = "<%=request.getAttribute("searchType") %>>";
 		searchType = searchType.substring(0,searchType.length-1);
-		let resF = document.getElementById("restaurantForm");
+		let resF = document.getElementById("favorites");
 		
 		//var rSug = '${RecipesSuggestions}';
 		var bizz = '${Businesses}';
@@ -83,7 +82,6 @@
 		int numBusinesses = (int)(request.getAttribute("numBusinesses"));
 		int rows = numRecipes+numBusinesses+1;
 		%>
-
 		resF.innerHTML ="<input type=\"hidden\" name=\"searchTerm\"value = \"" + searchTerm + "\"> ";
 		resF.innerHTML += "<input type=\"hidden\" name=\"searchType\"value = \"" + searchType + "\"> ";
 		
@@ -93,7 +91,6 @@
 	    	main.innerHTML += "<div class=\"container testimonial-group\">";
 	    	main.innerHTML += "<div class=\"row\" style=\"overflow-x:auto;white-space:nowrap;\" id=\"r"+"<%=i%>"+"\"></div></div></div>";
 		<%} %>
-
 		var curr;
 		var temp;
 	
@@ -103,6 +100,16 @@
 			temp.innerHTML += "<h4>Your favorites</h4>";
 			<% 
 			for (int j=0; j<numBusinesses; j++){%>
+
+				curr.innerHTML += "<div class=\"col elementBlock\" style=\"display:inline-block;float:none;\"><form id=\"details\" action=\"Detail\"><input type=\"submit\" class= \"image thumb\"name= \"restaurant\" value=\"" 
+				+ "<%=restaurants[j].getId()%>"+ "\" style=\"background-image: url('"+ 
+				"<%=restaurants[j].getImageUrl()%>" + "');border-radius:17px;\">"+"<span class=\"name\"></form>" + "<%=restaurants[j].getName()%></span></div>";
+			<%}
+			for (int j=0; j<numRecipes; j++){%>
+			curr.innerHTML += "<div class=\"col elementBlock\" style=\"display:inline-block;float:none;\"><form id=\"details\" action=\"Detail\"><input type=\"submit\" class= \"image thumb\"name= \"restaurant\" value=\"" 
+			+ "<%=recipes[j].getSource()%>"+ "\" style=\"background-image: url('"+ 
+			"<%=recipes[j].getImage()%>" + "');border-radius:17px;\"><span class=\"name\"></form>" + "<%=recipes[j].getLabel()%></span></div>";
+
 				curr.innerHTML += "<div class=\"col elementBlock\" style=\"display:inline-block;float:none;\"><input type=\"submit\" class= \"image thumb\"name= \"restaurant\" value=\"" 
 				+ "<%=restaurants[j].getId()%>"+ "\" style=\"background-image: url('"+ 
 				"<%=restaurants[j].getImageUrl()%>" + "');border-radius:17px;\">"+"<span class=\"name\">" + "<%=restaurants[j].getName()%></span></div>";
@@ -111,11 +118,11 @@
 			curr.innerHTML += "<div class=\"col elementBlock\" style=\"display:inline-block;float:none;\"><input type=\"submit\" class= \"image thumb\"name= \"restaurant\" value=\"" 
 			+ "<%=recipes[j].getSource()%>"+ "\" style=\"background-image: url('"+ 
 			"<%=recipes[j].getImage()%>" + "');border-radius:17px;\"><span class=\"name\">" + "<%=recipes[j].getLabel()%></span></div>";
+
 			<%}%>
 		}
 		
 		<%
-
 		int row =1;
 		for (int k=0; k<numBusinesses;k++){%>
 			var bus = bs["<%=restaurants[k].getName()%>"];
@@ -128,9 +135,15 @@
 			//var i;
 			//for (i=0; i<bus.length; i++){
 			bus.forEach(function(element) {
+
+				curr.innerHTML += "<div class=\"col elementBlock\" style=\"display:inline-block;float:none;\"><form id=\"details\" action=\"Detail\"><input type=\"submit\" class= \"image thumb\"name= \"restaurant\" value=\"" 
+				+ element["id"] +"\" style=\"background-image: url('"+ 
+				element["image_url"] + "');border-radius:17px;\"><span class=\"name\"></form>"+element["name"]+ "</span></div>";
+
 				curr.innerHTML += "<div class=\"col elementBlock\" style=\"display:inline-block;float:none;\"><input type=\"submit\" class= \"image thumb\"name= \"restaurant\" value=\"" 
 				+ element["id"] +"\" style=\"background-image: url('"+ 
 				element["image_url"] + "');border-radius:17px;\"><span class=\"name\">"+element["name"]+ "</span></div>";
+
 			});
 			<%//}%>
 			
@@ -177,8 +190,7 @@
 
 <div id="restaurantDiv">
 		    <div class="scrollmenu">
-		    	<form id="restaurantForm" action="Detail">
-		    </form>
+		    	<div id="favorites"></div>
 		    </div>
 		    </div>
 

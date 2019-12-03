@@ -69,11 +69,23 @@
 			boolean fav = (boolean) request.getAttribute("favorite");
 			System.out.println(b);%>
 			
-			let resF = document.getElementById("restaurantForm");
+			let details = document.getElementById("detailsDiv");
 			
 			var bizz = '${business}';
 			var rec = '${recipe}';
 			
+
+			if ("<%=r%>"){
+				var recipeDetails="";
+			    
+				recipeDetails += " <div class=\"col-sm-4\" id = \"picture\">";
+				recipeDetails += "<a id=\"recipePic\" href=\"https://www.google.com\"><img src=\""+"<%=recipe.getImage()%>" 
+					+"\" alt=\"" + "<%=recipe.getLabel()%>" +"\" style=\"border-radius:17px;\"></a></div>";
+				
+				recipeDetails += "<div class=\"col-sm-6\" id = \"ingredients\">";
+				recipeDetails += "<div style=\"font-weight:bold;font-size:200%\">"+"<%=recipe.getLabel()%>"+"</div>";
+				recipeDetails+="<br>Calories: "+"<%=recipe.getCalories()%>"+"<br><br>Ingredients: <br>";
+
 			<%
 			
 			if (b){ %>
@@ -89,15 +101,24 @@
 					+ "<%=recipe.getSource()%>"+ "\" style=\"background-image: url('"+ 
 					 "<%=recipe.getImage()%>" + "');border-radius:17px;\"></div>";
 				resF.innerHTML+="<div class=\"col-sm-3\" id =res>"+"<%=recipe.getLabel()%>" +"</br>"+"Calories: "+"<%=recipe.getCalories()%>"+"</br>"+"Ingredients: "+"</br>";
+
 				
 				<%String[] in = recipe.getIngredientLines();
 				for (int i=0; i<in.length; i++){%>
-					resF.innerHTML += "<%=in[i]%>"+"</br>";
+					recipeDetails += "  - "+"<%=in[i]%>"+"</br>";
 				<%}%>
-			
-				resF.innerHTML += "</div>";
+				
+				recipeDetails+= "<br><form action = \"AddRemFav\" method = \"GET\">";
+				recipeDetails += "<input type=\"hidden\" name=\"recipe\" value=\""+"<%=recipe.getUri()%>"+"\" />";
+				recipeDetails+= "<input id = \"favButton\" type =\"submit\" value = \"FAVORITE\"></form>";
+				
+				recipeDetails +="</div>";
+				
+				detailsDiv.innerHTML+=recipeDetails;
 				
 			<%}%>
+			
+			
 			
 		}
 		
@@ -140,9 +161,8 @@
 	    	<div id="mainBlock">
 	    	
 	    	<div class="tab-content">
-		    <div id="restaurantDiv">
-		    <form id="restaurantForm" action="Detail">
-		    </form>
+		    <div id="detailsDiv">
+		    
 		    
 		    
 		    </div>
