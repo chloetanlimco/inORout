@@ -63,7 +63,10 @@
 	color: white;
 	font-size: 5vh;
 	position: relative;
-	top: 42vh;
+	top: 40vh;
+	font-size: 3vh;
+	padding-left: 7% !important;
+	padding-right: 10% !important;
 }
 
 

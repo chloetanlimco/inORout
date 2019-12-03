@@ -71,8 +71,12 @@
 				</div>
 		</div>
 	</div>
+	<div id="error_msg">
+			<%=request.getAttribute("error") != null ? request.getAttribute("error") : ""%>
+		</div>
 	<div class="mainBox">
 		<div class="container-fluid searchSection">
+		
 			<form action="Search">
 				<div class="row">
 					<div class="col-sm-8">
@@ -90,9 +94,7 @@
 				</div>
 			</form>
 		</div>
-		<div id="error_msg">
-			<%=request.getAttribute("error") != null ? request.getAttribute("error") : ""%>
-		</div>
+		
 	</div>
 
 	<script type="text/javascript"
