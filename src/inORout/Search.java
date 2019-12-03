@@ -79,8 +79,8 @@ public class Search extends HttpServlet {
 			ids.add(p.getProperty("EdamamId4"));
 			ids.add(p.getProperty("EdamamId5"));
 			numkeys = keys.size();
-
-		} catch (FileNotFoundException e) {
+		}
+		catch (FileNotFoundException e) {
 			System.out.println("Make sure you have a config.txt file!");
 			response.sendError(500);
 			return;
