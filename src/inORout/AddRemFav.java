@@ -39,7 +39,6 @@ public class AddRemFav extends HttpServlet {
 		String username = (String) request.getSession().getAttribute("Current User");
 		String restaurant = request.getParameter("restaurant");
 		String recipe = request.getParameter("recipe");
-		String update = request.getParameter("update");
 		String next = "/Detail.jsp";
 		
 		String error = "";
@@ -69,14 +68,14 @@ public class AddRemFav extends HttpServlet {
 		    		}
 					
 		    		//add to favorites
-		    		if (!inFav && update.contentEquals("Update")) {
+		    		if (!inFav) {
 		    			st = conn.prepareStatement("INSERT INTO Restaurant (userID, restaurantID) VALUES((SELECT userID FROM User WHERE username=?),?)");
 						st.setString(1, username);
 						st.setString(2, restaurant);
 						st.executeUpdate();
 		    		}
 		    		//remove from favorites
-		    		else if (inFav && update.contentEquals("Update")) {
+		    		else if (inFav) {
 		    			st = conn.prepareStatement("DELETE FROM Restaurant (userID, restaurantID) VALUES((SELECT userID FROM User WHERE username=?),?)");
 						st.setString(1, username);
 						st.setString(2, restaurant);
@@ -95,14 +94,14 @@ public class AddRemFav extends HttpServlet {
 		    		}
 					
 		    		//add to favorites
-		    		if (!inFav && update.contentEquals("Update")) {
+		    		if (!inFav) {
 		    			st = conn.prepareStatement("INSERT INTO Recipe (userID, restaurantID) VALUES((SELECT userID FROM User WHERE username=?),?)");
 						st.setString(1, username);
 						st.setString(2, recipe);
 						st.executeUpdate();
 		    		}
 		    		//remove from favorites
-		    		else if (inFav && update.contentEquals("Update")) {
+		    		else if (inFav) {
 		    			st = conn.prepareStatement("DELETE FROM Recipe (userID, restaurantID) VALUES((SELECT userID FROM User WHERE username=?),?)");
 						st.setString(1, username);
 						st.setString(2, recipe);
