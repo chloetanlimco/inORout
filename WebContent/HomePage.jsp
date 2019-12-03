@@ -60,7 +60,7 @@
 		<div class="header">
 				<div class="row myrow">
 					<div class="col-sm-6 d-inline-block">
-						<button type="button" class="btn btn-default homeButton"
+						<button type="button" class="btn btn-default homeButton" style="pointer-events: none;"
 							id="titleHome">in-or-out</button>
 					</div>
 					<div class="col-sm-6 d-inline-block">

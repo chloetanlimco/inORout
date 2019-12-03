@@ -58,6 +58,10 @@
 		.inputPassword {
 			color: white;
 		}
+		
+		a:hover {
+			text-decoration: none;
+		}
 
 	</style>
 

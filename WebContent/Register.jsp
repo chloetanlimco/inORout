@@ -45,6 +45,10 @@
 			border: grey;
 			color: black;
 		}
+		
+		a:hover {
+			text-decoration: none;
+		}
 
 	</style>
 
