@@ -16,6 +16,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import inORout.Business;
 import inORout.Recipe;
+import inORout.ResultsEdamamCall;
+import inORout.ResultsYelpCall;
+
 
 @WebServlet("/Search")
 public class Search extends HttpServlet {
@@ -33,6 +36,14 @@ public class Search extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 
+		String[] optionArray = request.getParameterValues("option");
+		String option = null;
+		if (optionArray != null) {
+			option = String.join(",", optionArray);
+		}
+		String price = request.getParameter("price");
+		String sortby = request.getParameter("sort");
+		
 		String searchTerm = request.getParameter("searchTerm");
 		req = request;
 		if (searchTerm == null || searchTerm.equals("")) {
@@ -80,11 +91,10 @@ public class Search extends HttpServlet {
 
 		
 		// YELP API CALL
-		ResultsYelpCall yc = new ResultsYelpCall(this, searchTerm);
+		ResultsYelpCall yc = new ResultsYelpCall(this, searchTerm, option, price, sortby);
 
 		// EDAMAM API CALL
-		
-		ResultsEdamamCall ec = new ResultsEdamamCall(this, searchTerm);
+		ResultsEdamamCall ec = new ResultsEdamamCall(this, searchTerm, option);
 
 		// pass search result arrays back
 		try {

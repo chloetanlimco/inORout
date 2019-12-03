@@ -11,11 +11,21 @@ import com.google.gson.JsonParser;
 public class ResultsEdamamCall extends Thread {
 	Search s;
 	String searchTerm;
+	String option;
+
 
 	ResultsEdamamCall(Search search, String st) {
 		s = search;
 		searchTerm = st;
+		option = null;
 		this.start();
+	}
+	
+	ResultsEdamamCall(Search search, String st, String option) {
+		s = search;
+		searchTerm = st;
+		this.option = option;
+		this.run();
 	}
 
 	public void run() {
@@ -26,8 +36,13 @@ public class ResultsEdamamCall extends Thread {
 
 				String params = "q=" + searchTerm.replace(" ", "+") + "&app_key=" + s.keys.get(current % s.numkeys)
 						+ "&app_id=" + s.ids.get(current % s.numkeys);
+				if (option != null) {
+					params += "&healthLabels=" + option;
+				}
+				
 				URL url = new URL("https://api.edamam.com/search?" + params);
-
+				System.out.println(url);
+				
 				HttpURLConnection edamamCon = (HttpURLConnection) url.openConnection();
 				edamamCon.setRequestMethod("GET");
 
