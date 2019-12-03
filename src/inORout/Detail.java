@@ -112,7 +112,7 @@ public class Detail extends HttpServlet {
 				
 				while (rs.next()) {
 					//if recipe already in favorites
-					if (rs.getString("name").contentEquals(r.label) || rs.getString("name").contentEquals(b.name)) {
+					if (rs.getString("name").contentEquals(b.name)) {
 						fav = true;
 					}
 				}
@@ -172,7 +172,7 @@ public class Detail extends HttpServlet {
 				
 				while (rs.next()) {
 					//if recipe already in favorites
-					if (rs.getString("name").contentEquals(r.label) || rs.getString("name").contentEquals(b.name)) {
+					if (rs.getString("name").contentEquals(r.label)) {
 						fav = true;
 					}
 				}

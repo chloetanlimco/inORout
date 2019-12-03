@@ -196,9 +196,6 @@
 					</form>
 				</div>
 				<div class="col-sm-4">
-					<form action="Logger" id="buttonLog"></form>
-				</form>
-					</div>
 					<div class="col-sm-4">
 						<form action="ServletLogger" method="GET" id="buttonLog"></form>
 					</div>
