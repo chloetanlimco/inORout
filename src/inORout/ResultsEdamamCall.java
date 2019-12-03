@@ -20,6 +20,7 @@ public class ResultsEdamamCall extends Thread {
 
 	public void run() {
 		int current = 0;
+		JsonObject jsonObject = null;
 		while (current != s.numkeys) {
 			try {
 
@@ -32,20 +33,9 @@ public class ResultsEdamamCall extends Thread {
 
 				// parsing JSON
 				JsonParser jsonParser = new JsonParser();
-				JsonObject jsonObject = (JsonObject) jsonParser
+				jsonObject = (JsonObject) jsonParser
 						.parse(new InputStreamReader(edamamCon.getInputStream(), "UTF-8"));
 
-				JsonArray recipes = jsonObject.getAsJsonArray("hits");
-
-				// figure out what to iterate up to
-				int it = 10;
-				if (recipes.size() < 10) {
-					it = recipes.size();
-				}
-				for (int i = 0; i < it; i++) {
-					Recipe r = new Recipe(recipes.get(i).getAsJsonObject());
-					s.EdamamResults.add(r);
-				}
 				break;
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -56,6 +46,19 @@ public class ResultsEdamamCall extends Thread {
 				if (current == 0) {
 					break;
 				}
+			}
+		}
+		if(jsonObject != null) {
+			JsonArray recipes = jsonObject.getAsJsonArray("hits");
+	
+			// figure out what to iterate up to
+			int it = 10;
+			if (recipes.size() < 10) {
+				it = recipes.size();
+			}
+			for (int i = 0; i < it; i++) {
+				Recipe r = new Recipe(recipes.get(i).getAsJsonObject());
+				s.EdamamResults.add(r);
 			}
 		}
 	}

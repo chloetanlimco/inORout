@@ -19,6 +19,12 @@
 	href="https://fonts.googleapis.com/css?family=Lustria&display=swap"
 	rel="stylesheet">
 <script>
+	<%
+	if(request.getAttribute("searchType")==null){
+		request.getRequestDispatcher("HomePage.jsp").forward(request, response);
+	}
+	
+	%>
 		function profile() {
 			let div = document.getElementById("buttonLog");
 			if ("<%=session.getAttribute("Current user")%>" == "null") {
