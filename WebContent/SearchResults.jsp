@@ -19,6 +19,12 @@
 	href="https://fonts.googleapis.com/css?family=Lustria&display=swap"
 	rel="stylesheet">
 <script>
+	<%
+	if(request.getAttribute("searchType")==null){
+		request.getRequestDispatcher("HomePage.jsp").forward(request, response);
+	}
+	
+	%>
 		function profile() {
 			let div = document.getElementById("buttonLog");
 			if ("<%=session.getAttribute("Current user")%>" == "null") {
@@ -103,7 +109,7 @@
 			}
 			String[] addy = restaurants[i].getDisplayAddress().split("\n");%>
 			resF.innerHTML += "<div class=\"row\">";
-			resF.innerHTML += " <div class=\"col-sm-4\"> <input type=\"submit\" class= \"img-thumbnail image\"name= \"restaurant\" value=\"" 
+			resF.innerHTML += " <div class=\"col-sm-4 labelling\"> <input type=\"submit\" class= \"img-thumbnail image\"name= \"restaurant\" value=\"" 
 				+ "<%=restaurants[i].getId()%>" + "\" style=\"background-image: url('"+ 
 				"<%=restaurants[i].getImageUrl()%>" + "');\">";
 			resF.innerHTML+= "</div>";
@@ -140,7 +146,7 @@
 			}
 		%>
 			recF.innerHTML += "<div class=\"row\">";
-			recF.innerHTML += " <div class=\"col-sm-4 \"> <input type=\"submit\" class= \"img-thumbnail image\"name= \"recipe\" value=\"" 
+			recF.innerHTML += " <div class=\"col-sm-4 labelling\"> <input type=\"submit\" class= \"img-thumbnail image\"name= \"recipe\" value=\"" 
 				+ "<%=recipes[i].getSource()%>" + "\" style=\"background-image: url('"+ 
 				"<%=recipes[i].getImage()%>" + "');\">";
 			recF.innerHTML+= "</div>";
@@ -220,17 +226,18 @@
  								<div class="btn-group-toggle" data-toggle="buttons">
 									<label class="btn btn-default btn-lg filterButton"> <input
 										type="checkbox" name="option" autocomplete="off"
-										value="lactose"> Vegetarian
+										value="vegetarian"> Vegetarian
 									</label> <label class="btn btn-default btn-lg filterButton"> <input
 										type="checkbox" name="option" autocomplete="off"
 										value="vegan"> Vegan
 									</label> <label class="btn btn-default btn-lg filterButton">
 										<input type="checkbox" name="option" autocomplete="off"
-										value="gluten"> Gluten-Free
-									</label> <label class="btn btn-default btn-lg filterButton"> <input
+										value="gluten_free"> Gluten-Free
+									</label> 
+									<label class="btn btn-default btn-lg filterButton"> <input
 										type="checkbox" name="option" autocomplete="off"
-										value="lactose"> Lactose-Free
-									</label>		
+										value="dairy-free"> Lactose-Free
+									</label>
 								</div>					
 								
 								<div class="btn-group-toggle" data-toggle="buttons">
@@ -269,7 +276,7 @@
 									value="rating"> Rating
 								</label> <label class="btn btn-default btn-lg filterButton"> <input
 									type="radio" name="sort" autocomplete="off"
-									value="review"> Review Count
+									value="review_count"> Review Count
 								</label>
 								</div>
 								
