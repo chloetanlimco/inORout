@@ -39,6 +39,7 @@ public class AddRemFav extends HttpServlet {
 		String username = (String) request.getSession().getAttribute("Current User");
 		String restaurant = request.getParameter("restaurant");
 		String recipe = request.getParameter("recipe");
+		String update = request.getParameter("update");
 		String next = "/Detail.jsp";
 		
 		String error = "";
@@ -51,24 +52,71 @@ public class AddRemFav extends HttpServlet {
 			
 			Connection conn = null;
 			PreparedStatement st = null;
+			PreparedStatement lookup = null;
+			ResultSet favSet = null;
+			Boolean inFav = false;
 			try {
 				conn = DriverManager.getConnection("jdbc:mysql://google/foodapp?cloudSqlInstance=groupproject-258805:us-central1:project201&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false&user=anthonyuser&password=wQHL223i4LJhEuCl1");
+				
 				if (restaurant != null) {
-					st = conn.prepareStatement("INSERT INTO Restaurant (userID, restaurantID) VALUES(?,?)");
-					st.setString(1, username);
-					st.setString(2, restaurant);
+					//check if in favorites
+					lookup = conn.prepareStatement("SELECT * FROM Restaurant WHERE restaurantID=? AND userID=(SELECT userID FROM User WHERE username=?)");
+		    		lookup.setString(1, restaurant);
+		    		lookup.setString(2, username);
+		    		favSet = lookup.executeQuery();
+		    		if (favSet.next()) {
+		    			inFav = true;
+		    		}
+					
+		    		//add to favorites
+		    		if (!inFav && update.contentEquals("Update")) {
+		    			st = conn.prepareStatement("INSERT INTO Restaurant (userID, restaurantID) VALUES((SELECT userID FROM User WHERE username=?),?)");
+						st.setString(1, username);
+						st.setString(2, restaurant);
+						st.executeUpdate();
+		    		}
+		    		//remove from favorites
+		    		else if (inFav && update.contentEquals("Update")) {
+		    			st = conn.prepareStatement("DELETE FROM Restaurant (userID, restaurantID) VALUES((SELECT userID FROM User WHERE username=?),?)");
+						st.setString(1, username);
+						st.setString(2, restaurant);
+						st.executeUpdate();
+		    		}
+					
 				}
 				else {
-					st = conn.prepareStatement("INSERT INTO Recipe (userID, restaurantID) VALUES(?,?)");
-					st.setString(1, username);
-					st.setString(2, recipe);
+					//check if in favorites
+					lookup = conn.prepareStatement("SELECT * FROM Recipe WHERE restaurantID=? AND userID=(SELECT userID FROM User WHERE username=?)");
+		    		lookup.setString(1, recipe);
+		    		lookup.setString(2, username);
+		    		favSet = lookup.executeQuery();
+		    		if (favSet.next()) {
+		    			inFav = true;
+		    		}
+					
+		    		//add to favorites
+		    		if (!inFav && update.contentEquals("Update")) {
+		    			st = conn.prepareStatement("INSERT INTO Recipe (userID, restaurantID) VALUES((SELECT userID FROM User WHERE username=?),?)");
+						st.setString(1, username);
+						st.setString(2, recipe);
+						st.executeUpdate();
+		    		}
+		    		//remove from favorites
+		    		else if (inFav && update.contentEquals("Update")) {
+		    			st = conn.prepareStatement("DELETE FROM Recipe (userID, restaurantID) VALUES((SELECT userID FROM User WHERE username=?),?)");
+						st.setString(1, username);
+						st.setString(2, recipe);
+						st.executeUpdate();
+		    		}
+		    		
 				}
-				st.executeUpdate();
+				
 			}
 			catch (SQLException sqle) {
 				System.out.println(sqle.getMessage());
 			}
 			
+			request.setAttribute("inFav", inFav);
 		}
 		
 		request.setAttribute("fav-error", error);
