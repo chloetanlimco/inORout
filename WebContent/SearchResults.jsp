@@ -147,7 +147,7 @@
 		%>
 			recF.innerHTML += "<div class=\"row\">";
 			recF.innerHTML += " <div class=\"col-sm-4 labelling\"> <input type=\"submit\" class= \"img-thumbnail image\"name= \"recipe\" value=\"" 
-				+ "<%=recipes[i].getSource()%>" + "\" style=\"background-image: url('"+ 
+				+ "<%=recipes[i].getUri()%>" + "\" style=\"background-image: url('"+ 
 				"<%=recipes[i].getImage()%>" + "');\">";
 			recF.innerHTML+= "</div>";
 			recF.innerHTML += " <div class=\"col-sm-8\">";
