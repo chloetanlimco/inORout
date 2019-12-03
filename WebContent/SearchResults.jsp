@@ -124,6 +124,7 @@
 				{
 			rate += "<img class= \"star\" src=\"greystar.png\">"; 
 				}
+       		rate += "<%=restaurants[i].getReviewCount()%>";
 			resF.innerHTML += " <div class=\"col-sm-4\"><h4>" + "<%=restaurants[i].getName()%>" + 
 			"</h4><h5 id=\"rate\">" + rate + "</h5><h5>" + 
 			"<%=restaurants[i].getPrice()%>" + "</h5>";
