@@ -14,6 +14,7 @@ public class Recipe {
 	public String[] cautions;
 	public String[] ingredientLines;
 	public double calories;
+	public String url;
 	
 	public Recipe(JsonObject obj) {
 		JsonObject recipe = obj.get("recipe").getAsJsonObject();
@@ -22,6 +23,8 @@ public class Recipe {
 		image = recipe.getAsJsonPrimitive("image").getAsString();
 		uri = recipe.getAsJsonPrimitive("uri").getAsString();
 		servings = recipe.getAsJsonPrimitive("yield").getAsString();
+		url = recipe.getAsJsonPrimitive("url").getAsString();
+		
 		JsonArray health = recipe.getAsJsonArray("healthLabels");
 		if (health.size() > 0) {
 			healthLabels = new String[health.size()];
@@ -122,6 +125,9 @@ public class Recipe {
 	}
 	public double getCalories() {
 		return calories;
+	}
+	public String getUrl() {
+		return url;
 	}
 	
 }
