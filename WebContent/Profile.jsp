@@ -173,11 +173,6 @@
 				</div>
 			</div>
 
-<<<<<<< Updated upstream
-		</div>
-
-		<div class="main" id="main"></div>
-=======
   <div class="header">
 	  <div class="container">
 	  <div class="row">
@@ -203,7 +198,6 @@
 	    </div>
 	  </div>
 	  </div>
->>>>>>> Stashed changes
 	</div>
 
 	<div id="restaurantDiv">
