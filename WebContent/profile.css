@@ -1,5 +1,4 @@
 @charset "UTF-8";
-
 *{
 	font-family: Lustria;
 }
@@ -43,6 +42,8 @@
 .main
 {
 	margin-top:5vh;
+	margin-left: 40px;
+	margin-right: 40px;
 }
 .searchSection
 {
@@ -123,4 +124,26 @@ h4, h5
 .testimonial-group > .row > .col-xs-2 {
   display: inline-block;
   float: none;
+}
+.thumb {
+	display: block;
+	margin-bottom: 10px;
+	width: 20vh;
+	margin-right: 10px;
+} 
+.elementBlock {
+	margin-left: 20px;
+	margin-right: 20px;
+	text-align: center;
+	width: 20vh;
+	word-wrap: break-word;
+	overflow-wrap: break-word;
+	white-space: pre-wrap;
+	height: 25vh;
+	margin-bottom: 20px;
+}
+.name {
+	width: 100%;
+	display: flex;
+	justify-content: center;
 }
