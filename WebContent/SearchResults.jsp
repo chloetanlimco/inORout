@@ -185,7 +185,7 @@
 								<input type="text" class="form-control" id="foodSearch"
 									placeholder="Find fries, sushi, pizza..." name="searchTerm">
 							</div>
-<<<<<<< Updated upstream
+
 						</div>
 						<div class="col-sm-3">
 							<input type="submit" class="btn btn-default searchButton"
@@ -197,13 +197,11 @@
 				</div>
 				<div class="col-sm-4">
 					<form action="Logger" id="buttonLog"></form>
-=======
-						</form>
+				</form>
 					</div>
 					<div class="col-sm-4">
 						<form action="ServletLogger" method="GET" id="buttonLog"></form>
 					</div>
->>>>>>> Stashed changes
 				</div>
 			</div>
 		</div>
