@@ -85,7 +85,7 @@ public class AddRemFav extends HttpServlet {
 				}
 				else {
 					//check if in favorites
-					lookup = conn.prepareStatement("SELECT * FROM Recipe WHERE restaurantID=? AND userID=(SELECT userID FROM User WHERE username=?)");
+					lookup = conn.prepareStatement("SELECT * FROM Recipe WHERE recipeID=? AND userID=(SELECT userID FROM User WHERE username=?)");
 		    		lookup.setString(1, recipe);
 		    		lookup.setString(2, username);
 		    		favSet = lookup.executeQuery();
@@ -95,14 +95,14 @@ public class AddRemFav extends HttpServlet {
 					
 		    		//add to favorites
 		    		if (!inFav) {
-		    			st = conn.prepareStatement("INSERT INTO Recipe (userID, restaurantID) VALUES((SELECT userID FROM User WHERE username=?),?)");
+		    			st = conn.prepareStatement("INSERT INTO Recipe (userID, recipeID) VALUES((SELECT userID FROM User WHERE username=?),?)");
 						st.setString(1, username);
 						st.setString(2, recipe);
 						st.executeUpdate();
 		    		}
 		    		//remove from favorites
 		    		else if (inFav) {
-		    			st = conn.prepareStatement("DELETE FROM Recipe (userID, restaurantID) VALUES((SELECT userID FROM User WHERE username=?),?)");
+		    			st = conn.prepareStatement("DELETE FROM Recipe (userID, recipeID) VALUES((SELECT userID FROM User WHERE username=?),?)");
 						st.setString(1, username);
 						st.setString(2, recipe);
 						st.executeUpdate();
