@@ -83,7 +83,7 @@
 				
 				busDetails += " <div class=\"col-sm-4\" id = \"picture\">";
 				busDetails += "<img src=\""+"<%=business.getImageUrl()%>" 
-					+"\" alt=\"" + "<%=business.getName()%>" +"\" style=\"border-radius:17px;height:40vh;width:40vh;\"></div>";
+					+"\" alt=\"" + "<%=business.getName()%>" +"\" style=\"border-radius:17px;height:40vh;height:40vh;\"></div>";
 				
 				busDetails += "<div class=\"col-sm-6\" id = \"det\">";
 				busDetails += "<div style=\"font-weight:bold;font-size:200%\">"+"<%=business.getName()%></div>";
