@@ -14,7 +14,7 @@
   <link href="https://fonts.googleapis.com/css?family=Lustria&display=swap" rel="stylesheet">
   <script>
   function profile() {
-		let div = document.getElementById("buttonLog");
+	  let div = document.getElementById("buttonLog");
 		if("<%=session.getAttribute("Current user")%>" == "null")
 		{
 			let el = document.createElement("input");
@@ -66,39 +66,80 @@
 				recipe = (Recipe) request.getAttribute("recipe");
 				r = true;
 			}
-			boolean fav = (boolean) request.getAttribute("favorite");
-			System.out.println(b);%>
+			boolean fav = (boolean) request.getAttribute("favorite");%>
 			
-			let resF = document.getElementById("restaurantForm");
+			let recDetailsDiv = document.getElementById("detailsDiv1");
+			let busDetailsDiv = document.getElementById("detailsDiv2");
 			
 			var bizz = '${business}';
 			var rec = '${recipe}';
+			var rec = "<%=request.getAttribute("recipe")%>";
+			var res = "<%=request.getAttribute("restaurant")%>";
 			
-			<%
+			<% if(request.getAttribute("recipe") == null) //BUSINESS
+			{%>
 			
-			if (b){ %>
-				resF.innerHTML += " <div class=\"col-sm-4\" id = \"picture\"><input type=\"submit\" class= \"img-thumbnail image\"name= \"restaurant\" value=\"" 
-					+ "<%=business.getId()%>"+ "\" style=\"background-image: url('"+ 
-					 "<%=business.getImageUrl()%>" + "');border-radius:17px;\"></div>";
-				resF.innerHTML+="<div class=\"col-sm-3\" id =res>"+"<%=business.getName()%>" +"</br>";
-			
-				resF.innerHTML += "</div>";
-			<%}
-			else if (r){%>
-				resF.innerHTML += " <div class=\"col-sm-4\" id = \"picture\"><input type=\"submit\" class= \"img-thumbnail image\"name= \"restaurant\" value=\"" 
-					+ "<%=recipe.getSource()%>"+ "\" style=\"background-image: url('"+ 
-					 "<%=recipe.getImage()%>" + "');border-radius:17px;\"></div>";
-				resF.innerHTML+="<div class=\"col-sm-3\" id =res>"+"<%=recipe.getLabel()%>" +"</br>"+"Calories: "+"<%=recipe.getCalories()%>"+"</br>"+"Ingredients: "+"</br>";
+				var busDetails="";
 				
-				<%String[] in = recipe.getIngredientLines();
-				for (int i=0; i<in.length; i++){%>
-					resF.innerHTML += "<%=in[i]%>"+"</br>";
+				busDetails += " <div class=\"col-sm-4\" id = \"picture\">";
+				busDetails += "<img src=\""+"<%=business.getImageUrl()%>" 
+					+"\" alt=\"" + "<%=business.getName()%>" +"\" style=\"border-radius:17px;height:40vh;width:40vh;\"></div>";
+				
+				busDetails += "<div class=\"col-sm-6\" id = \"det\">";
+				busDetails += "<div style=\"font-weight:bold;font-size:200%\">"+"<%=business.getName()%></div>";
+				busDetails+="<br>Rating: "+"<%=business.getRating()%>"+"<br>Price: "+"<%=business.getPrice()%>"+"<br>";
+				
+				//busDetails += "<div class=\"col-sm-6\" id = \"address\">";
+				
+				busDetails += "<%=business.getDisplayAddress().substring(0,business.getDisplayAddress().indexOf("\n"))%>"+"<br>";
+				busDetails += "<%=business.getDisplayAddress().substring(business.getDisplayAddress().indexOf("\n")+1)%>"+"<br>";
+				
+				busDetails +="<%=business.getDisplayPhone()%>";
+				
+				<% if (session.getAttribute("Current user")!=null){%>
+					busDetails+= "<br><br><form action = \"AddRemFav\" method = \"GET\">";
+					busDetails += "<input type=\"hidden\" name=\"restaurant\" value=\""+"<%=business.getId()%>"+"\" />";
+					busDetails+= "<input id = \"favButton\" type =\"submit\" value = \"FAVORITE\"></form>";
 				<%}%>
-			
-				resF.innerHTML += "</div>";
 				
-			<%}%>
+				busDetails +="</div></div>";
+				
+				busDetailsDiv.innerHTML+=busDetails;
+	
+			<%}
+			else {//RECIPE%>
+				var recipeDetails="";
+				recipeDetails += " <div class=\"col-sm-4\" id = \"picture\">";
+				recipeDetails += "<a id=\"recipePic\" href=\""+"<%=recipe.getUrl()%>"+"\"><img src=\""+"<%=recipe.getImage()%>" 
+					+"\" alt=\"" + "<%=recipe.getLabel()%>" +"\" style=\"border-radius:17px;\"></a></div>";
+				
+				recipeDetails += "<div class=\"col-sm-6\" id = \"ingredients\">";
+				recipeDetails += "<div style=\"font-weight:bold;font-size:200%\">"+"<%=recipe.getLabel()%>"+"</div>";
+				recipeDetails+="<br>Calories: "+"<%=recipe.getCalories()%>"+"<br><br>Ingredients: <br>";
+				
+				<%
+				if (r){
+					String[] in = recipe.getIngredientLines();
+					for (int i=0; i<in.length; i++){%>
+					recipeDetails += "  - "+"<%=in[i]%>"+"</br>";
+					<%}
+				}%>
+				
+					
+				<% if (session.getAttribute("Current user")!=null){%>
+					recipeDetails+= "<br><form action = \"AddRemFav\" method = \"GET\">";
+					recipeDetails += "<input type=\"hidden\" name=\"recipe\" value=\""+"<%=recipe.getUri()%>"+"\" />";
+					recipeDetails+= "<input id = \"favButton\" type =\"submit\" value = \"FAVORITE\"></form>";
+				<%}%>
+				
+				recipeDetails +="</div>";
+				
+				recDetailsDiv.innerHTML+=recipeDetails;
+
+			<%}
+			%>
 			
+			 
 		}
 		
 	}
@@ -140,9 +181,9 @@
 	    	<div id="mainBlock">
 	    	
 	    	<div class="tab-content">
-		    <div id="restaurantDiv">
-		    <form id="restaurantForm" action="Detail">
-		    </form>
+		    <div id="detailsDiv1">
+		    <div id="detailsDiv2">
+		    
 		    
 		    
 		    </div>

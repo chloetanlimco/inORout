@@ -153,12 +153,15 @@ public class Detail extends HttpServlet {
 			
 			// parsing JSON
 			JsonParser jsonParser = new JsonParser();
-			JsonArray jsonObject = (JsonArray) jsonParser.parse(new InputStreamReader(edamamCon.getInputStream(), "UTF-8"));
+			if(edamamCon.getInputStream() != null)
+			{
+			JsonArray jsonObject = (JsonArray) jsonParser.parse(new InputStreamReader(edamamCon.getInputStream().toString(), "UTF-8"));
+			
 			JsonObject obj = jsonObject.get(0).getAsJsonObject();
 			System.out.println(obj);
 //			JsonArray recipes = jsonObject.getAsJsonArray("hits");
 			r = new Recipe(obj, "detail");
-			
+			}
 			//see if recipe in user's favorites
 			// if username already taken
 			Connection conn = null;
