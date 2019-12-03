@@ -66,6 +66,7 @@ public class Recipe {
 		source = recipe.getAsJsonPrimitive("source").getAsString();
 		image = recipe.getAsJsonPrimitive("image").getAsString();
 		uri = recipe.getAsJsonPrimitive("uri").getAsString();
+		url = recipe.getAsJsonPrimitive("url").getAsString();
 		JsonArray health = recipe.getAsJsonArray("healthLabels");
 		if (health.size() > 0) {
 			healthLabels = new String[health.size()];
