@@ -14,7 +14,7 @@ public class ResultsEdamamCall extends Thread {
 
 	ResultsEdamamCall(Search search, String st) {
 		s = search;
-		st = searchTerm;
+		searchTerm = st;
 		this.start();
 	}
 
@@ -45,12 +45,10 @@ public class ResultsEdamamCall extends Thread {
 				for (int i = 0; i < it; i++) {
 					Recipe r = new Recipe(recipes.get(i).getAsJsonObject());
 					s.EdamamResults.add(r);
-					System.out.println("E Added");
-
 				}
-				System.out.println("Edamam Succeeded!!");
 				break;
 			} catch (Exception e) {
+				e.printStackTrace();
 				current = current + 1;
 				System.out.println(e.getMessage());
 				e.printStackTrace();
@@ -60,6 +58,5 @@ public class ResultsEdamamCall extends Thread {
 				}
 			}
 		}
-		s.latch.countDown();
 	}
 }

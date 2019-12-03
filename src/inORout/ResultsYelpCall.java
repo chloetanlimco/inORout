@@ -14,7 +14,7 @@ public class ResultsYelpCall extends Thread {
 
 	ResultsYelpCall(Search search, String st) {
 		s = search;
-		st = searchTerm;
+		searchTerm = st;
 		run();	
 	}
 
@@ -54,14 +54,13 @@ public class ResultsYelpCall extends Thread {
 					if (!businesses.get(i).getAsJsonObject().getAsJsonPrimitive("is_closed").getAsBoolean()) {
 						Business b = new Business(businesses.get(i).getAsJsonObject());
 						s.YelpResults.add(b);
-						System.out.println("Y Added");
 					}
 				}
 
 				yelpsuccess = true;
-				System.out.println("Yelp Succeeded!!");
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
+				e.printStackTrace();
 				try {
 					Thread.sleep(sleeptime);
 				} catch (InterruptedException e1) {
@@ -74,6 +73,5 @@ public class ResultsYelpCall extends Thread {
 				}
 			}
 		}
-		s.latch.countDown();
 	}
 }

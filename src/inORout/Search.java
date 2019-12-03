@@ -6,7 +6,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
 import java.util.Vector;
-import java.util.concurrent.CountDownLatch;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -29,7 +28,6 @@ public class Search extends HttpServlet {
 	Vector<Recipe> EdamamResults;
 	String YelpBearerId;
 	HttpServletRequest req;
-	CountDownLatch latch;
 
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -80,20 +78,19 @@ public class Search extends HttpServlet {
 		YelpResults = new Vector<Business>();
 		EdamamResults = new Vector<Recipe>();
 
-		latch = new CountDownLatch(2);
 		
 		// YELP API CALL
-		new ResultsYelpCall(this, searchTerm);
+		ResultsYelpCall yc = new ResultsYelpCall(this, searchTerm);
 
 		// EDAMAM API CALL
 		
-		new ResultsEdamamCall(this, searchTerm);
+		ResultsEdamamCall ec = new ResultsEdamamCall(this, searchTerm);
 
 		// pass search result arrays back
 		try {
-			latch.await();
+			yc.join();
+			ec.join();
 		}catch(Exception e) {
-			System.out.println("BAD");
 			System.out.println(e.getMessage());
 		}
 		
