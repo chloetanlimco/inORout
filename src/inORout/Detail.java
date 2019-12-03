@@ -155,7 +155,7 @@ public class Detail extends HttpServlet {
 			JsonParser jsonParser = new JsonParser();
 			if(edamamCon.getInputStream() != null)
 			{
-			JsonArray jsonObject = (JsonArray) jsonParser.parse(new InputStreamReader(edamamCon.getInputStream().toString(), "UTF-8"));
+			JsonArray jsonObject = (JsonArray) jsonParser.parse(new InputStreamReader(edamamCon.getInputStream(), "UTF-8"));
 			
 			JsonObject obj = jsonObject.get(0).getAsJsonObject();
 			System.out.println(obj);
