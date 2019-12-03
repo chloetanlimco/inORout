@@ -118,8 +118,12 @@
    			var rate ="";
        		for(var j=0; j < stars; j++)
        				{
-       			rate += "<img class= \"star\" src=\"star.png\">"; 
+       			rate += "<img class= \"star\" src=\"redstar.png\">"; 
        				}
+       		for(var j=stars; j < 5; j++)
+				{
+			rate += "<img class= \"star\" src=\"greystar.png\">"; 
+				}
 			resF.innerHTML += " <div class=\"col-sm-4\"><h4>" + "<%=restaurants[i].getName()%>" + 
 			"</h4><h5 id=\"rate\">" + rate + "</h5><h5>" + 
 			"<%=restaurants[i].getPrice()%>" + "</h5>";
