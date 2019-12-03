@@ -12,6 +12,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Lustria&display=swap" rel="stylesheet">
+
   <script>
 	function profile() {
 		let div = document.getElementById("buttonLog");
@@ -34,7 +35,6 @@
 		}
 		else
 		{
-			
 			let el = document.createElement("input");
 			el.type = "submit";
 			el.name = "logChoice";
@@ -91,7 +91,7 @@
 		<%for (int i=0; i<rows; i++){%>
 			main.innerHTML += "<div id=\"r"+"<%=i%>"+"header\"></div><div id=\"row"+"<%=i%>"+"\">";
 	    	main.innerHTML += "<div class=\"container testimonial-group\">";
-	    	main.innerHTML += "<div class=\"row text-center\" style=\"overflow-x:auto;white-space:nowrap;\" id=\"r"+"<%=i%>"+"\"></div></div></div>";
+	    	main.innerHTML += "<div class=\"row\" style=\"overflow-x:auto;white-space:nowrap;\" id=\"r"+"<%=i%>"+"\"></div></div></div>";
 		<%} %>
 
 		var curr;
@@ -100,17 +100,17 @@
 		if (<%=rows%>!=1){ //if there are favorites, make a favorites row
 			curr = document.getElementById("r0");
 			temp = document.getElementById("r0header");
-			temp.innerHTML += "<h4>Your favorites</h4></br></br>";
+			temp.innerHTML += "<h4>Your favorites</h4>";
 			<% 
 			for (int j=0; j<numBusinesses; j++){%>
-				curr.innerHTML += "<div class=\"col-xs-2\" style=\"display:inline-block;float:none;\"><input type=\"submit\" class= \"img-thumbnail image\"name= \"restaurant\" value=\"" 
+				curr.innerHTML += "<div class=\"col elementBlock\" style=\"display:inline-block;float:none;\"><input type=\"submit\" class= \"image thumb\"name= \"restaurant\" value=\"" 
 				+ "<%=restaurants[j].getId()%>"+ "\" style=\"background-image: url('"+ 
-				"<%=restaurants[j].getImageUrl()%>" + "');border-radius:17px;\"></div>"+"<%=restaurants[j].getName()%>";
+				"<%=restaurants[j].getImageUrl()%>" + "');border-radius:17px;\">"+"<span class=\"name\">" + "<%=restaurants[j].getName()%></span></div>";
 			<%}
 			for (int j=0; j<numRecipes; j++){%>
-			curr.innerHTML += "<div class=\"col-xs-2\" style=\"display:inline-block;float:none;\"><input type=\"submit\" class= \"img-thumbnail image\"name= \"restaurant\" value=\"" 
+			curr.innerHTML += "<div class=\"col elementBlock\" style=\"display:inline-block;float:none;\"><input type=\"submit\" class= \"image thumb\"name= \"restaurant\" value=\"" 
 			+ "<%=recipes[j].getSource()%>"+ "\" style=\"background-image: url('"+ 
-			"<%=recipes[j].getImage()%>" + "');border-radius:17px;\"></div>"+"<%=recipes[j].getLabel()%>";
+			"<%=recipes[j].getImage()%>" + "');border-radius:17px;\"><span class=\"name\">" + "<%=recipes[j].getLabel()%></span></div>";
 			<%}%>
 		}
 		
@@ -122,15 +122,15 @@
 		
 			curr = document.getElementById("r"+"<%=row%>");
 			temp = document.getElementById("r"+"<%=row%>"+"header");
-			temp.innerHTML += "<h4>Because you liked "+ "<%=restaurants[k].getName()%>"+"</h4></br></br>";
+			temp.innerHTML += "<h4>Because you liked "+ "<%=restaurants[k].getName()%>"+"</h4>";
 			<%row++;
 			//for (int j=0;j<bus.length;j++){%>
 			//var i;
 			//for (i=0; i<bus.length; i++){
 			bus.forEach(function(element) {
-				curr.innerHTML += "<div class=\"col-xs-2\" style=\"display:inline-block;float:none;\"><input type=\"submit\" class= \"img-thumbnail image\"name= \"restaurant\" value=\"" 
+				curr.innerHTML += "<div class=\"col elementBlock\" style=\"display:inline-block;float:none;\"><input type=\"submit\" class= \"image thumb\"name= \"restaurant\" value=\"" 
 				+ element["id"] +"\" style=\"background-image: url('"+ 
-				element["image_url"] + "');border-radius:17px;\"></div>"+element["name"];
+				element["image_url"] + "');border-radius:17px;\"><span class=\"name\">"+element["name"]+ "</span></div>";
 			});
 			<%//}%>
 			
