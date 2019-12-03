@@ -12,6 +12,15 @@
 	font-size: 5vh;
 	background-color: #FC9D90 ! important;
 }
+#ingredients{
+	margin-top: 10vh;
+}
+#details{
+	margin-top: 15vh;
+}
+#picture{
+	margin-top: 10vh;
+}
 .header
 {
 	position: relative;
@@ -103,10 +112,10 @@
 {
 	font-family: 'Lustria';
 }
-#restaurantDiv
+#mainBlock
 {
 	font-family: 'Lustria';
-	color: black;
+	margin-left: 13vh;
 }
 #recipeDiv
 {
@@ -144,4 +153,8 @@ h4, h5
 }
 #resdetails{
 	margin-top:10vh;
+}
+#det{
+	margin-top:10vh;
+	margin-left:4vh;
 }
