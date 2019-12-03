@@ -81,41 +81,69 @@
 			
 				var busDetails="";
 				
-				busDetails += " <div class=\"col-sm-4\" id = \"picture\">";
+				busDetails += " <div class=\"col-sm-5\" id = \"picture\">";
 				busDetails += "<img src=\""+"<%=business.getImageUrl()%>" 
-					+"\" alt=\"" + "<%=business.getName()%>" +"\" style=\"border-radius:17px;height:40vh;height:40vh;\"></div>";
+					+"\" alt=\"" + "<%=business.getName()%>" +"\" style=\"border-radius:17px;width:100%;\"></div>";
 				
-				busDetails += "<div class=\"col-sm-6\" id = \"det\">";
+	
+				
+					
+					
+					var stars = "<%=business.getRating()%>";
+		   			var rate ="";
+		       		for(var j=0; j < stars; j++)
+		       		{
+		       			rate += "<img class= \"star\" src=\"redstar.png\">"; 
+		       		}
+		       		for(var k=0; k<5-stars; k++){
+		       			rate += "<img class= \"star\" src=\"greystar.png\">";
+		       		}
+				
+					
+				busDetails += "<div class=\"col-sm-3\" id = \"det\">";
 				busDetails += "<div style=\"font-weight:bold;font-size:200%\">"+"<%=business.getName()%></div>";
-				busDetails+="<br>Rating: "+"<%=business.getRating()%>"+"<br>Price: "+"<%=business.getPrice()%>"+"<br>";
+				busDetails+="<br>"+rate+"<br><br>  "+"<%=business.getPrice()%>"+"<br>";
+				
+				
+				busDetails +="Categories: "+"<%=business.getCategories()%>"+"<br>";
+				
+				<% if (session.getAttribute("Current user")!=null && !fav){%>
+				busDetails+= "<br><br><form action = \"AddRemFav\" method = \"GET\">";
+				busDetails += "<input type=\"hidden\" name=\"restaurant\" value=\""+"<%=business.getId()%>"+"\"></input>";
+				busDetails+= "<input id = \"favButton\" type =\"submit\" value = \"Add to favorites\"></input></form>";
+			<%}%>
+				
+				busDetails += "</div>";
+				
+	       		//busDetails += " <div class=\"col-sm-4\">" + rate + "<br>" +
+				
 				
 				//busDetails += "<div class=\"col-sm-6\" id = \"address\">";
 				
-				busDetails += "<%=business.getDisplayAddress().substring(0,business.getDisplayAddress().indexOf("\n"))%>"+"<br>";
-				busDetails += "<%=business.getDisplayAddress().substring(business.getDisplayAddress().indexOf("\n")+1)%>"+"<br>";
+				busDetails += "<div class=\"col-sm-3\" id = \"det1\">";
+				busDetails +="Distance: "+"<%=business.getDistance()%>"+" miles<br><br>";
 				
-				busDetails +="<%=business.getDisplayPhone()%>";
+				busDetails += "Address: "+"<%=business.getDisplayAddress().substring(0,business.getDisplayAddress().indexOf("\n"))%>"+"<br><br>";
 				
-				<% if (session.getAttribute("Current user")!=null){%>
-					busDetails+= "<br><br><form action = \"AddRemFav\" method = \"GET\">";
-					busDetails += "<input type=\"hidden\" name=\"restaurant\" value=\""+"<%=business.getId()%>"+"\" />";
-					busDetails+= "<input id = \"favButton\" type =\"submit\" value = \"FAVORITE\"></form>";
-				<%}%>
+				busDetails +="<img class= \"star\" src=\"phone.png\">"+"<%=business.getDisplayPhone()%>";
 				
-				busDetails +="</div></div>";
+				
+				busDetails +="</div>";
 				
 				busDetailsDiv.innerHTML+=busDetails;
+				
+				<%System.out.println("business id: "+business.getId());%>
 	
 			<%}
 			else {//RECIPE%>
 				var recipeDetails="";
-				recipeDetails += " <div class=\"col-sm-4\" id = \"picture\">";
+				recipeDetails += "<div class=\"col-sm-4\" id = \"picture\">";
 				recipeDetails += "<a id=\"recipePic\" href=\""+"<%=recipe.getUrl()%>"+"\"><img src=\""+"<%=recipe.getImage()%>" 
-					+"\" alt=\"" + "<%=recipe.getLabel()%>" +"\" style=\"border-radius:17px;\"></a></div>";
+					+"\" alt=\"" + "<%=recipe.getLabel()%>" +"\" style=\"border-radius:17px;width:100%;\"></a></div>";
 				
-				recipeDetails += "<div class=\"col-sm-6\" id = \"ingredients\">";
+				recipeDetails += "<div class=\"col-sm-3\" id = \"ingredients\">";
 				recipeDetails += "<div style=\"font-weight:bold;font-size:200%\">"+"<%=recipe.getLabel()%>"+"</div>";
-				recipeDetails+="<br>Calories: "+"<%=recipe.getCalories()%>"+"<br><br>Ingredients: <br>";
+				recipeDetails +="<br>Ingredients: <br>"
 				
 				<%
 				if (r){
@@ -124,17 +152,47 @@
 					recipeDetails += "  - "+"<%=in[i]%>"+"</br>";
 					<%}
 				}%>
+				recipeDetails += "</div>";
 				
+				
+				recipeDetails += "<div class=\"col-sm-3\" id = \"moredetails\">";
+				//recipeDetails+="Ingredients: <br>";
+				
+				recipeDetails+="<br>Calories: "+"<%=(int)recipe.getCalories()%>"+"<br>Yields: "+"<%=recipe.servings%>";
+				recipeDetails+="<br><br>This recipe is: <br>";
+				
+				<%
+				if (r){
+					String[] health = recipe.getHealthLabels();
+					for (int i=0; i<health.length; i++){%>
+					recipeDetails += " - "+"<%=health[i]%>"+"</br>";
+					<%}
+				}%>
+				
+				recipeDetails+="<br>Health Cautions: <br>";
+				<%
+				if (r){
+					String[] cautions = recipe.getCautions();
+					for (int i=0; i<cautions.length; i++){%>
+					recipeDetails += "  - "+"<%=cautions[i]%>"+"</br>";
+					<%}
+				}%>
+				
+				<% if (session.getAttribute("Current user")!=null && !fav){%>
+				recipeDetails+= "<br><form action = \"AddRemFav\" method = \"GET\">";
+				recipeDetails += "<input type=\"hidden\" name=\"recipe\" value=\""+"<%=recipe.getUri()%>"+"\"></input>";
+				recipeDetails+= "<input id = \"favButton\" type =\"submit\" value = \"Add to favorites\"></input></form>";
+			<%}%>
+				recipeDetails +="</div>";
 					
-				<% if (session.getAttribute("Current user")!=null){%>
-					recipeDetails+= "<br><form action = \"AddRemFav\" method = \"GET\">";
-					recipeDetails += "<input type=\"hidden\" name=\"recipe\" value=\""+"<%=recipe.getUri()%>"+"\" />";
-					recipeDetails+= "<input id = \"favButton\" type =\"submit\" value = \"FAVORITE\"></form>";
-				<%}%>
+				
 				
 				recipeDetails +="</div>";
 				
 				recDetailsDiv.innerHTML+=recipeDetails;
+				
+				<%System.out.println("recipe id: "+recipe.getUri());
+				System.out.println(recipe.getHealthLabels());%>
 
 			<%}
 			%>

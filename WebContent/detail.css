@@ -14,12 +14,17 @@
 }
 #ingredients{
 	margin-top: 10vh;
+	margin-left: 10vh;
+}
+#moredetails{
+	margin-top: 13vh;
+	margin-left: 10vh;
 }
 #details{
 	margin-top: 15vh;
 }
 #picture{
-	margin-top: 10vh;
+	margin-top: 12vh;
 }
 .header
 {
@@ -84,17 +89,6 @@
 	margin-top: 0vh ! important; 
 	padding: 0vh ! important;
 }
-.filterButton
-{
-	background-color: transparent ! important;
-	border-color: black ! important;
-	margin: 1vh ! important;
-	background-color: #9AADF2 ! important;
-	color: white ! important;
-	font-family: 'Lustria';
-	text-align: center ! important;
-	left: 50vh ! important;
-}
 
 
 .row:after {
@@ -132,17 +126,6 @@
 .grid{
 	padding-left: 50px;
 }
-.image
-{
-	margin-top:10vh;
-	position: relative;
-	width: 50vh;
-	height:50vh ! important;
-	font-size: 0.00001vh;
-	background-repeat: no-repeat;
-  	display: block;
-  	background-size:cover;
-}
 h4, h5
 {
 	font-family: 'Lustria' ! important;
@@ -155,6 +138,18 @@ h4, h5
 	margin-top:10vh;
 }
 #det{
-	margin-top:10vh;
-	margin-left:4vh;
+	margin-top:12vh;
+	margin-left:10vh;
+}
+#det1{
+	margin-top:20vh;
+}
+#favButton{
+	background-color: #FC9D90;
+	border-radius:8px;
+}
+.star
+{
+	height: 2vh;
+	width: 2vh;
 }

@@ -33,10 +33,10 @@ public class AddRemFav extends HttpServlet {
 	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stuf
+		//RequestDispatcher dispatch = getServletContext().getRequestDispatcher("/Test1.jsp");
 		/* Pass in restaurant or recipe id */
-		String username = (String) request.getSession().getAttribute("Current User");
+		String username = (String) request.getSession().getAttribute("Current user");
 		String restaurant = request.getParameter("restaurant");
 		String recipe = request.getParameter("recipe");
 		String next = "/Detail.jsp";
