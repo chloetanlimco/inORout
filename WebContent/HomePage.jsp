@@ -65,7 +65,7 @@
 					</div>
 					<div class="col-sm-6 d-inline-block">
 						<div class="full">
-							<form action="Logger" id="buttonLog"></form>
+							<form action="ServletLogger" method="GET" id="buttonLog"></form>
 						</div>
 					</div>
 				</div>

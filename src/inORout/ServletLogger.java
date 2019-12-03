@@ -27,24 +27,13 @@ import inORout.Recipe;
 /**
  * Servlet implementation class Search
  */
-@WebServlet("/Logger")
-public class Logger extends HttpServlet {
+@WebServlet("/ServletLogger")
+public class ServletLogger extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public Logger() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-
-	/**
-	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
+		System.out.println("hi");
 		String logChoice = request.getParameter("logChoice");
 		if(logChoice.equals("Login"))
 		{
@@ -70,8 +59,7 @@ public class Logger extends HttpServlet {
 		}
 		else if(logChoice.equals("Profile"))
 		{
-
-			RequestDispatcher rd = request.getRequestDispatcher("Profile");
+			RequestDispatcher rd = request.getRequestDispatcher("ProfileHelper");
 
 			try {
 				rd.forward(request, response);
@@ -84,7 +72,7 @@ public class Logger extends HttpServlet {
 		else if(logChoice.equals("Signout"))
 		{
 			request.getSession().setAttribute("Current user", null);
-			RequestDispatcher dispatch = getServletContext().getRequestDispatcher("/HomePage.jsp");
+			RequestDispatcher dispatch = request.getRequestDispatcher("/HomePage.jsp");
 			try {
 				dispatch.forward(request, response);
 			} catch (IOException e) {
@@ -95,21 +83,4 @@ public class Logger extends HttpServlet {
 		}
 		
 	}
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
-
 }

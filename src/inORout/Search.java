@@ -117,7 +117,7 @@ public class Search extends HttpServlet {
 		request.setAttribute("searchType", request.getParameter("searchType"));
 		request.setAttribute("searchTerm", searchTerm);
 		System.out.println(request.getParameter("searchType"));
-
+		System.out.println(request.getServletContext());
 		// send it back
 		// CHANGE THIS TO CORRECT PAGE FOR REDIRECT
 		RequestDispatcher dispatch = getServletContext().getRequestDispatcher("/SearchResults.jsp");

@@ -173,9 +173,37 @@
 				</div>
 			</div>
 
+<<<<<<< Updated upstream
 		</div>
 
 		<div class="main" id="main"></div>
+=======
+  <div class="header">
+	  <div class="container">
+	  <div class="row">
+	    <div class="col-sm-2">
+	    <a href="HomePage.jsp" class="btn btn-default homeButton" id="titleHome">in-or-out</a>
+	    </div>
+	    <div class="searchSection">
+		  <form action="Search">
+		  <div class="col-sm-3">
+		    <div class="form-group">
+		      <input type="text" class="form-control" id="foodSearch" placeholder="Find fries, sushi, pizza..." name="searchTerm">
+		    </div>
+		  </div>
+		    <div class="col-sm-3">
+		    	<input type="submit" class="btn btn-default searchButton" name="searchType" value="Search by Restaurant">
+		    	<input type="submit" class="btn btn-default searchButton" name="searchType" value="Search by Recipe">
+		     </div>
+		  </form>
+		  </div>
+	    <div class="col-sm-3">
+	    <form action="ServletLogger" method="GET" id="buttonLog">
+	    </form>
+	    </div>
+	  </div>
+	  </div>
+>>>>>>> Stashed changes
 	</div>
 
 	<div id="restaurantDiv">
