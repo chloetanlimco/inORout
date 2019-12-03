@@ -23,7 +23,7 @@ public class ResultsYelpCall extends Thread {
 		sortBy = null;
 		this.run();
 	}
-	
+
 	ResultsYelpCall(Search search, String st, String option, String price, String sortBy) {
 		s = search;
 		searchTerm = st;
@@ -57,7 +57,7 @@ public class ResultsYelpCall extends Thread {
 		if (sortBy != null && !sortBy.contentEquals("none")) {
 			params += "&sort_by=" + sortBy;
 		}
-		
+
 		JsonObject jsonObject = null;
 
 		while (!yelpsuccess) {

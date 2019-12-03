@@ -165,131 +165,128 @@
 	<div class="container-fluid mycontainer">
 
 		<div class="header">
-				<div class="row">
-					<div class="col-sm-2">
-						<a href="HomePage.jsp" class="btn btn-default homeButton"
-							id="titleHome">in-or-out</a>
-					</div>
-					<div class="searchSection">
-						<form action="Search">
-							<div class="col-sm-3">
-								<div class="form-group">
-									<input type="text" class="form-control" id="foodSearch"
-										placeholder="Find fries, sushi, pizza..." name="searchTerm">
-								</div>
+			<div class="row">
+				<div class="col-sm-2">
+					<a href="HomePage.jsp" class="btn btn-default homeButton"
+						id="titleHome">in-or-out</a>
+				</div>
+				<div class="searchSection">
+					<form action="Search">
+						<div class="col-sm-3">
+							<div class="form-group">
+								<input type="text" class="form-control" id="foodSearch"
+									placeholder="Find fries, sushi, pizza..." name="searchTerm">
 							</div>
-							<div class="col-sm-3">
-								<input type="submit" class="btn btn-default searchButton"
-									name="searchType" value="Search by Restaurant"> <input
-									type="submit" class="btn btn-default searchButton"
-									name="searchType" value="Search by Recipe">
-							</div>
-						</form>
-					</div>
-					<div class="col-sm-4">
-						<form action="Logger" id="buttonLog"></form>
-					</div>
+						</div>
+						<div class="col-sm-3">
+							<input type="submit" class="btn btn-default searchButton"
+								name="searchType" value="Search by Restaurant"> <input
+								type="submit" class="btn btn-default searchButton"
+								name="searchType" value="Search by Recipe">
+						</div>
+					</form>
+				</div>
+				<div class="col-sm-4">
+					<form action="Logger" id="buttonLog"></form>
 				</div>
 			</div>
 		</div>
-		<div class="jumbotron mainBox">
-			<div class="row">
-				<div class="col-sm-9" id="mainBlock">
-					<ul class="nav nav-tabs" id="tabs">
-						<li id="restaurantTab"><a data-toggle="tab"
-							href="#restaurantDiv">Restaurants</a></li>
-						<li id="recipeTab"><a data-toggle="tab" href="#recipeDiv">Recipes</a></li>
-					</ul>
+	</div>
+	<div class="jumbotron mainBox">
+		<div class="row">
+			<div class="col-sm-9" id="mainBlock">
+				<ul class="nav nav-tabs" id="tabs">
+					<li id="restaurantTab"><a data-toggle="tab"
+						href="#restaurantDiv">Restaurants</a></li>
+					<li id="recipeTab"><a data-toggle="tab" href="#recipeDiv">Recipes</a></li>
+				</ul>
 
-					<div class="tab-content">
-						<div id="restaurantDiv">
-							<form id="restaurantForm" action="Detail"></form>
-						</div>
-						<div id="recipeDiv">
-							<form id="recipeForm" action="Detail"></form>
-						</div>
+				<div class="tab-content">
+					<div id="restaurantDiv">
+						<form id="restaurantForm" action="Detail"></form>
 					</div>
-
-
+					<div id="recipeDiv">
+						<form id="recipeForm" action="Detail"></form>
+					</div>
 				</div>
-				<div class="col-sm-3">
-					<div class="jumbotron filterBar">
-						<div class="parentCenter">
-							<form action="">
-								<input type="hidden" name="searchTerm"
-									value="<%=request.getAttribute("searchTerm")%>"> <input
-									type="hidden" name="searchType"
-									value="<%=request.getAttribute("searchType")%>">
 
-								<h3 class="text-center">Filter By:</h3>
 
- 								<div class="btn-group-toggle" data-toggle="buttons">
-									<label class="btn btn-default btn-lg filterButton"> <input
-										type="checkbox" name="option" autocomplete="off"
-										value="vegetarian"> Vegetarian
-									</label> <label class="btn btn-default btn-lg filterButton"> <input
-										type="checkbox" name="option" autocomplete="off"
-										value="vegan"> Vegan
-									</label> <label class="btn btn-default btn-lg filterButton">
-										<input type="checkbox" name="option" autocomplete="off"
-										value="gluten_free"> Gluten-Free
-									</label> 
-									<label class="btn btn-default btn-lg filterButton"> <input
-										type="checkbox" name="option" autocomplete="off"
-										value="dairy-free"> Lactose-Free
-									</label>
-								</div>					
-								
-								<div class="btn-group-toggle" data-toggle="buttons">
+			</div>
+			<div class="col-sm-3">
+				<div class="jumbotron filterBar">
+					<div class="parentCenter">
+						<form action="">
+							<input type="hidden" name="searchTerm"
+								value="<%=request.getAttribute("searchTerm")%>"> <input
+								type="hidden" name="searchType"
+								value="<%=request.getAttribute("searchType")%>">
+
+							<h3 class="text-center">Filter By:</h3>
+
+							<div class="btn-group-toggle" data-toggle="buttons">
+								<label class="btn btn-default btn-lg filterButton"> <input
+									type="checkbox" name="option" autocomplete="off"
+									value="vegetarian"> Vegetarian
+								</label> <label class="btn btn-default btn-lg filterButton"> <input
+									type="checkbox" name="option" autocomplete="off" value="vegan">
+									Vegan
+								</label> <label class="btn btn-default btn-lg filterButton"> <input
+									type="checkbox" name="option" autocomplete="off"
+									value="gluten_free"> Gluten-Free
+								</label> <label class="btn btn-default btn-lg filterButton"> <input
+									type="checkbox" name="option" autocomplete="off"
+									value="dairy-free"> Lactose-Free
+								</label>
+							</div>
+
+							<div class="btn-group-toggle" data-toggle="buttons">
 								<h3 class="text-center">Price:</h3>
-								<label class="btn btn-default btn-lg filterButton price"> <input
-									type="radio" name="price" autocomplete="off"
-									value="0"> No Preference
+								<label class="btn btn-default btn-lg filterButton price">
+									<input type="radio" name="price" autocomplete="off" value="0">
+									No Preference
+								</label> <br> <label
+									class="btn btn-default btn-lg filterButton price"> <input
+									type="radio" name="price" autocomplete="off" value="1">
+									$
+								</label> <label class="btn btn-default btn-lg filterButton"> <input
+									type="radio" name="price" autocomplete="off" value="2">
+									$$
+								</label> <label class="btn btn-default btn-lg filterButton"> <input
+									type="radio" name="price" autocomplete="off" value="3">
+									$$$
+								</label> <label class="btn btn-default btn-lg filterButton"> <input
+									type="radio" name="price" autocomplete="off" value="4">
+									$$$$
 								</label>
-								<br>
-								
-								<label class="btn btn-default btn-lg filterButton price"> <input
-									type="radio" name="price" autocomplete="off"
-									value="1"> $
-								</label> <label class="btn btn-default btn-lg filterButton"> <input
-									type="radio" name="price" autocomplete="off"
-									value="2"> $$
-								</label> <label class="btn btn-default btn-lg filterButton"> <input
-									type="radio" name="price" autocomplete="off"
-									value="3"> $$$
-								</label> <label class="btn btn-default btn-lg filterButton"> <input
-									type="radio" name="price" autocomplete="off"
-									value="4"> $$$$
-								</label>
-								</div>
-								
-								<div class="btn-group-toggle" data-toggle="buttons">
+							</div>
+
+							<div class="btn-group-toggle" data-toggle="buttons">
 								<h3 class="text-center">Sort By:</h3>
 								<label class="btn btn-default btn-lg filterButton"> <input
-									type="radio" name="sort" autocomplete="off"
-									value="none"> No Sorting
+									type="radio" name="sort" autocomplete="off" value="none">
+									No Sorting
 								</label> <label class="btn btn-default btn-lg filterButton"> <input
-									type="radio" name="sort" autocomplete="off"
-									value="distance"> Distance
+									type="radio" name="sort" autocomplete="off" value="distance">
+									Distance
 								</label> <label class="btn btn-default btn-lg filterButton"> <input
-									type="radio" name="sort" autocomplete="off"
-									value="rating"> Rating
+									type="radio" name="sort" autocomplete="off" value="rating">
+									Rating
 								</label> <label class="btn btn-default btn-lg filterButton"> <input
 									type="radio" name="sort" autocomplete="off"
 									value="review_count"> Review Count
 								</label>
-								</div>
-								
+							</div>
 
-								
 
-								<button type="submit" class="btn btn-lg btn-primary">Submit
-									Search</button>
-							</form>
-						</div>
+
+
+							<button type="submit" class="btn btn-lg btn-primary">Submit
+								Search</button>
+						</form>
 					</div>
 				</div>
 			</div>
+		</div>
 
 	</div>
 	<script type="text/javascript" src="jquery.js"></script>
