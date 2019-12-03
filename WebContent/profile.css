@@ -2,6 +2,13 @@
 *{
 	font-family: Lustria;
 }
+
+.mycontainer{
+	padding-left: 0 !important;
+	padding-right: 0 !important;
+	padding-top: 0 !important;
+}
+
 #titleHome
 {
 	border: none;
@@ -96,9 +103,10 @@
 {
 	font-family: 'Lustria' ! important;
 	color: black;
-	margin-bottom:35px;
-	margin-top:10px;
+	padding: 20px;
+	padding-left: 30px;
 }
+
 .grid{
 	padding-left: 50px;
 }

@@ -1,19 +1,24 @@
-<%@ page import ="inORout.Business" %>
-<%@ page import ="inORout.Recipe" %>
+<%@ page import="inORout.Business"%>
+<%@ page import="inORout.Recipe"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Profile</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" type="text/css" href="profile.css" /> 
-  <link rel="shortcut icon" href="#">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-  <link href="https://fonts.googleapis.com/css?family=Lustria&display=swap" rel="stylesheet">
+<title>Profile</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="profile.css" />
+<link rel="shortcut icon" href="#">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<link
+	href="https://fonts.googleapis.com/css?family=Lustria&display=swap"
+	rel="stylesheet">
 
-  <script>
+<script>
 	function profile() {
 		let div = document.getElementById("buttonLog");
 		if("<%=session.getAttribute("Current user")%>" == "null")
@@ -31,7 +36,6 @@
 			el2.value = "Signup";
 			el2.className = "btn btn-default btn-lg loginbutton";
 			div.appendChild(el2);
-			
 		}
 		else
 		{
@@ -116,73 +120,69 @@
 			<%}%>
 		}
 		
-		<%
-		int row =1;
-		for (int k=0; k<numBusinesses;k++){%>
+		<%int row = 1;
+			for (int k = 0; k < numBusinesses; k++) {%>
 			var bus = bs["<%=restaurants[k].getName()%>"];
 		
 			curr = document.getElementById("r"+"<%=row%>");
 			temp = document.getElementById("r"+"<%=row%>"+"header");
-			temp.innerHTML += "<h4>Because you liked "+ "<%=restaurants[k].getName()%>"+"</h4>";
-			<%row++;
-			//for (int j=0;j<bus.length;j++){%>
-			//var i;
-			//for (i=0; i<bus.length; i++){
-			bus.forEach(function(element) {
+			temp.innerHTML += "<h4>Because you liked "+ "<%=restaurants[k].getName()%>" + "</h4>";
+		<%row++;%>
+		bus.forEach(function(element) {
 
-				curr.innerHTML += "<div class=\"col elementBlock\" style=\"display:inline-block;float:none;\"><form id=\"details\" action=\"Detail\"><input type=\"submit\" class= \"image thumb\"name= \"restaurant\" value=\"" 
-				+ element["id"] +"\" style=\"background-image: url('"+ 
-				element["image_url"] + "');border-radius:17px;\"><span class=\"name\"></form>"+element["name"]+ "</span></div>";
-
+			curr.innerHTML += "<div class=\"col elementBlock\" style=\"display:inline-block;float:none;\"><form id=\"details\" action=\"Detail\"><input type=\"submit\" class= \"image thumb\"name= \"restaurant\" value=\""
+					+ element["id"]
+					+ "\" style=\"background-image: url('"
+					+ element["image_url"]
+					+ "');border-radius:17px;\"><span class=\"name\"></form>"
+					+ element["name"] + "</span></div>";
+	
 			});
-			<%//}%>
-			
 		<%}%>
-		
-		
 	}
-	 
-	</script>
+</script>
 </head>
 <body onload="profile(); loadResults();">
 
-<div class="container-fluid">
+	<div class="container-fluid mycontainer">
 
-  <div class="header">
-	  <div class="container">
-	  <div class="row">
-	    <div class="col-sm-2">
-	    <a href="HomePage.jsp" class="btn btn-default homeButton" id="titleHome">in-or-out</a>
-	    </div>
-	    <div class="searchSection">
-		  <form action="Search">
-		  <div class="col-sm-3">
-		    <div class="form-group">
-		      <input type="text" class="form-control" id="foodSearch" placeholder="Find fries, sushi, pizza..." name="searchTerm">
-		    </div>
-		  </div>
-		    <div class="col-sm-3">
-		    	<input type="submit" class="btn btn-default searchButton" name="searchType" value="Search by Restaurant">
-		    	<input type="submit" class="btn btn-default searchButton" name="searchType" value="Search by Recipe">
-		     </div>
-		  </form>
-		  </div>
-	    <div class="col-sm-3">
-	    <form action="Logger" id="buttonLog">
-	    </form>
-	    </div>
-	  </div>
-	  </div>
+		<div class="header">
+			<div class="row">
+				<div class="col-sm-2">
+					<a href="HomePage.jsp" class="btn btn-default homeButton"
+						id="titleHome">in-or-out</a>
+				</div>
+				<div class="searchSection">
+					<form action="Search">
+						<div class="col-sm-3">
+							<div class="form-group">
+								<input type="text" class="form-control" id="foodSearch"
+									placeholder="Find fries, sushi, pizza..." name="searchTerm">
+							</div>
+						</div>
+						<div class="col-sm-3">
+							<input type="submit" class="btn btn-default searchButton"
+								name="searchType" value="Search by Restaurant"> <input
+								type="submit" class="btn btn-default searchButton"
+								name="searchType" value="Search by Recipe">
+						</div>
+					</form>
+				</div>
+				<div class="col-sm-4">
+					<form action="Logger" id="buttonLog"></form>
+				</div>
+			</div>
+
+		</div>
+
+		<div class="main" id="main"></div>
 	</div>
-  	<div class="main" id="main">	
-	    </div>
-	    </div>
 
-<div id="restaurantDiv">
-		    <div class="scrollmenu">
-		    	<div id="favorites"></div>
-		    </div>
-		    </div>
+	<div id="restaurantDiv">
+		<div class="scrollmenu">
+			<div id="favorites"></div>
+		</div>
+	</div>
 
 </body>
 </html>
