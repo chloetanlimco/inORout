@@ -226,17 +226,18 @@
  								<div class="btn-group-toggle" data-toggle="buttons">
 									<label class="btn btn-default btn-lg filterButton"> <input
 										type="checkbox" name="option" autocomplete="off"
-										value="lactose"> Vegetarian
+										value="vegetarian"> Vegetarian
 									</label> <label class="btn btn-default btn-lg filterButton"> <input
 										type="checkbox" name="option" autocomplete="off"
 										value="vegan"> Vegan
 									</label> <label class="btn btn-default btn-lg filterButton">
 										<input type="checkbox" name="option" autocomplete="off"
-										value="gluten"> Gluten-Free
-									</label> <label class="btn btn-default btn-lg filterButton"> <input
+										value="gluten_free"> Gluten-Free
+									</label> 
+									<label class="btn btn-default btn-lg filterButton"> <input
 										type="checkbox" name="option" autocomplete="off"
-										value="lactose"> Lactose-Free
-									</label>		
+										value="dairy-free"> Lactose-Free
+									</label>
 								</div>					
 								
 								<div class="btn-group-toggle" data-toggle="buttons">
@@ -275,7 +276,7 @@
 									value="rating"> Rating
 								</label> <label class="btn btn-default btn-lg filterButton"> <input
 									type="radio" name="sort" autocomplete="off"
-									value="review"> Review Count
+									value="review_count"> Review Count
 								</label>
 								</div>
 								

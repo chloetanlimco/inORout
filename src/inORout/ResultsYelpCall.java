@@ -11,11 +11,29 @@ import com.google.gson.JsonParser;
 public class ResultsYelpCall extends Thread {
 	Search s;
 	String searchTerm;
+	String option;
+	String price;
+	String sortBy;
 
 	ResultsYelpCall(Search search, String st) {
 		s = search;
 		searchTerm = st;
-		run();
+		option = null;
+		price = null;
+		sortBy = null;
+		this.run();
+	}
+	
+	ResultsYelpCall(Search search, String st, String option, String price, String sortBy) {
+		s = search;
+		searchTerm = st;
+		this.option = option;
+		if (option != null) {
+			option.replace("dairy-free", "");
+		}
+		this.price = price;
+		this.sortBy = sortBy;
+		this.run();
 	}
 
 	public void run() {
@@ -30,6 +48,16 @@ public class ResultsYelpCall extends Thread {
 		}
 
 		String params = "term=" + searchTerm.replace(" ", "+") + "&latitude=" + latitude + "&longitude=" + longitude;
+		if (price != null && !price.contentEquals("0")) {
+			params += "&price=" + price;
+		}
+		if (option != null && option.contentEquals("dairy-free")) {
+			params += "&option=" + option;
+		}
+		if (sortBy != null && !sortBy.contentEquals("none")) {
+			params += "&sort_by=" + sortBy;
+		}
+		
 		JsonObject jsonObject = null;
 
 		while (!yelpsuccess) {
