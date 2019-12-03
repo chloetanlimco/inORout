@@ -12,18 +12,21 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Lustria&display=swap" rel="stylesheet">
+
   <script>
 	function profile() {
 		let div = document.getElementById("buttonLog");
 		if("<%=session.getAttribute("Current user")%>" == "null")
 		{
 			let el = document.createElement("input");
+			el.type = "submit";
 			el.name = "logChoice";
 			el.value = "Login";
 			el.className = "btn btn-default btn-lg loginbutton";
 			div.appendChild(el);
 			
 			let el2 = document.createElement("input");
+			el.type = "submit";
 			el2.name = "logChoice";
 			el2.value = "Signup";
 			el2.className = "btn btn-default btn-lg loginbutton";
@@ -32,13 +35,8 @@
 		}
 		else
 		{
-			let ell = document.createElement("input");
-			ell.name = "logChoice";
-			ell.value = "Profile";
-			ell.className = "btn btn-default btn-lg loginbutton";
-			div.appendChild(ell);
-			
 			let el = document.createElement("input");
+			el.type = "submit";
 			el.name = "logChoice";
 			el.value = "Signout";
 			el.className = "btn btn-default btn-lg loginbutton";
@@ -49,12 +47,11 @@
 	{
 		var type = "<%=request.getAttribute("searchType") %>>";
 		type = type.substring(0, type.length-1);
-
 		var searchTerm = "<%=request.getAttribute("searchTerm") %>>";
 		searchTerm = searchTerm.substring(0,searchTerm.length-1);
 		var searchType = "<%=request.getAttribute("searchType") %>>";
 		searchType = searchType.substring(0,searchType.length-1);
-		let resF = document.getElementById("restaurantForm");
+		let resF = document.getElementById("favorites");
 		
 		//var rSug = '${RecipesSuggestions}';
 		var bizz = '${Businesses}';
@@ -85,7 +82,6 @@
 		int numBusinesses = (int)(request.getAttribute("numBusinesses"));
 		int rows = numRecipes+numBusinesses+1;
 		%>
-
 		resF.innerHTML ="<input type=\"hidden\" name=\"searchTerm\"value = \"" + searchTerm + "\"> ";
 		resF.innerHTML += "<input type=\"hidden\" name=\"searchType\"value = \"" + searchType + "\"> ";
 		
@@ -93,46 +89,44 @@
 		<%for (int i=0; i<rows; i++){%>
 			main.innerHTML += "<div id=\"r"+"<%=i%>"+"header\"></div><div id=\"row"+"<%=i%>"+"\">";
 	    	main.innerHTML += "<div class=\"container testimonial-group\">";
-	    	main.innerHTML += "<div class=\"row text-center\" style=\"overflow-x:auto;white-space:nowrap;\" id=\"r"+"<%=i%>"+"\"></div></div></div>";
+	    	main.innerHTML += "<div class=\"row\" style=\"overflow-x:auto;white-space:nowrap;\" id=\"r"+"<%=i%>"+"\"></div></div></div>";
 		<%} %>
-
 		var curr;
 		var temp;
 	
 		if (<%=rows%>!=1){ //if there are favorites, make a favorites row
 			curr = document.getElementById("r0");
 			temp = document.getElementById("r0header");
-			temp.innerHTML += "<h4>Your favorites</h4></br></br>";
+			temp.innerHTML += "<h4>Your favorites</h4>";
 			<% 
 			for (int j=0; j<numBusinesses; j++){%>
-				curr.innerHTML += "<div class=\"col-xs-2\" style=\"display:inline-block;float:none;\"><input type=\"submit\" class= \"img-thumbnail image\"name= \"restaurant\" value=\"" 
+				curr.innerHTML += "<div class=\"col elementBlock\" style=\"display:inline-block;float:none;\"><form id=\"details\" action=\"Detail\"><input type=\"submit\" class= \"image thumb\"name= \"restaurant\" value=\"" 
 				+ "<%=restaurants[j].getId()%>"+ "\" style=\"background-image: url('"+ 
-				"<%=restaurants[j].getImageUrl()%>" + "');border-radius:17px;\"></div>"+"<%=restaurants[j].getName()%>";
+				"<%=restaurants[j].getImageUrl()%>" + "');border-radius:17px;\">"+"<span class=\"name\"></form>" + "<%=restaurants[j].getName()%></span></div>";
 			<%}
 			for (int j=0; j<numRecipes; j++){%>
-			curr.innerHTML += "<div class=\"col-xs-2\" style=\"display:inline-block;float:none;\"><input type=\"submit\" class= \"img-thumbnail image\"name= \"restaurant\" value=\"" 
+			curr.innerHTML += "<div class=\"col elementBlock\" style=\"display:inline-block;float:none;\"><form id=\"details\" action=\"Detail\"><input type=\"submit\" class= \"image thumb\"name= \"restaurant\" value=\"" 
 			+ "<%=recipes[j].getSource()%>"+ "\" style=\"background-image: url('"+ 
-			"<%=recipes[j].getImage()%>" + "');border-radius:17px;\"></div>"+"<%=recipes[j].getLabel()%>";
+			"<%=recipes[j].getImage()%>" + "');border-radius:17px;\"><span class=\"name\"></form>" + "<%=recipes[j].getLabel()%></span></div>";
 			<%}%>
 		}
 		
 		<%
-
 		int row =1;
 		for (int k=0; k<numBusinesses;k++){%>
 			var bus = bs["<%=restaurants[k].getName()%>"];
 		
 			curr = document.getElementById("r"+"<%=row%>");
 			temp = document.getElementById("r"+"<%=row%>"+"header");
-			temp.innerHTML += "<h4>Because you liked "+ "<%=restaurants[k].getName()%>"+"</h4></br></br>";
+			temp.innerHTML += "<h4>Because you liked "+ "<%=restaurants[k].getName()%>"+"</h4>";
 			<%row++;
 			//for (int j=0;j<bus.length;j++){%>
 			//var i;
 			//for (i=0; i<bus.length; i++){
 			bus.forEach(function(element) {
-				curr.innerHTML += "<div class=\"col-xs-2\" style=\"display:inline-block;float:none;\"><input type=\"submit\" class= \"img-thumbnail image\"name= \"restaurant\" value=\"" 
+				curr.innerHTML += "<div class=\"col elementBlock\" style=\"display:inline-block;float:none;\"><form id=\"details\" action=\"Detail\"><input type=\"submit\" class= \"image thumb\"name= \"restaurant\" value=\"" 
 				+ element["id"] +"\" style=\"background-image: url('"+ 
-				element["image_url"] + "');border-radius:17px;\"></div>"+element["name"];
+				element["image_url"] + "');border-radius:17px;\"><span class=\"name\"></form>"+element["name"]+ "</span></div>";
 			});
 			<%//}%>
 			
@@ -167,7 +161,7 @@
 		  </form>
 		  </div>
 	    <div class="col-sm-3">
-	    <form action="Logger.java" id="buttonLog">
+	    <form action="Logger" id="buttonLog">
 	    </form>
 	    </div>
 	  </div>
@@ -179,8 +173,7 @@
 
 <div id="restaurantDiv">
 		    <div class="scrollmenu">
-		    	<form id="restaurantForm" action="Detail">
-		    </form>
+		    	<div id="favorites"></div>
 		    </div>
 		    </div>
 
