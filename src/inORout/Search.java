@@ -80,40 +80,41 @@ public class Search extends HttpServlet {
 				System.out.println("Make sure you have a config.txt file!");
 			}
 
-			Vector<Business> YelpResults = new Vector<Business>();
-			Vector<Recipe> EdamamResults = new Vector<Recipe>();
+			YelpResults = new Vector<Business>();
+			EdamamResults = new Vector<Recipe>();
 
 			// YELP API CALL
-			int sleeptime = 125;
-			if (!searchTerm.contentEquals("")) {
-				boolean yelpsuccess = false;
-				while (!yelpsuccess) {
-					try {
-						HttpSession session = request.getSession();
-						String latitude = "34.0205";
-						String longitude = "-118.2856";
-						if (session.getAttribute("latitude") != null && session.getAttribute("longitude") != null) {
-							latitude = (String) session.getAttribute("latitude");
-							longitude = (String) session.getAttribute("longitude");
-						}
-						helpers.yelpCall(this, latitude, longitude, searchTerm);
-						
-						yelpsuccess = true;
-					} catch (Exception e) {
-						System.out.println(e.getMessage());
-						try {
-							Thread.sleep(sleeptime);
-						} catch (InterruptedException e1) {
-							System.out.println(e.getMessage());
-						}
-						sleeptime *=2;
-						System.out.println(sleeptime);
-						if(sleeptime == 2000) {
-							break;
-						}
-					}
-				}
-			}
+//			int sleeptime = 125;
+//			if (!searchTerm.contentEquals("")) {
+//				boolean yelpsuccess = false;
+//				while (!yelpsuccess) {
+//					try {
+//						HttpSession session = request.getSession();
+//						String latitude = "34.0205";
+//						String longitude = "-118.2856";
+//						if (session.getAttribute("latitude") != null && session.getAttribute("longitude") != null) {
+//							latitude = (String) session.getAttribute("latitude");
+//							longitude = (String) session.getAttribute("longitude");
+//						}
+//						helpers.yelpCall(this, latitude, longitude, searchTerm);
+//						
+//						yelpsuccess = true;
+//					} catch (Exception e) {
+//						System.out.println(e.getMessage());
+//						try {
+//							Thread.sleep(sleeptime);
+//						} catch (InterruptedException e1) {
+//							System.out.println(e.getMessage());
+//						}
+//						sleeptime *=2;
+//						System.out.println(sleeptime);
+//						if(sleeptime == 2000) {
+//							break;
+//						}
+//					}
+//				}
+//			}
+			new ResultsYelpCall(this, searchTerm);
 
 			// EDAMAM API CALL
 			int current = 0;
