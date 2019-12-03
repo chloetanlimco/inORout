@@ -39,7 +39,6 @@
 
 .mainBox
 {
-	height: 100vh;
 	border: none;
 	border-radius: 0 !important;
 	padding: 0 ! important;
@@ -66,11 +65,11 @@
 .filterBar
 {
 	position: relative;
-	height: 65vh;
 	width: 100%;
 	font-family: 'Lustria';
 	margin-top: 0vh ! important; 
 	padding: 0px 5px ! important;
+	padding-bottom: 40px !important;
 }
 .filterBar h3 {
 	padding: 10px 5px 0px;
@@ -81,14 +80,20 @@
 }
 .filterButton
 {
-	background-color: transparent ! important;
 	border-color: 3px black ! important;
 	margin: 1vh auto ! important;
-	background-color: #9AADF2 ! important;
+	background-color: #9AADF2 !important;
 	color: white ! important;
 	font-family: 'Lustria';
 	text-align: center ! important;
 	left: 50vh ! important;
+	outline: none !important;
+	width: 150px;
+}
+
+.filterButton.active{
+	box-shadow: inset 0 3px 5px rgba(0,0,0,.3);
+	background-color: #6f8efc !important;
 }
 
 
@@ -99,6 +104,7 @@
 }
 .parentCenter
 {
+	padding-top: 20px;
 	margin: auto;
 	display: block;
 }
@@ -110,20 +116,19 @@
 {
 	font-family: 'Lustria';
 	color: black;
+	text-align: left;
 }
 #recipeDiv
 {
 	font-family: 'Lustria';
 	color: black;
+	text-align:left;
 }
 .row
 {
 	font-family: 'Lustria' ! important;
 	color: black;
 	padding: 10px;
-}
-.row .col-sm-4 {
-	text-align: center;
 }
 .image
 {
@@ -142,5 +147,28 @@ h4, h5
 	font-family: 'Lustria' ! important;
 	color: black;
 }
+
+#filter-header{
+	text-align: center;
+}
+
+h3{
+	margin-top: 10px !important;
+	padding-top: 0px !important;
+	margin-bottom: 0px !important;
+}
+.star
+{
+	height: 2vh;
+	width: 2vh;
+}
+
+.mycontainer{
+	padding-left: 0 !important;
+	padding-right: 0 !important;
+	padding-top: 0 !important;
+}
+
+
 
 
