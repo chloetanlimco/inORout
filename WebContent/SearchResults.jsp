@@ -109,7 +109,7 @@
 			}
 			String[] addy = restaurants[i].getDisplayAddress().split("\n");%>
 			resF.innerHTML += "<div class=\"row\">";
-			resF.innerHTML += " <div class=\"col-sm-4\"> <input type=\"submit\" class= \"img-thumbnail image\"name= \"restaurant\" value=\"" 
+			resF.innerHTML += " <div class=\"col-sm-4 labelling\"> <input type=\"submit\" class= \"img-thumbnail image\"name= \"restaurant\" value=\"" 
 				+ "<%=restaurants[i].getId()%>" + "\" style=\"background-image: url('"+ 
 				"<%=restaurants[i].getImageUrl()%>" + "');\">";
 			resF.innerHTML+= "</div>";
@@ -146,7 +146,7 @@
 			}
 		%>
 			recF.innerHTML += "<div class=\"row\">";
-			recF.innerHTML += " <div class=\"col-sm-4 \"> <input type=\"submit\" class= \"img-thumbnail image\"name= \"recipe\" value=\"" 
+			recF.innerHTML += " <div class=\"col-sm-4 labelling\"> <input type=\"submit\" class= \"img-thumbnail image\"name= \"recipe\" value=\"" 
 				+ "<%=recipes[i].getSource()%>" + "\" style=\"background-image: url('"+ 
 				"<%=recipes[i].getImage()%>" + "');\">";
 			recF.innerHTML+= "</div>";
