@@ -83,7 +83,6 @@ public class Detail extends HttpServlet {
 		Recipe r = null;
 		boolean fav = false;
 		if (restaurant != null) {
-			System.out.println(restaurant);
 			URL url = new URL("https://api.yelp.com/v3/businesses/" + restaurant);
 
 			HttpURLConnection yelpCon = (HttpURLConnection) url.openConnection();
@@ -142,9 +141,8 @@ public class Detail extends HttpServlet {
 		}
 		//recipe details
 		/* Might not need if we want to forward to original site */
-		else {
+		else if (recipe != null) {
 			
-			/* Not sure for this search, source might just give original site? */
 			String params = "r=" + encodedLink + "&app_key=" + app_key + "&app_id=" + app_id;
 			URL url = new URL("https://api.edamam.com/search?" + params);
 			
