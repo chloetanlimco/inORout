@@ -215,10 +215,11 @@ public class Detail extends HttpServlet {
 
 					while (rs.next()) {
 						// if recipe already in favorites
-						if (rs.getString("name").contentEquals(r.label)) {
+						if (rs.getString("recipeID").contentEquals(recipe)) {
 							fav = true;
 						}
 					}
+					break;
 				} catch (Exception e) {
 					e.printStackTrace();
 					current = current + 1;

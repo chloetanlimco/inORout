@@ -97,6 +97,7 @@ public class AddRemFav extends HttpServlet {
 				}
 
 			} else {
+				System.out.println("checking");
 				// check if in favorites
 				lookup = conn.prepareStatement(
 						"SELECT * FROM Recipe WHERE recipeID=? AND userID=(SELECT userID FROM User WHERE username=?)");
@@ -110,6 +111,7 @@ public class AddRemFav extends HttpServlet {
 
 				// add to favorites
 				if (!inFav) {
+					System.out.println("inserting");
 					st = conn.prepareStatement(
 							"INSERT INTO Recipe (userID, recipeID) VALUES((SELECT userID FROM User WHERE username=?),?)");
 					st.setString(1, username);

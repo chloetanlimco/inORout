@@ -68,6 +68,8 @@
 				recipe = (Recipe) request.getAttribute("recipe");
 				r = true;
 			}
+			System.out.println(b);
+			System.out.println(r);
 			boolean fav = (boolean) request.getAttribute("favorite");%>
 			
 			let recDetailsDiv = document.getElementById("detailsDiv1");
