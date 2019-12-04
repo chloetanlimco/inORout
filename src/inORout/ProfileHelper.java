@@ -52,7 +52,13 @@ public class ProfileHelper extends HttpServlet {
 	Vector<String> RecipeIDs;
 	Vector<String> BusinessIDs;
 	CountDownLatch restaurantlatch;
+	CountDownLatch recipelatch;
 	HttpSession session;
+	Vector<String> ids;
+	Vector<String> keys;
+	int numkeys;
+	int businesslength;
+	int recipelength;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -101,19 +107,25 @@ public class ProfileHelper extends HttpServlet {
 		}
 		// SUGGESTIONS
 		// read in config file with API keys
-		YelpBearerId = "";
-		String app_key = "";
-		String app_id = "";
-		try {
-			FileReader fr = new FileReader(getServletContext().getRealPath("/WEB-INF/config.txt"));
-			Properties p = new Properties();
-			p.load(fr);
-			YelpBearerId = p.getProperty("Yelp");
-			app_key = p.getProperty("EdamamKey");
-			app_id = p.getProperty("EdamamId");
-		} catch (FileNotFoundException e) {
-			System.out.println("Make sure you have a config.txt file!");
-		}
+
+		FileReader fr = new FileReader(getServletContext().getRealPath("/WEB-INF/config.txt"));
+		Properties p = new Properties();
+		p.load(fr);
+		YelpBearerId = p.getProperty("Yelp");
+		ids = new Vector<String>();
+		keys = new Vector<String>();
+		keys.add(p.getProperty("EdamamKey"));
+		keys.add(p.getProperty("EdamamKey2"));
+		keys.add(p.getProperty("EdamamKey3"));
+		keys.add(p.getProperty("EdamamKey4"));
+		keys.add(p.getProperty("EdamamKey5"));
+		ids.add(p.getProperty("EdamamId"));
+		ids.add(p.getProperty("EdamamId2"));
+		ids.add(p.getProperty("EdamamId3"));
+		ids.add(p.getProperty("EdamamId4"));
+		ids.add(p.getProperty("EdamamId5"));
+		numkeys = keys.size();
+
 
 		YObject = new TreeMap<String, Vector<Business>>();
 		EObject = new TreeMap<String, Vector<Recipe>>();
@@ -122,7 +134,9 @@ public class ProfileHelper extends HttpServlet {
 		LikedBusinesses = new Vector<Business>();
 		LikedRecipes.setSize((RecipeIDs.size() > 3 ? 3 : RecipeIDs.size()));
 		LikedBusinesses.setSize((BusinessIDs.size() > 3 ? 3 : BusinessIDs.size()));
-
+		recipelength = LikedRecipes.size();
+		businesslength = LikedBusinesses.size();
+		
 		session = request.getSession();
 		String latitude = "34.0205";
 		String longitude = "-118.2856";
@@ -143,48 +157,16 @@ public class ProfileHelper extends HttpServlet {
 		}
 		
 		// RECIPES
-//		for (int i = 0; i < LikedRecipes.size(); i++) {
-//			Vector<Recipe> temp = new Vector<Recipe>();
-//			String encodedLink = URLEncoder.encode(RecipeIDs.get(i), StandardCharsets.UTF_8.toString());
-//			URL url = new URL(
-//					"https://api.edamam.com/search?r=" + encodedLink + "&app_key=" + app_key + "&app_id=" + app_id);
-//			HttpURLConnection edamamCon = (HttpURLConnection) url.openConnection();
-//			JsonParser jsonParser = new JsonParser();
-//			JsonArray jsonObject = (JsonArray) jsonParser
-//					.parse(new InputStreamReader(edamamCon.getInputStream(), "UTF-8"));
-//			// UNSURE IF THIS WORKS
-//			JsonObject obj = jsonObject.get(0).getAsJsonObject();
-//			
-//			LikedRecipes.set(i, new Recipe(obj, "trash"));
-//			String name = obj.getAsJsonPrimitive("label").getAsString();
-//			String a = name.substring(0, name.indexOf(' ')); // get first word
-//			
-//			// SEARCH HERE
-//			String params = "q=" + a + "&app_key=" + app_key + "&app_id=" + app_id;
-//			URL u = new URL("https://api.edamam.com/search?" + params);
-//			HttpURLConnection eCon = (HttpURLConnection) u.openConnection();
-//			edamamCon.setRequestMethod("GET");
-//			// parsing JSON
-//			
-//			JsonParser jP = new JsonParser();
-//			
-//			JsonElement jE = jP.parse(new InputStreamReader(eCon.getInputStream(), "UTF-8"));
-//			JsonArray recipes;
-//			try {
-//
-//				recipes = (JsonArray) jE; 
-//				// figure out what to iterate up to
-//				for (int j = 0; j < ((10 < recipes.size()) ? 10 : recipes.size()); j++) {
-//					Recipe r = new Recipe(recipes.get(j).getAsJsonObject(), "trash");
-//					temp.add(r);
-//				}
-//				EObject.put(name, temp);
-//				
-//			} catch (Exception e) {
-//				System.out.println("exception reached:" + e.getMessage());
-//			}
-
-//		}
+		recipelatch = new CountDownLatch(LikedRecipes.size());
+		for (int i = 0; i < LikedRecipes.size(); i++) {		
+			new ProfileEdamamCall(this, i);
+		}
+		
+		try {
+			recipelatch.await();
+		} catch (InterruptedException e1) {
+			e1.printStackTrace();
+		}
 		
 		// PASS MAP OF SUGGESTIONS BACK
 		Gson gson = new Gson();
@@ -200,7 +182,7 @@ public class ProfileHelper extends HttpServlet {
 		request.setAttribute("Recipes", RecipeFav);
 		request.setAttribute("Businesses", BusinessFav);
 
-		request.setAttribute("numRecipes", RecipeFav.length);
+		request.setAttribute("numRecipes", recipelength);
 		request.setAttribute("numBusinesses", BusinessFav.length);
 		// send it back
 		

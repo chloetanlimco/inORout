@@ -59,6 +59,7 @@ public class ProfileYelpCall extends Thread {
 				sleeptime *= 2;
 				System.out.println(sleeptime);
 				if (sleeptime == 2000) {
+					p.businesslength = 0;
 					break;
 				}
 			}
@@ -95,6 +96,7 @@ public class ProfileYelpCall extends Thread {
 					sleeptime *= 2;
 					System.out.println(sleeptime);
 					if (sleeptime == 2000) {
+						p.businesslength = 0;
 						break;
 					}
 				}
