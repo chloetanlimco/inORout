@@ -85,6 +85,7 @@ public class AddRemFav extends HttpServlet {
 				if (!inFav) {
 					st = conn.prepareStatement(
 							"INSERT INTO Restaurant (userID, restaurantID) VALUES((SELECT userID FROM User WHERE username=?),?)");
+					System.out.println("username is " + username);
 					st.setString(1, username);
 					st.setString(2, restaurant);
 					st.executeUpdate();
