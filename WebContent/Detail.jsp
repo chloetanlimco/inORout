@@ -45,18 +45,6 @@
 			div.appendChild(el);
 		}
 	}
-  function callFavoriteRestaurant(){
-	  	if (document.getElementById("favButton").getAttribute("value")=="Add to favorites"){
-	  		document.getElementById("favButton").setAttribute("value", "Remove from favorites");
-	  	}
-		else{
-			document.getElementById("favButton").setAttribute("value", "Add to favorites");
-		}
-		var xhttp = new XMLHttpRequest();
-		xhttp.open("GET","AddRemFav?restaurant="+"<%=((Business)request.getAttribute("business")).getId()%>",false);
-		xhttp.send();
-	}
-
 
   function loadResults()
 	{
@@ -121,12 +109,14 @@
 				
 				busDetails +="Categories: "+"<%=business.getCategories()%>"+"<br>";
 				
-				<% if (session.getAttribute("Current user")!=null && !fav){%>
+				<% if (session.getAttribute("Current user")!=null && !fav){
+				System.out.println("in the if statement");%>
 				busDetails+= "<br><br><form id=\"myform\">";
 				busDetails += "<input type=\"hidden\" id=\"keyid\" value=\""+"<%=business.getId()%>"+"\"></input>";
 				busDetails+= "<input id = \"favButton\" type =\"submit\" value = \"Add to favorites\"></input></form>";
 			<%}
-			else if (session.getAttribute("Current user")!=null){%>
+			else if (session.getAttribute("Current user")!=null){
+				System.out.println("in the else statement");%>
 				busDetails+= "<br><br><form id=\"myform\">";
 				busDetails += "<input type=\"hidden\" id=\"keyid\" value=\""+"<%=business.getId()%>"+"\"></input>";
 				busDetails+= "<input id = \"favButton\" type =\"submit\" value = \"Remove from favorites\"></input></form>";
@@ -177,7 +167,7 @@
 				recipeDetails += "<div class=\"col-sm-3\" id = \"moredetails\">";
 				//recipeDetails+="Ingredients: <br>";
 				
-				recipeDetails+="<br>Calories: "+"<%=(int)recipe.getCalories()%>"+"<br>Yields: "+"<%=recipe.servings%>";
+				recipeDetails+="<br>Calories per serving: "+"<%=(int)recipe.getCalories()%>"+"<br>";
 				recipeDetails+="<br><br>This recipe is: <br>";
 				
 				<%
@@ -201,6 +191,11 @@
 				recipeDetails+= "<br><form id=\"myform\">";
 				recipeDetails += "<input type=\"hidden\" id=\"keyid\" value=\""+"<%=recipe.getUri()%>"+"\"></input>";
 				recipeDetails+= "<input id = \"favButton\" type =\"submit\" value = \"Add to favorites\"></input></form>";
+			<%}
+			else if (session.getAttribute("Current user")!=null){%>
+				recipeDetails+= "<br><form id=\"myform\">";
+				recipeDetails += "<input type=\"hidden\" id=\"keyid\" value=\""+ "<%=recipe.getUri()%>"+"\"></input>";
+				recipeDetails+= "<input id = \"favButton\" type =\"submit\" value = \"Remove from favorites\"></input></form>";
 			<%}%>
 				recipeDetails +="</div>";
 					
