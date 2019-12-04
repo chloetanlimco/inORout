@@ -9,7 +9,7 @@ public class Recipe {
 	public String image;
 	public String source;
 	public String uri;
-	public String servings;
+	public int servings;
 	public String[] healthLabels;
 	public String[] cautions;
 	public String[] ingredientLines;
@@ -22,7 +22,7 @@ public class Recipe {
 		source = recipe.getAsJsonPrimitive("source").getAsString();
 		image = recipe.getAsJsonPrimitive("image").getAsString();
 		uri = recipe.getAsJsonPrimitive("uri").getAsString();
-		servings = recipe.getAsJsonPrimitive("yield").getAsString();
+		servings = recipe.getAsJsonPrimitive("yield").getAsInt();
 		url = recipe.getAsJsonPrimitive("url").getAsString();
 		
 		JsonArray health = recipe.getAsJsonArray("healthLabels");
@@ -58,7 +58,7 @@ public class Recipe {
 			ingredientLines[0] = "No ingredients.";
 		}
 		
-		calories = recipe.getAsJsonPrimitive("calories").getAsDouble();
+		calories = recipe.getAsJsonPrimitive("calories").getAsDouble() / servings;
 	}
 	
 	public Recipe(JsonObject recipe, String detail) {
