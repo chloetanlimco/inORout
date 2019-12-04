@@ -93,8 +93,6 @@ public class ResultsYelpCall extends Thread {
 
 		if (jsonObject != null) {
 			int total = jsonObject.getAsJsonPrimitive("total").getAsInt();
-			System.out.println(total);
-			System.out.println(jsonObject);
 			JsonArray businesses = jsonObject.getAsJsonArray("businesses");
 
 			// maximum 20 elements to return - can change this if you want
