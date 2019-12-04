@@ -96,9 +96,10 @@ public class ResultsYelpCall extends Thread {
 			JsonArray businesses = jsonObject.getAsJsonArray("businesses");
 
 			// maximum 20 elements to return - can change this if you want
-			for (int i = 0; i < ((total < 20) ? total : 20); i++) {
+			for (int i = 0; i < ((total-1 < 20) ? total-1 : 20); i++) {
 				// if not closed
 				if (!businesses.get(i).getAsJsonObject().getAsJsonPrimitive("is_closed").getAsBoolean()) {
+					
 					Business b = new Business(businesses.get(i).getAsJsonObject());
 					s.YelpResults.add(b);
 				}
