@@ -105,7 +105,7 @@
 					
 				busDetails += "<div class=\"col-sm-3\" id = \"det\">";
 				busDetails += "<div style=\"font-weight:bold;font-size:200%\">"+"<%=business.getName()%></div>";
-				busDetails+="<br>"+rate+"<br><br>  "+"<%=business.getPrice()%>"+"<br><br>";
+				busDetails+="<br> "+rate+"<%=business.getReviewCount()%>"+" Reviews <br><br>  "+"<%=business.getPrice()%>"+"<br><br>";
 				
 				busDetails +="Categories: "+"<%=business.getCategories()%>"+"<br>";
 				
@@ -250,6 +250,8 @@
 	</div>
 	<div id = "detailsDiv1"></div>
 	<div id = "detailsDiv2"></div>
+	
+	<script type="text/javascript" src="jquery.js"></script>
 
 </body>
 </html>
