@@ -40,8 +40,10 @@ public class ProfileYelpCall extends Thread {
 				yelpCon.setRequestMethod("GET");
 				// parsing JSON
 				JsonParser jsonParser = new JsonParser();
+				yelpCon.setConnectTimeout(1000);
 				JsonObject jsonObject = (JsonObject) jsonParser
 						.parse(new InputStreamReader(yelpCon.getInputStream(), "UTF-8"));
+				
 				p.LikedBusinesses.set(num, new Business(jsonObject));
 
 				category = jsonObject.getAsJsonArray("categories").get(0).getAsJsonObject().get("title").getAsString();
@@ -78,6 +80,7 @@ public class ProfileYelpCall extends Thread {
 					// add headers
 					yCon.setRequestProperty("Authorization", "Bearer " + p.YelpBearerId);
 					yCon.setRequestMethod("GET");
+					yCon.setConnectTimeout(1000);
 					// parsing JSON
 					JsonParser jP = new JsonParser();
 					JsonObject jO = (JsonObject) jP.parse(new InputStreamReader(yCon.getInputStream(), "UTF-8"));
