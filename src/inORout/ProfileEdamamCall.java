@@ -43,6 +43,7 @@ public class ProfileEdamamCall extends Thread {
 				p.LikedRecipes.set(num, new Recipe(obj, "trash"));
 				name = obj.getAsJsonPrimitive("label").getAsString();
 				a = name.substring(0, name.indexOf(' ')); // get first word
+				break;
 			} catch (Exception e) {
 				System.out.println("exception reached:" + e.getMessage());
 				e.printStackTrace();
@@ -67,7 +68,7 @@ public class ProfileEdamamCall extends Thread {
 				String params = "q=" + a + "&app_key=" + p.keys.get(current % p.numkeys) + "&app_id=" +p.ids.get(current % p.numkeys);
 				URL u = new URL("https://api.edamam.com/search?" + params);
 				HttpURLConnection eCon = (HttpURLConnection) u.openConnection();
-				edamamCon.setRequestMethod("GET");
+				eCon.setRequestMethod("GET");
 				// parsing JSON
 	
 				JsonParser jP = new JsonParser();
@@ -82,7 +83,7 @@ public class ProfileEdamamCall extends Thread {
 					temp.add(r);
 				}
 				p.EObject.put(name, temp);
-
+				break;
 			} catch (Exception e) {
 				System.out.println("exception reached:" + e.getMessage());
 				e.printStackTrace();
