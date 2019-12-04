@@ -49,11 +49,11 @@
 	}
 	function loadResults()
 	{
-		var type = "<%=request.getAttribute("searchType") %>>";
+		var type = "<%=request.getAttribute("searchType") %>";
 		type = type.substring(0, type.length-1);
-		var searchTerm = "<%=request.getAttribute("searchTerm") %>>";
+		var searchTerm = "<%=request.getAttribute("searchTerm") %>";
 		searchTerm = searchTerm.substring(0,searchTerm.length-1);
-		var searchType = "<%=request.getAttribute("searchType") %>>";
+		var searchType = "<%=request.getAttribute("searchType") %>";
 		searchType = searchType.substring(0,searchType.length-1);
 		let resF = document.getElementById("favorites");
 		
@@ -115,7 +115,7 @@
 				System.out.println(recipes[j].getUri());%>
 			curr.innerHTML += "<div class=\"col elementBlock\" style=\"display:inline-block;float:none;\"><form id=\"details\" action=\"Detail\"><input type=\"submit\" class= \"image thumb\" name= \"recipe\" value=\"" 
 			+ "<%=recipes[j].getUri()%>"+ "\" style=\"background-image: url('"+ 
-			"<%=recipes[j].getImage()%>" + "');border-radius:17px;\"><span class=\"name\"></form>" + "<%=recipes[j].getLabel()%></span></div>";
+			"<%=recipes[j].getImage()%>" + "');border-radius:17px; color:rgba(0,0,0,0);\"><span class=\"name\"></form>" + "<%=recipes[j].getLabel()%></span></div>";
 			
 			<%}%>
 		}

@@ -179,7 +179,7 @@ public class ProfileHelper extends HttpServlet {
 		request.setAttribute("Businesses", BusinessFav);
 
 		request.setAttribute("numRecipes", recipelength);
-		request.setAttribute("numBusinesses", BusinessFav.length);
+		request.setAttribute("numBusinesses", businesslength);
 		// send it back
 		
 		RequestDispatcher dispatch = request.getRequestDispatcher("/Profile.jsp");
