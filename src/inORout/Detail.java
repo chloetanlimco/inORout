@@ -63,6 +63,7 @@ public class Detail extends HttpServlet {
 			encodedLink = URLEncoder.encode(recipe, StandardCharsets.UTF_8.toString());
 		}
 		String username = (String) request.getSession().getAttribute("Current User");
+		System.out.println(username + "is the user");
 
 		String error = "";
 		String next = "/Detail.jsp";
@@ -131,10 +132,15 @@ public class Detail extends HttpServlet {
 							"SELECT * from Restaurant WHERE userID=(SELECT userID from User WHERE username=?)");
 					st.setString(1, username);
 					rs = st.executeQuery();
+					System.out.println("hi");
+
 
 					while (rs.next()) {
 						// if recipe already in favorites
-						if (rs.getString("name").contentEquals(b.name)) {
+						System.out.println(restaurant + " the restaurant");
+						if (rs.getString("restaurantID").equals(restaurant)) {
+							System.out.println(rs.getString("restaurantID") + "More stuff");
+							
 							fav = true;
 						}
 					}

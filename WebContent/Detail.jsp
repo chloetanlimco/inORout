@@ -227,6 +227,7 @@
 			
 			return false;
 		};
+		console.log(<%= request.getAttribute("favorite")%> + "mycode")
 		
 	}
 	</script>
