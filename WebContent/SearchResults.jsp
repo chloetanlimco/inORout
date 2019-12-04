@@ -301,28 +301,29 @@
 		</div>
 
 	</div>
+	<script type="text/javascript"
+	src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
 	<script type="text/javascript" src="jquery.js"></script>
 	<script>
 	
-	if("<%=session.getAttribute("longitude")%>" == "null"){
-	
-		if (navigator.geolocation) {
-		    navigator.geolocation.getCurrentPosition(function (p) {
-			    	$.ajax({
-	                method: "POST",
-	                url: "SetLocation?",
-	                data: {
-	                    longitude: p.coords.longitude,
-	                    latitude: p.coords.latitude,
-	                }
-	            });
+	if("<%=session.getAttribute("longitude")%>"
+		  == "null") {
 
-		    });
+			if (navigator.geolocation) {
+				navigator.geolocation.getCurrentPosition(function(p) {
+					$.ajax({
+						method : "POST",
+						url : "SetLocation?",
+						data : {
+							longitude : p.coords.longitude,
+							latitude : p.coords.latitude,
+						}
+					});
+
+				});
+			}
 		}
-	}
-
-
-</script>
+	</script>
 
 </body>
 

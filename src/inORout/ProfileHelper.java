@@ -158,7 +158,7 @@ public class ProfileHelper extends HttpServlet {
 			// SEARCH HERE
 			String params = "q=" + a + "&app_key=" + app_key + "&app_id=" + app_id;
 			URL u = new URL("https://api.edamam.com/search?" + params);
-			HttpURLConnection eCon = (HttpURLConnection) url.openConnection();
+			HttpURLConnection eCon = (HttpURLConnection) u.openConnection();
 			edamamCon.setRequestMethod("GET");
 			// parsing JSON
 			JsonParser jP = new JsonParser();
