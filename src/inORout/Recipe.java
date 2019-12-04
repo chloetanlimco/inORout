@@ -67,6 +67,7 @@ public class Recipe {
 		image = recipe.getAsJsonPrimitive("image").getAsString();
 		uri = recipe.getAsJsonPrimitive("uri").getAsString();
 		url = recipe.getAsJsonPrimitive("url").getAsString();
+		servings = recipe.getAsJsonPrimitive("yield").getAsInt();
 		JsonArray health = recipe.getAsJsonArray("healthLabels");
 		if (health.size() > 0) {
 			healthLabels = new String[health.size()];
@@ -100,7 +101,7 @@ public class Recipe {
 			ingredientLines[0] = "No ingredients.";
 		}
 		
-		calories = recipe.getAsJsonPrimitive("calories").getAsDouble();
+		calories = recipe.getAsJsonPrimitive("calories").getAsDouble() / (double)servings;
 	}
 
 	public String getLabel() {

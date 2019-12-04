@@ -170,7 +170,8 @@
 				recipeDetails += "<div class=\"col-sm-3\" id = \"moredetails\">";
 				//recipeDetails+="Ingredients: <br>";
 				
-				recipeDetails+="<br>Calories per serving: "+"<%=(int)recipe.getCalories()%>"+"<br>";
+				recipeDetails+="<br>Calories per serving: "+"<%=(int) recipe.getCalories()%>"+"<br>";
+				recipeDetails+="<br>Number of servings: "+"<%=recipe.getServings()%>"+"<br>";
 				recipeDetails+="<br><br>This recipe is: <br>";
 				
 				<%
