@@ -160,7 +160,7 @@
 			recF.innerHTML+= "</div>";
 			recF.innerHTML += " <div class=\"col-sm-8\">";
 			recF.innerHTML += "<h4>" + "<%=recipes[i].getLabel()%>" + "</h4> <br/>";
-			recF.innerHTML += "<h5> Calories: " + "<%=recipes[i].getCalories()%>" + "</h5>";
+			recF.innerHTML += "<h5> Calories: " + "<%=(int) recipes[i].getCalories()%>" + "</h5>";
 			recF.innerHTML += "<h5> Servings: " + "<%=recipes[i].getServings()%>" + "</h5><br/>";
 			
 			recF.innerHTML+= "<br/> <br/></div></div>";
