@@ -107,16 +107,16 @@
 
 				curr.innerHTML += "<div class=\"col elementBlock\" style=\"display:inline-block;float:none;\"><form id=\"details\" action=\"Detail\"><input type=\"submit\" class= \"image thumb\"name= \"restaurant\" value=\"" 
 				+ "<%=restaurants[j].getId()%>"+ "\" style=\"background-image: url('"+ 
-				"<%=restaurants[j].getImageUrl()%>" + "');border-radius:17px;\">"+"<span class=\"name\"></form>" + "<%=restaurants[j].getName()%></span></div>";
+				"<%=restaurants[j].getImageUrl()%>" + "');border-radius:17px; color:rgba(0,0,0,0);\">"+"<span class=\"name\"></form>" + "<%=restaurants[j].getName()%></span></div>";
 			<%}
 			for (int j=0; j<numRecipes; j++){%>
 			curr.innerHTML += "<div class=\"col elementBlock\" style=\"display:inline-block;float:none;\"><form id=\"details\" action=\"Detail\"><input type=\"submit\" class= \"image thumb\"name= \"restaurant\" value=\"" 
 			+ "<%=recipes[j].getSource()%>"+ "\" style=\"background-image: url('"+ 
-			"<%=recipes[j].getImage()%>" + "');border-radius:17px;\"><span class=\"name\"></form>" + "<%=recipes[j].getLabel()%></span></div>";
+			"<%=recipes[j].getImage()%>" + "');border-radius:17px; color:rgba(0,0,0,0);\"><span class=\"name\"></form>" + "<%=recipes[j].getLabel()%></span></div>";
 
 				curr.innerHTML += "<div class=\"col elementBlock\" style=\"display:inline-block;float:none;\"><input type=\"submit\" class= \"image thumb\"name= \"restaurant\" value=\"" 
 				+ "<%=restaurants[j].getId()%>"+ "\" style=\"background-image: url('"+ 
-				"<%=restaurants[j].getImageUrl()%>" + "');border-radius:17px;\">"+"<span class=\"name\">" + "<%=restaurants[j].getName()%></span></div>";
+				"<%=restaurants[j].getImageUrl()%>" + "');border-radius:17px; color:rgba(0,0,0,0);\">"+"<span class=\"name\">" + "<%=restaurants[j].getName()%></span></div>";
 			<%}%>
 		}
 		
@@ -134,7 +134,7 @@
 					+ element["id"]
 					+ "\" style=\"background-image: url('"
 					+ element["image_url"]
-					+ "');border-radius:17px;\"><span class=\"name\"></form>"
+					+ "');border-radius:17px; color:rgba(0,0,0,0);\"><span class=\"name\"></form>"
 					+ element["name"] + "</span></div>";
 	
 			});
