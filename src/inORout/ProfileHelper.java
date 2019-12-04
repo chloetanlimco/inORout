@@ -68,6 +68,7 @@ public class ProfileHelper extends HttpServlet {
 		RecipeIDs = new Vector<String>();
 		BusinessIDs = new Vector<String>();
 		try {
+			DriverManager.setLoginTimeout(2);
 			conn = DriverManager.getConnection(
 					"jdbc:mysql://google/foodapp?cloudSqlInstance=groupproject-258805:us-central1:project201&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false&user=anthonyuser&password=wQHL223i4LJhEuCl1");
 			PreparedStatement st = conn.prepareStatement("SELECT userID from User WHERE username=?");

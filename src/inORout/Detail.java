@@ -139,7 +139,7 @@ public class Detail extends HttpServlet {
 
 					// see if restaurant in user's favorites
 					// if username already taken
-
+					DriverManager.setLoginTimeout(2);
 					conn = DriverManager.getConnection(
 							"jdbc:mysql://google/foodapp?cloudSqlInstance=groupproject-258805:us-central1:project201&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false&user=anthonyuser&password=wQHL223i4LJhEuCl1");
 					st = conn.prepareStatement(
@@ -221,7 +221,7 @@ public class Detail extends HttpServlet {
 					}
 					// see if recipe in user's favorites
 					// if username already taken
-
+					DriverManager.setLoginTimeout(2);
 					conn = DriverManager.getConnection(
 							"jdbc:mysql://google/foodapp?cloudSqlInstance=groupproject-258805:us-central1:project201&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false&user=anthonyuser&password=wQHL223i4LJhEuCl1");
 					st = conn.prepareStatement(
