@@ -150,12 +150,6 @@ public class ProfileHelper extends HttpServlet {
 			new ProfileYelpCall(this, latitude, longitude, i);		
 			}
 		
-		try {
-			restaurantlatch.await();
-		} catch (InterruptedException e1) {
-			e1.printStackTrace();
-		}
-		
 		// RECIPES
 		recipelatch = new CountDownLatch(LikedRecipes.size());
 		for (int i = 0; i < LikedRecipes.size(); i++) {		
@@ -163,6 +157,7 @@ public class ProfileHelper extends HttpServlet {
 		}
 		
 		try {
+			restaurantlatch.await();
 			recipelatch.await();
 		} catch (InterruptedException e1) {
 			e1.printStackTrace();
