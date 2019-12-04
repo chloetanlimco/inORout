@@ -59,19 +59,12 @@
 		<div id="header">
 			<div style="padding-top: 25px;">
 				<a href="HomePage.jsp">
-
-					<span style="margin-left: 5%; width: 10%; font-size: 50px">in-or-out</text>
-
+					<span style="margin-left: 5%; width: 10%; font-size: 50px">in-or-out</span>
 				</a>
 			</div>
-
-
 		</div>
 		<div class="mainTextParent">
 			<div class="mainText">
-
-
-
 				<form name="myform" method="POST" action="Register">
 					<div class="form-group row">
 						<label for="inputUsername" class="col-sm-2 col-form-label">Username</label>

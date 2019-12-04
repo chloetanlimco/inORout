@@ -71,7 +71,7 @@ public class ProfileYelpCall extends Thread {
 			success = false;
 			while (!success) {
 				try {
-					String params = "term=" + category.replace(" ", "+") + "&location=Los+Angeles";
+					String params = "term=" + category.replace(" ", "+") + "&latitude=" + latitude + "&longitude=" + longitude;
 					URL u = new URL("https://api.yelp.com/v3/businesses/search?" + params);
 					HttpURLConnection yCon = (HttpURLConnection) u.openConnection();
 					// add headers

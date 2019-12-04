@@ -78,11 +78,11 @@
 		
 		<% 
 		Business[] restaurants = (Business[]) request.getAttribute("Businesses");
-		//Recipe[] recipes = (Recipe[]) request.getAttribute("RecipeArray");
-		//int numRecipes = (int)(request.getAttribute("numRecipes"));
+		Recipe[] recipes = (Recipe[]) request.getAttribute("Recipes");
+		int numRecipes = (int)(request.getAttribute("numRecipes"));
 		//Business[] restaurants = null;
-		Recipe[] recipes = null;
-		int numRecipes = 0;
+		//Recipe[] recipes = null;
+		
 		int numBusinesses = (int)(request.getAttribute("numBusinesses"));
 		int rows = numRecipes+numBusinesses+1;
 		%>
@@ -109,21 +109,21 @@
 				+ "<%=restaurants[j].getId()%>"+ "\" style=\"background-image: url('"+ 
 				"<%=restaurants[j].getImageUrl()%>" + "');border-radius:17px; color:rgba(0,0,0,0);\">"+"<span class=\"name\"></form>" + "<%=restaurants[j].getName()%></span></div>";
 			<%}
-			for (int j=0; j<numRecipes; j++){%>
-			curr.innerHTML += "<div class=\"col elementBlock\" style=\"display:inline-block;float:none;\"><form id=\"details\" action=\"Detail\"><input type=\"submit\" class= \"image thumb\"name= \"restaurant\" value=\"" 
-			+ "<%=recipes[j].getSource()%>"+ "\" style=\"background-image: url('"+ 
-			"<%=recipes[j].getImage()%>" + "');border-radius:17px; color:rgba(0,0,0,0);\"><span class=\"name\"></form>" + "<%=recipes[j].getLabel()%></span></div>";
-
-				curr.innerHTML += "<div class=\"col elementBlock\" style=\"display:inline-block;float:none;\"><input type=\"submit\" class= \"image thumb\"name= \"restaurant\" value=\"" 
-				+ "<%=restaurants[j].getId()%>"+ "\" style=\"background-image: url('"+ 
-				"<%=restaurants[j].getImageUrl()%>" + "');border-radius:17px; color:rgba(0,0,0,0);\">"+"<span class=\"name\">" + "<%=restaurants[j].getName()%></span></div>";
+			
+			for (int j=0; j<numRecipes; j++){
+				System.out.println(j);
+				System.out.println(recipes[j].getUri());%>
+			curr.innerHTML += "<div class=\"col elementBlock\" style=\"display:inline-block;float:none;\"><form id=\"details\" action=\"Detail\"><input type=\"submit\" class= \"image thumb\" name= \"recipe\" value=\"" 
+			+ "<%=recipes[j].getUri()%>"+ "\" style=\"background-image: url('"+ 
+			"<%=recipes[j].getImage()%>" + "');border-radius:17px;\"><span class=\"name\"></form>" + "<%=recipes[j].getLabel()%></span></div>";
+			
 			<%}%>
 		}
 		
 		<%int row = 1;
 			for (int k = 0; k < numBusinesses; k++) {%>
 			var bus = bs["<%=restaurants[k].getName()%>"];
-		
+
 			curr = document.getElementById("r"+"<%=row%>");
 			temp = document.getElementById("r"+"<%=row%>"+"header");
 			temp.innerHTML += "<h4>Because you liked "+ "<%=restaurants[k].getName()%>" + "</h4>";

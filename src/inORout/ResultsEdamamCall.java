@@ -57,9 +57,6 @@ public class ResultsEdamamCall extends Thread {
 				System.out.println(e.getMessage());
 				e.printStackTrace();
 				System.out.println(current);
-				if (current == 0) {
-					break;
-				}
 			}
 		}
 		if(jsonObject != null) {

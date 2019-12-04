@@ -13,39 +13,40 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Lustria&display=swap" rel="stylesheet">
   <script>
+	
   function profile() {
 		let div = document.getElementById("buttonLog");
-		if("<%=session.getAttribute("Current user")%>" == "null")
-		{
+		if ("<%=session.getAttribute("Current user")%>" == "null") {
 			let el = document.createElement("input");
+			el.type = "submit";
 			el.name = "logChoice";
 			el.value = "Login";
 			el.className = "btn btn-default btn-lg loginbutton";
 			div.appendChild(el);
-			
+	
 			let el2 = document.createElement("input");
+			el2.type = "submit";
 			el2.name = "logChoice";
 			el2.value = "Signup";
 			el2.className = "btn btn-default btn-lg loginbutton";
 			div.appendChild(el2);
-			
-		}
-		else
-		{
+		} else {
 			let ell = document.createElement("input");
+			ell.type = "submit";
 			ell.name = "logChoice";
 			ell.value = "Profile";
 			ell.className = "btn btn-default btn-lg loginbutton";
 			div.appendChild(ell);
-			
+	
 			let el = document.createElement("input");
+			el.type = "submit";
 			el.name = "logChoice";
 			el.value = "Signout";
 			el.className = "btn btn-default btn-lg loginbutton";
 			div.appendChild(el);
 		}
 	}
-
+	
   function loadResults()
 	{
 		
@@ -85,7 +86,7 @@
 				var busDetails="";
 				
 				busDetails += " <div class=\"col-sm-5\" id = \"picture\">";
-				busDetails += "<img src=\""+"<%=business.getImageUrl()%>" 
+				busDetails += "<img src=\""+"<%=business.getImageUrl()%>"
 					+"\" alt=\"" + "<%=business.getName()%>" +"\" style=\"border-radius:17px;width:100%;\"></div>";
 				
 	
@@ -210,14 +211,27 @@
 
 			<%}
 			%>
-			
 			 
 		}
+		document.getElementById("myform").onsubmit = function(e){
+			e.preventDefault();
+			console.log("good");
+			$.ajax({
+				method : "GET",
+				url : "AddRemFav?",
+				data : {
+					recipe: "<%=r? "true" : "false"%>",
+					id: e.target.firstElementChild.value
+				}
+			});  
+			
+			return false;
+		};
 		
 	}
 	</script>
 </head>
-<body onload="profile(); loadResults();">
+<body onload="profile(); loadResults(); ">
 	<div class="container-fluid mycontainer">
 
 		<div class="header">
@@ -243,15 +257,13 @@
 					</form>
 				</div>
 				<div class="col-sm-4">
-					<form action="Logger" id="buttonLog"></form>
+					<form action="ServletLogger" id="buttonLog"></form>
 				</div>
 			</div>
 		</div>
 	</div>
 	<div id = "detailsDiv1"></div>
 	<div id = "detailsDiv2"></div>
-	
-	<script type="text/javascript" src="jquery.js"></script>
 
 </body>
 </html>
