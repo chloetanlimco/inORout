@@ -67,6 +67,8 @@ public class Login extends HttpServlet {
 				//else login
 				else {
 					session.setAttribute("Current user", username);
+					session.setAttribute("userid", rs.getString("userID"));
+					System.out.println(rs.getString("userID"));
 					/*request.setAttribute("error", "Successful login!");*/
 				}
 			}

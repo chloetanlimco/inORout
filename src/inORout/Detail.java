@@ -62,7 +62,7 @@ public class Detail extends HttpServlet {
 		if (recipe != null) {
 			encodedLink = URLEncoder.encode(recipe, StandardCharsets.UTF_8.toString());
 		}
-		String username = (String) request.getSession().getAttribute("Current User");
+		String username = (String) request.getSession().getAttribute("Current user");
 		System.out.println(username + "is the user");
 
 		String error = "";

@@ -224,6 +224,12 @@
 					id: e.target.firstElementChild.value
 				}
 			});  
+			if($("#favButton").val() === "Remove from favorites"){
+				$("#favButton").val("Add to favorites");
+			}else{
+				$("#favButton").val("Remove from favorites");
+			}
+			
 			
 			return false;
 		};
