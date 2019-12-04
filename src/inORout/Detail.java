@@ -193,7 +193,7 @@ public class Detail extends HttpServlet {
 
 					HttpURLConnection edamamCon = (HttpURLConnection) url.openConnection();
 					edamamCon.setRequestMethod("GET");
-					edamamCon.setConnectTimeout(1000);
+					edamamCon.setConnectTimeout(200);
 
 
 					// parsing JSON
