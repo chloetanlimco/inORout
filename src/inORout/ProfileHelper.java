@@ -143,48 +143,49 @@ public class ProfileHelper extends HttpServlet {
 		}
 		
 		// RECIPES
-		for (int i = 0; i < LikedRecipes.size(); i++) {
-			Vector<Recipe> temp = new Vector<Recipe>();
-			String encodedLink = URLEncoder.encode(RecipeIDs.get(i), StandardCharsets.UTF_8.toString());
-			URL url = new URL(
-					"https://api.edamam.com/search?r=" + encodedLink + "&app_key=" + app_key + "&app_id=" + app_id);
-			HttpURLConnection edamamCon = (HttpURLConnection) url.openConnection();
-			JsonParser jsonParser = new JsonParser();
-			JsonArray jsonObject = (JsonArray) jsonParser
-					.parse(new InputStreamReader(edamamCon.getInputStream(), "UTF-8"));
-			// UNSURE IF THIS WORKS
-			JsonObject obj = jsonObject.get(0).getAsJsonObject();
-			
-			LikedRecipes.set(i, new Recipe(obj, "trash"));
-			String name = obj.getAsJsonPrimitive("label").getAsString();
-			String a = name.substring(0, name.indexOf(' ')); // get first word
-			
-			// SEARCH HERE
-			String params = "q=" + a + "&app_key=" + app_key + "&app_id=" + app_id;
-			URL u = new URL("https://api.edamam.com/search?" + params);
-			HttpURLConnection eCon = (HttpURLConnection) u.openConnection();
-			edamamCon.setRequestMethod("GET");
-			// parsing JSON
-			
-			JsonParser jP = new JsonParser();
-			
-			JsonElement jE = jP.parse(new InputStreamReader(eCon.getInputStream(), "UTF-8"));
-			JsonArray recipes;
-			try {
+//		for (int i = 0; i < LikedRecipes.size(); i++) {
+//			Vector<Recipe> temp = new Vector<Recipe>();
+//			String encodedLink = URLEncoder.encode(RecipeIDs.get(i), StandardCharsets.UTF_8.toString());
+//			URL url = new URL(
+//					"https://api.edamam.com/search?r=" + encodedLink + "&app_key=" + app_key + "&app_id=" + app_id);
+//			HttpURLConnection edamamCon = (HttpURLConnection) url.openConnection();
+//			JsonParser jsonParser = new JsonParser();
+//			JsonArray jsonObject = (JsonArray) jsonParser
+//					.parse(new InputStreamReader(edamamCon.getInputStream(), "UTF-8"));
+//			// UNSURE IF THIS WORKS
+//			JsonObject obj = jsonObject.get(0).getAsJsonObject();
+//			
+//			LikedRecipes.set(i, new Recipe(obj, "trash"));
+//			String name = obj.getAsJsonPrimitive("label").getAsString();
+//			String a = name.substring(0, name.indexOf(' ')); // get first word
+//			
+//			// SEARCH HERE
+//			String params = "q=" + a + "&app_key=" + app_key + "&app_id=" + app_id;
+//			URL u = new URL("https://api.edamam.com/search?" + params);
+//			HttpURLConnection eCon = (HttpURLConnection) u.openConnection();
+//			edamamCon.setRequestMethod("GET");
+//			// parsing JSON
+//			
+//			JsonParser jP = new JsonParser();
+//			
+//			JsonElement jE = jP.parse(new InputStreamReader(eCon.getInputStream(), "UTF-8"));
+//			JsonArray recipes;
+//			try {
+//
+//				recipes = (JsonArray) jE; 
+//				// figure out what to iterate up to
+//				for (int j = 0; j < ((10 < recipes.size()) ? 10 : recipes.size()); j++) {
+//					Recipe r = new Recipe(recipes.get(j).getAsJsonObject(), "trash");
+//					temp.add(r);
+//				}
+//				EObject.put(name, temp);
+//				
+//			} catch (Exception e) {
+//				System.out.println("exception reached:" + e.getMessage());
+//			}
 
-				recipes = (JsonArray) jE; 
-				// figure out what to iterate up to
-				for (int j = 0; j < ((10 < recipes.size()) ? 10 : recipes.size()); j++) {
-					Recipe r = new Recipe(recipes.get(j).getAsJsonObject(), "trash");
-					temp.add(r);
-				}
-				EObject.put(name, temp);
-				
-			} catch (Exception e) {
-				System.out.println("exception reached:" + e.getMessage());
-			}
-
-		}
+//		}
+		
 		// PASS MAP OF SUGGESTIONS BACK
 		Gson gson = new Gson();
 		Type gsonType = new TypeToken<HashMap>() {

@@ -129,8 +129,8 @@ public class AddRemFav extends HttpServlet {
 				}
 				// remove from favorites
 				else if (inFav) {
-					st = conn.prepareStatement("DELETE FROM Recipe WHERE restaurantRecordID=?)");
-					record = favSet.getInt("recipeRecordID");
+					st = conn.prepareStatement("DELETE FROM Recipe WHERE recipeRecordID=?");
+					st.setInt(1, record);
 					st.executeUpdate();
 				}
 
