@@ -160,7 +160,8 @@
 			recF.innerHTML+= "</div>";
 			recF.innerHTML += " <div class=\"col-sm-8\">";
 			recF.innerHTML += "<h4>" + "<%=recipes[i].getLabel()%>" + "</h4> <br/>";
-			recF.innerHTML += "<h5> Calories: " + "<%=recipes[i].getCalories()%>" + "</h5><br/>";
+			recF.innerHTML += "<h5> Calories: " + "<%=recipes[i].getCalories()%>" + "</h5>";
+			recF.innerHTML += "<h5> Servings: " + "<%=recipes[i].getServings()%>" + "</h5><br/>";
 			
 			recF.innerHTML+= "<br/> <br/></div></div>";
 		<%}%>
@@ -196,9 +197,6 @@
 					</form>
 				</div>
 				<div class="col-sm-4">
-					<form action="Logger" id="buttonLog"></form>
-				</form>
-					</div>
 					<div class="col-sm-4">
 						<form action="ServletLogger" method="GET" id="buttonLog"></form>
 					</div>
@@ -303,28 +301,29 @@
 		</div>
 
 	</div>
+	<script type="text/javascript"
+	src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
 	<script type="text/javascript" src="jquery.js"></script>
 	<script>
 	
-	if("<%=session.getAttribute("longitude")%>" == "null"){
-	
-		if (navigator.geolocation) {
-		    navigator.geolocation.getCurrentPosition(function (p) {
-			    	$.ajax({
-	                method: "POST",
-	                url: "SetLocation?",
-	                data: {
-	                    longitude: p.coords.longitude,
-	                    latitude: p.coords.latitude,
-	                }
-	            });
+	if("<%=session.getAttribute("longitude")%>"
+		  == "null") {
 
-		    });
+			if (navigator.geolocation) {
+				navigator.geolocation.getCurrentPosition(function(p) {
+					$.ajax({
+						method : "POST",
+						url : "SetLocation?",
+						data : {
+							longitude : p.coords.longitude,
+							latitude : p.coords.latitude,
+						}
+					});
+
+				});
+			}
 		}
-	}
-
-
-</script>
+	</script>
 
 </body>
 

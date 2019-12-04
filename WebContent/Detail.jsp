@@ -13,6 +13,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Lustria&display=swap" rel="stylesheet">
   <script>
+	
   function profile() {
 		let div = document.getElementById("buttonLog");
 		if("<%=session.getAttribute("Current user")%>" == "null")
@@ -45,6 +46,7 @@
 			div.appendChild(el);
 		}
 	}
+	
   function loadResults()
 	{
 		
@@ -76,13 +78,15 @@
 			var rec = "<%=request.getAttribute("recipe")%>";
 			var res = "<%=request.getAttribute("restaurant")%>";
 			
-			<% if(request.getAttribute("recipe") == null) //BUSINESS
+			<% if (fav){System.out.println("IM IN FAVORITES");}
+			else {System.out.println("I AM NOT IN FAVORITES");}
+			if(request.getAttribute("recipe") == null) //BUSINESS
 			{%>
 			
 				var busDetails="";
 				
 				busDetails += " <div class=\"col-sm-5\" id = \"picture\">";
-				busDetails += "<img src=\""+"<%=business.getImageUrl()%>" 
+				busDetails += "<img src=\""+"<%=business.getImageUrl()%>"
 					+"\" alt=\"" + "<%=business.getName()%>" +"\" style=\"border-radius:17px;width:100%;\"></div>";
 				
 	
@@ -106,10 +110,17 @@
 				
 				busDetails +="Categories: "+"<%=business.getCategories()%>"+"<br>";
 				
-				<% if (session.getAttribute("Current user")!=null && !fav){%>
-				busDetails+= "<br><br><form action = \"AddRemFav\" method = \"GET\">";
-				busDetails += "<input type=\"hidden\" name=\"restaurant\" value=\""+"<%=business.getId()%>"+"\"></input>";
+				<% if (session.getAttribute("Current user")!=null && !fav){
+				System.out.println("in the if statement");%>
+				busDetails+= "<br><br><form id=\"myform\">";
+				busDetails += "<input type=\"hidden\" id=\"keyid\" value=\""+"<%=business.getId()%>"+"\"></input>";
 				busDetails+= "<input id = \"favButton\" type =\"submit\" value = \"Add to favorites\"></input></form>";
+			<%}
+			else if (session.getAttribute("Current user")!=null){
+				System.out.println("in the else statement");%>
+				busDetails+= "<br><br><form id=\"myform\">";
+				busDetails += "<input type=\"hidden\" id=\"keyid\" value=\""+"<%=business.getId()%>"+"\"></input>";
+				busDetails+= "<input id = \"favButton\" type =\"submit\" value = \"Remove from favorites\"></input></form>";
 			<%}%>
 				
 				busDetails += "</div>";
@@ -157,7 +168,7 @@
 				recipeDetails += "<div class=\"col-sm-3\" id = \"moredetails\">";
 				//recipeDetails+="Ingredients: <br>";
 				
-				recipeDetails+="<br>Calories: "+"<%=(int)recipe.getCalories()%>"+"<br>Yields: "+"<%=recipe.servings%>";
+				recipeDetails+="<br>Calories per serving: "+"<%=(int)recipe.getCalories()%>"+"<br>";
 				recipeDetails+="<br><br>This recipe is: <br>";
 				
 				<%
@@ -178,9 +189,14 @@
 				}%>
 				
 				<% if (session.getAttribute("Current user")!=null && !fav){%>
-				recipeDetails+= "<br><form action = \"AddRemFav\" method = \"GET\">";
-				recipeDetails += "<input type=\"hidden\" name=\"recipe\" value=\""+"<%=recipe.getUri()%>"+"\"></input>";
+				recipeDetails+= "<br><form id=\"myform\">";
+				recipeDetails += "<input type=\"hidden\" id=\"keyid\" value=\""+"<%=recipe.getUri()%>"+"\"></input>";
 				recipeDetails+= "<input id = \"favButton\" type =\"submit\" value = \"Add to favorites\"></input></form>";
+			<%}
+			else if (session.getAttribute("Current user")!=null){%>
+				recipeDetails+= "<br><form id=\"myform\">";
+				recipeDetails += "<input type=\"hidden\" id=\"keyid\" value=\""+ "<%=recipe.getUri()%>"+"\"></input>";
+				recipeDetails+= "<input id = \"favButton\" type =\"submit\" value = \"Remove from favorites\"></input></form>";
 			<%}%>
 				recipeDetails +="</div>";
 					
@@ -195,14 +211,27 @@
 
 			<%}
 			%>
-			
 			 
 		}
+		document.getElementById("myform").onsubmit = function(e){
+			e.preventDefault();
+			console.log("good");
+			$.ajax({
+				method : "GET",
+				url : "AddRemFav?",
+				data : {
+					recipe: "<%=r? "true" : "false"%>",
+					id: e.target.firstElementChild.value
+				}
+			});  
+			
+			return false;
+		};
 		
 	}
 	</script>
 </head>
-<body onload="profile(); loadResults();">
+<body onload="profile(); loadResults(); ">
 	<div class="container-fluid mycontainer">
 
 		<div class="header">
@@ -235,6 +264,11 @@
 	</div>
 	<div id = "detailsDiv1"></div>
 	<div id = "detailsDiv2"></div>
+	<script type="text/javascript" src="jquery.js"></script>
+	<script>
+
+
+	</script>
 
 </body>
 </html>

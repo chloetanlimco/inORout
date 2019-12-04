@@ -117,12 +117,14 @@
 	font-family: 'Lustria';
 	color: black;
 	text-align: left;
+	margin-left: 150px;
 }
 #recipeDiv
 {
 	font-family: 'Lustria';
 	color: black;
 	text-align:left;
+	margin-left: 150px;
 }
 .row
 {
@@ -172,6 +174,7 @@ h3{
 .labelling
 {
 	font-size: 0.0000000001vh;
+	color: rgba(0,0,0,0);
 }
 
 
