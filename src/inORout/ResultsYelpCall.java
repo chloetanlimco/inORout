@@ -52,8 +52,8 @@ public class ResultsYelpCall extends Thread {
 		if (price != null && !price.contentEquals("0")) {
 			params += "&price=" + price;
 		}
-		if (option != null && option.contentEquals("dairy-free")) {
-			params += "&option=" + option;
+		if (option != null && !option.contentEquals("dairy-free")) {
+			params += "&categories=" + option;
 		}
 		if (sortBy != null && !sortBy.contentEquals("none")) {
 			params += "&sort_by=" + sortBy;
