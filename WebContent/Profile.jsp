@@ -57,11 +57,12 @@
 		searchType = searchType.substring(0,searchType.length-1);
 		let resF = document.getElementById("favorites");
 		
-		//var rSug = '${RecipesSuggestions}';
+		var rSug = '${RecipesSuggestions}';
 		var bizz = '${Businesses}';
 		var num = '${numBusinesses}';
 		var bSug = '${BusinessSuggestions}';
 		
+		//parse business suggestions
 		//var rs = JSON.parse(rSug);
 		bSug = bSug.replace(/\\n/g, "\\n")  
                .replace(/\\'/g, "\\'")
@@ -75,6 +76,21 @@
 		bSug = bSug.replace(/[\u0000-\u0019]+/g,""); 
 		
 		var bs = JSON.parse(bSug);
+		
+		
+		//parse recipe suggestions
+		rSug = rSug.replace(/\\n/g, "\\n")  
+        .replace(/\\'/g, "\\'")
+        .replace(/\\"/g, '\\"')
+        .replace(/\\&/g, "\\&")
+        .replace(/\\r/g, "\\r")
+        .replace(/\\t/g, "\\t")
+        .replace(/\\b/g, "\\b")
+        .replace(/\\f/g, "\\f");
+		// remove non-printable and other non-valid JSON chars
+		rSug = rSug.replace(/[\u0000-\u0019]+/g,""); 
+	
+		var rs = JSON.parse(rSug);
 		
 		<% 
 		Business[] restaurants = (Business[]) request.getAttribute("Businesses");
@@ -139,6 +155,26 @@
 	
 			});
 		<%}%>
+		
+		<%
+		for (int k = 0; k < numRecipes; k++) {%>
+		var rec = rs["<%=recipes[k].getLabel()%>"];
+
+		curr = document.getElementById("r"+"<%=row%>");
+		temp = document.getElementById("r"+"<%=row%>"+"header");
+		temp.innerHTML += "<h4>Because you liked "+ "<%=recipes[k].getLabel()%>" + "</h4>";
+		<%row++;%>
+		rec.forEach(function(element) {
+
+		curr.innerHTML += "<div class=\"col elementBlock\" style=\"display:inline-block;float:none;\"><form id=\"details\" action=\"Detail\"><input type=\"submit\" class= \"image thumb\"name= \"recipe\" value=\""
+				+ element["uri"]
+				+ "\" style=\"background-image: url('"
+				+ element["image"]
+				+ "');border-radius:17px; color:rgba(0,0,0,0);\"><span class=\"name\"></form>"
+				+ element["label"] + "</span></div>";
+
+		});
+	<%}%>
 	}
 </script>
 </head>
