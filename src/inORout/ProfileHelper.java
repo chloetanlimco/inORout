@@ -1,6 +1,5 @@
 package inORout;
 
-
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
@@ -59,18 +58,19 @@ public class ProfileHelper extends HttpServlet {
 		BusinessIDs = new Vector<String>();
 		try {
 			int sqlcount = 0;
-			while(true) {
+			while (true) {
 				try {
-				DriverManager.setLoginTimeout(2);
-				conn = DriverManager.getConnection(
-						"jdbc:mysql://google/foodapp?cloudSqlInstance=groupproject-258805:us-central1:project201&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false&user=anthonyuser&password=wQHL223i4LJhEuCl1");
-				break;
-				}catch(Exception e) {
+					DriverManager.setLoginTimeout(2);
+					conn = DriverManager.getConnection(
+							"jdbc:mysql://google/foodapp?cloudSqlInstance=groupproject-258805:us-central1:project201&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false&user=anthonyuser&password=wQHL223i4LJhEuCl1");
+					break;
+				} catch (Exception e) {
 					sqlcount++;
-					if(sqlcount == 5) {
-						DriverManager.setLoginTimeout(2);
-						conn = DriverManager.getConnection(
-								"jdbc:mysql://google/foodapp?cloudSqlInstance=groupproject-258805:us-central1:project201&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false&user=anthonyuser&password=wQHL223i4LJhEuCl1");
+					System.out.println(e.getMessage());
+					System.out.println(sqlcount);
+
+					if (sqlcount == 5) {
+						break;
 					}
 				}
 			}
@@ -142,7 +142,6 @@ public class ProfileHelper extends HttpServlet {
 		ids.add(p.getProperty("EdamamId11"));
 		numkeys = keys.size();
 
-
 		YObject = new TreeMap<String, Vector<Business>>();
 		EObject = new TreeMap<String, Vector<Recipe>>();
 
@@ -152,7 +151,7 @@ public class ProfileHelper extends HttpServlet {
 		LikedBusinesses.setSize((BusinessIDs.size() > 3 ? 3 : BusinessIDs.size()));
 		recipelength = LikedRecipes.size();
 		businesslength = LikedBusinesses.size();
-		
+
 		session = request.getSession();
 		String latitude = "34.0205";
 		String longitude = "-118.2856";
@@ -163,22 +162,22 @@ public class ProfileHelper extends HttpServlet {
 		// RESTAURANTS
 		restaurantlatch = new CountDownLatch((BusinessIDs.size() > 3 ? 3 : BusinessIDs.size()));
 		for (int i = 0; i < (BusinessIDs.size() > 3 ? 3 : BusinessIDs.size()); i++) {
-			new ProfileYelpCall(this, latitude, longitude, i);		
-			}
-		
+			new ProfileYelpCall(this, latitude, longitude, i);
+		}
+
 		// RECIPES
 		recipelatch = new CountDownLatch(LikedRecipes.size());
-		for (int i = 0; i < LikedRecipes.size(); i++) {		
+		for (int i = 0; i < LikedRecipes.size(); i++) {
 			new ProfileEdamamCall(this, i);
 		}
-		
+
 		try {
 			restaurantlatch.await();
 			recipelatch.await();
 		} catch (InterruptedException e1) {
 			e1.printStackTrace();
 		}
-		
+
 		// PASS MAP OF SUGGESTIONS BACK
 		Gson gson = new Gson();
 		Type gsonType = new TypeToken<HashMap>() {
@@ -197,7 +196,7 @@ public class ProfileHelper extends HttpServlet {
 		request.setAttribute("numRecipes", recipelength);
 		request.setAttribute("numBusinesses", businesslength);
 		// send it back
-		
+
 		RequestDispatcher dispatch = request.getRequestDispatcher("/Profile.jsp");
 		try {
 			dispatch.forward(request, response);

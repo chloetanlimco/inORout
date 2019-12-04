@@ -40,7 +40,7 @@ public class ProfileYelpCall extends Thread {
 				yelpCon.setRequestMethod("GET");
 				// parsing JSON
 				JsonParser jsonParser = new JsonParser();
-				yelpCon.setConnectTimeout(100);
+				yelpCon.setConnectTimeout(200);
 				JsonObject jsonObject = (JsonObject) jsonParser
 						.parse(new InputStreamReader(yelpCon.getInputStream(), "UTF-8"));
 				
@@ -80,7 +80,7 @@ public class ProfileYelpCall extends Thread {
 					// add headers
 					yCon.setRequestProperty("Authorization", "Bearer " + p.YelpBearerId);
 					yCon.setRequestMethod("GET");
-					yCon.setConnectTimeout(100);
+					yCon.setConnectTimeout(200);
 					// parsing JSON
 					JsonParser jP = new JsonParser();
 					JsonObject jO = (JsonObject) jP.parse(new InputStreamReader(yCon.getInputStream(), "UTF-8"));

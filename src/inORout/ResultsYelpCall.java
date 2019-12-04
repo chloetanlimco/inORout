@@ -68,7 +68,7 @@ public class ResultsYelpCall extends Thread {
 				// add headers
 				yelpCon.setRequestProperty("Authorization", "Bearer " + s.YelpBearerId);
 				yelpCon.setRequestMethod("GET");
-				yelpCon.setConnectTimeout(100);
+				yelpCon.setConnectTimeout(200);
 
 
 				// parsing JSON

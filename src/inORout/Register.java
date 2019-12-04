@@ -59,11 +59,12 @@ public class Register extends HttpServlet {
 				break;
 				}catch(Exception e) {
 					sqlcount++;
-					if(sqlcount == 5) {
-						DriverManager.setLoginTimeout(2);
-						conn = DriverManager.getConnection(
-								"jdbc:mysql://google/foodapp?cloudSqlInstance=groupproject-258805:us-central1:project201&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false&user=anthonyuser&password=wQHL223i4LJhEuCl1");
-					}
+System.out.println(e.getMessage());
+System.out.println(sqlcount);
+
+					if(sqlcount == 5){
+break;
+}
 				}
 			}
 			st = conn.prepareStatement("SELECT * from User WHERE username=?");
