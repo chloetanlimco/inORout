@@ -51,7 +51,7 @@ public class Recipe {
 		if (ingredients.size() > 0) {
 			ingredientLines = new String[ingredients.size()];
 			for (int i = 0; i < ingredients.size(); i++) {
-				ingredientLines[i] = ingredients.get(i).getAsString();
+				ingredientLines[i] = ingredients.get(i).getAsString().replaceAll("\"", "");
 			}
 		} else {
 			ingredientLines = new String[1];
@@ -94,7 +94,7 @@ public class Recipe {
 		if (ingredients.size() > 0) {
 			ingredientLines = new String[ingredients.size()];
 			for (int i = 0; i < ingredients.size(); i++) {
-				ingredientLines[i] = ingredients.get(i).getAsString();
+				ingredientLines[i] = ingredients.get(i).getAsString().replaceAll("\"", "");
 			}
 		} else {
 			ingredientLines = new String[1];

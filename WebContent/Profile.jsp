@@ -73,22 +73,24 @@
                .replace(/\\b/g, "\\b")
                .replace(/\\f/g, "\\f");
 		// remove non-printable and other non-valid JSON chars
-		bSug = bSug.replace(/[\u0000-\u0019]+/g,""); 
+ 		bSug = bSug.replace(/[\u0000-\u0019]+/g,"");
 		
 		var bs = JSON.parse(bSug);
 		
 		
 		//parse recipe suggestions
-		/* rSug = rSug.replace(/\\n/g, "\\n")  
+		rSug = rSug.replace(/\\n/g, "\\n")  
         .replace(/\\'/g, "\\'")
         .replace(/\\"/g, '\\"')
         .replace(/\\&/g, "\\&")
         .replace(/\\r/g, "\\r")
         .replace(/\\t/g, "\\t")
         .replace(/\\b/g, "\\b")
-        .replace(/\\f/g, "\\f"); */
+        .replace(/\\f/g, "\\f");
 		// remove non-printable and other non-valid JSON chars
-		/* rSug = rSug.replace(/[\u0000-\u0019]+/g,"");  */
+		rSug = rSug.replace(/[\u0000-\u0019]+/g,""); 
+		
+		console.log(rSug);
 	
 		var rs = JSON.parse(rSug);
 		

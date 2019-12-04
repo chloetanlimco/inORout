@@ -4,11 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.Properties;
-import java.util.Vector;
+
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -59,15 +55,8 @@ public class ServletLogger extends HttpServlet {
 		}
 		else if(logChoice.equals("Profile"))
 		{
-			RequestDispatcher rd = request.getRequestDispatcher("ProfileHelper");
+			response.sendRedirect("/InOrOut/ProfileHelper");
 
-			try {
-				rd.forward(request, response);
-			} catch (IOException e) {
-				e.printStackTrace();
-			} catch (ServletException e) {
-				e.printStackTrace();
-			}
 		}
 		else if(logChoice.equals("Signout"))
 		{

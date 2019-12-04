@@ -34,7 +34,7 @@ public class ProfileEdamamCall extends Thread {
 				URL url = new URL(
 						"https://api.edamam.com/search?r=" + encodedLink + "&app_key=" + p.keys.get(current % p.numkeys) + "&app_id=" +p.ids.get(current % p.numkeys));
 				edamamCon = (HttpURLConnection) url.openConnection();
-				edamamCon.setConnectTimeout(200);
+				edamamCon.setConnectTimeout(100);
 				JsonParser jsonParser = new JsonParser();
 				JsonArray jsonObject = (JsonArray) jsonParser
 						.parse(new InputStreamReader(edamamCon.getInputStream(), "UTF-8"));
