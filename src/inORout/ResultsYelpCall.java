@@ -38,7 +38,7 @@ public class ResultsYelpCall extends Thread {
 	}
 
 	public void run() {
-		int sleeptime = 125;
+		int sleeptime = 50;
 		boolean yelpsuccess = false;
 		HttpSession session = s.req.getSession();
 		String latitude = "34.0205";
@@ -68,6 +68,8 @@ public class ResultsYelpCall extends Thread {
 				// add headers
 				yelpCon.setRequestProperty("Authorization", "Bearer " + s.YelpBearerId);
 				yelpCon.setRequestMethod("GET");
+				yelpCon.setConnectTimeout(100);
+
 
 				// parsing JSON
 				JsonParser jsonParser = new JsonParser();
@@ -83,7 +85,7 @@ public class ResultsYelpCall extends Thread {
 				}
 				sleeptime *= 2;
 				System.out.println(sleeptime);
-				if (sleeptime == 2000) {
+				if (sleeptime == 1600) {
 					break;
 				}
 			}

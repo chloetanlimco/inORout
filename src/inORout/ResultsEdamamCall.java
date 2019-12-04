@@ -44,6 +44,8 @@ public class ResultsEdamamCall extends Thread {
 				
 				HttpURLConnection edamamCon = (HttpURLConnection) url.openConnection();
 				edamamCon.setRequestMethod("GET");
+				edamamCon.setConnectTimeout(100);
+
 
 				// parsing JSON
 				JsonParser jsonParser = new JsonParser();
