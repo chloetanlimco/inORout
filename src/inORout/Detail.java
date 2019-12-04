@@ -112,6 +112,8 @@ public class Detail extends HttpServlet {
 					// add headers
 					yelpCon.setRequestProperty("Authorization", "Bearer " + YelpBearerId);
 					yelpCon.setRequestMethod("GET");
+					yelpCon.setConnectTimeout(1000);
+
 
 					// parsing JSON
 					JsonParser jsonParser = new JsonParser();
@@ -191,6 +193,8 @@ public class Detail extends HttpServlet {
 
 					HttpURLConnection edamamCon = (HttpURLConnection) url.openConnection();
 					edamamCon.setRequestMethod("GET");
+					edamamCon.setConnectTimeout(1000);
+
 
 					// parsing JSON
 					JsonParser jsonParser = new JsonParser();
