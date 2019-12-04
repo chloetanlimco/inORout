@@ -16,30 +16,30 @@
 	
   function profile() {
 		let div = document.getElementById("buttonLog");
-		if("<%=session.getAttribute("Current user")%>" == "null")
-		{
+		if ("<%=session.getAttribute("Current user")%>" == "null") {
 			let el = document.createElement("input");
+			el.type = "submit";
 			el.name = "logChoice";
 			el.value = "Login";
 			el.className = "btn btn-default btn-lg loginbutton";
 			div.appendChild(el);
-			
+	
 			let el2 = document.createElement("input");
+			el2.type = "submit";
 			el2.name = "logChoice";
 			el2.value = "Signup";
 			el2.className = "btn btn-default btn-lg loginbutton";
 			div.appendChild(el2);
-			
-		}
-		else
-		{
+		} else {
 			let ell = document.createElement("input");
+			ell.type = "submit";
 			ell.name = "logChoice";
 			ell.value = "Profile";
 			ell.className = "btn btn-default btn-lg loginbutton";
 			div.appendChild(ell);
-			
+	
 			let el = document.createElement("input");
+			el.type = "submit";
 			el.name = "logChoice";
 			el.value = "Signout";
 			el.className = "btn btn-default btn-lg loginbutton";
@@ -257,7 +257,7 @@
 					</form>
 				</div>
 				<div class="col-sm-4">
-					<form action="Logger" id="buttonLog"></form>
+					<form action="ServletLogger" id="buttonLog"></form>
 				</div>
 			</div>
 		</div>
