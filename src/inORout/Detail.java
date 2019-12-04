@@ -139,9 +139,22 @@ public class Detail extends HttpServlet {
 
 					// see if restaurant in user's favorites
 					// if username already taken
-					DriverManager.setLoginTimeout(2);
-					conn = DriverManager.getConnection(
-							"jdbc:mysql://google/foodapp?cloudSqlInstance=groupproject-258805:us-central1:project201&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false&user=anthonyuser&password=wQHL223i4LJhEuCl1");
+					int sqlcount = 0;
+					while(true) {
+						try {
+						DriverManager.setLoginTimeout(2);
+						conn = DriverManager.getConnection(
+								"jdbc:mysql://google/foodapp?cloudSqlInstance=groupproject-258805:us-central1:project201&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false&user=anthonyuser&password=wQHL223i4LJhEuCl1");
+						break;
+						}catch(Exception e) {
+							sqlcount++;
+							if(sqlcount == 5) {
+								DriverManager.setLoginTimeout(2);
+								conn = DriverManager.getConnection(
+										"jdbc:mysql://google/foodapp?cloudSqlInstance=groupproject-258805:us-central1:project201&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false&user=anthonyuser&password=wQHL223i4LJhEuCl1");
+							}
+						}
+					}
 					st = conn.prepareStatement(
 							"SELECT * from Restaurant WHERE userID=(SELECT userID from User WHERE username=?)");
 					st.setString(1, username);
@@ -221,9 +234,22 @@ public class Detail extends HttpServlet {
 					}
 					// see if recipe in user's favorites
 					// if username already taken
-					DriverManager.setLoginTimeout(2);
-					conn = DriverManager.getConnection(
-							"jdbc:mysql://google/foodapp?cloudSqlInstance=groupproject-258805:us-central1:project201&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false&user=anthonyuser&password=wQHL223i4LJhEuCl1");
+					int sqlcount = 0;
+					while(true) {
+						try {
+						DriverManager.setLoginTimeout(2);
+						conn = DriverManager.getConnection(
+								"jdbc:mysql://google/foodapp?cloudSqlInstance=groupproject-258805:us-central1:project201&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false&user=anthonyuser&password=wQHL223i4LJhEuCl1");
+						break;
+						}catch(Exception e) {
+							sqlcount++;
+							if(sqlcount == 5) {
+								DriverManager.setLoginTimeout(2);
+								conn = DriverManager.getConnection(
+										"jdbc:mysql://google/foodapp?cloudSqlInstance=groupproject-258805:us-central1:project201&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false&user=anthonyuser&password=wQHL223i4LJhEuCl1");
+							}
+						}
+					}
 					st = conn.prepareStatement(
 							"SELECT * from Recipe WHERE userID=(SELECT userID from User WHERE username=?)");
 					st.setString(1, username);

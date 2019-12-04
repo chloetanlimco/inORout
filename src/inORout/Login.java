@@ -44,8 +44,22 @@ public class Login extends HttpServlet {
 		PreparedStatement ps= null;
 		ResultSet rs= null;
 		try {
-			DriverManager.setLoginTimeout(2);
-			conn = DriverManager.getConnection("jdbc:mysql://google/foodapp?cloudSqlInstance=groupproject-258805:us-central1:project201&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false&user=anthonyuser&password=wQHL223i4LJhEuCl1");
+			int sqlcount = 0;
+			while(true) {
+				try {
+				DriverManager.setLoginTimeout(2);
+				conn = DriverManager.getConnection(
+						"jdbc:mysql://google/foodapp?cloudSqlInstance=groupproject-258805:us-central1:project201&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false&user=anthonyuser&password=wQHL223i4LJhEuCl1");
+				break;
+				}catch(Exception e) {
+					sqlcount++;
+					if(sqlcount == 5) {
+						DriverManager.setLoginTimeout(2);
+						conn = DriverManager.getConnection(
+								"jdbc:mysql://google/foodapp?cloudSqlInstance=groupproject-258805:us-central1:project201&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false&user=anthonyuser&password=wQHL223i4LJhEuCl1");
+					}
+				}
+			}
 			
 			//check if user exists
 			ps = conn.prepareStatement("SELECT * FROM User WHERE username=?");

@@ -1,19 +1,13 @@
 package inORout;
 
-import java.io.FileNotFoundException;
+
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
@@ -29,10 +23,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import com.google.gson.Gson;
 import java.lang.reflect.Type;
 import com.google.gson.reflect.TypeToken;
@@ -68,9 +58,22 @@ public class ProfileHelper extends HttpServlet {
 		RecipeIDs = new Vector<String>();
 		BusinessIDs = new Vector<String>();
 		try {
-			DriverManager.setLoginTimeout(2);
-			conn = DriverManager.getConnection(
-					"jdbc:mysql://google/foodapp?cloudSqlInstance=groupproject-258805:us-central1:project201&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false&user=anthonyuser&password=wQHL223i4LJhEuCl1");
+			int sqlcount = 0;
+			while(true) {
+				try {
+				DriverManager.setLoginTimeout(2);
+				conn = DriverManager.getConnection(
+						"jdbc:mysql://google/foodapp?cloudSqlInstance=groupproject-258805:us-central1:project201&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false&user=anthonyuser&password=wQHL223i4LJhEuCl1");
+				break;
+				}catch(Exception e) {
+					sqlcount++;
+					if(sqlcount == 5) {
+						DriverManager.setLoginTimeout(2);
+						conn = DriverManager.getConnection(
+								"jdbc:mysql://google/foodapp?cloudSqlInstance=groupproject-258805:us-central1:project201&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false&user=anthonyuser&password=wQHL223i4LJhEuCl1");
+					}
+				}
+			}
 			PreparedStatement st = conn.prepareStatement("SELECT userID from User WHERE username=?");
 			st.setString(1, request.getSession().getAttribute("Current user").toString());
 			int userID;

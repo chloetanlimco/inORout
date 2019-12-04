@@ -73,8 +73,22 @@ public class AddRemFav extends HttpServlet {
 		ResultSet favSet = null;
 		Boolean inFav = false;
 		try {
-			conn = DriverManager.getConnection(
-					"jdbc:mysql://google/foodapp?cloudSqlInstance=groupproject-258805:us-central1:project201&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false&user=anthonyuser&password=wQHL223i4LJhEuCl1");
+			int sqlcount = 0;
+			while(true) {
+				try {
+				DriverManager.setLoginTimeout(2);
+				conn = DriverManager.getConnection(
+						"jdbc:mysql://google/foodapp?cloudSqlInstance=groupproject-258805:us-central1:project201&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false&user=anthonyuser&password=wQHL223i4LJhEuCl1");
+				break;
+				}catch(Exception e) {
+					sqlcount++;
+					if(sqlcount == 5) {
+						DriverManager.setLoginTimeout(2);
+						conn = DriverManager.getConnection(
+								"jdbc:mysql://google/foodapp?cloudSqlInstance=groupproject-258805:us-central1:project201&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false&user=anthonyuser&password=wQHL223i4LJhEuCl1");
+					}
+				}
+			}
 
 			int record = -1;
 			if (restaurant != null) {

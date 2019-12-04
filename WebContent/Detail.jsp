@@ -226,14 +226,15 @@
 				data : {
 					recipe: "<%=r == true ? "true" : "false"%>",
 					id: e.target.firstElementChild.value
+				},
+			success: function(result){
+				if($("#favButton").val() === "Remove from favorites"){
+					$("#favButton").val("Add to favorites");
+				}else{
+					$("#favButton").val("Remove from favorites");
 				}
-			});  
-			if($("#favButton").val() === "Remove from favorites"){
-				$("#favButton").val("Add to favorites");
-			}else{
-				$("#favButton").val("Remove from favorites");
 			}
-			
+			});
 			
 			return false;
 		};
