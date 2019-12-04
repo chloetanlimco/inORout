@@ -171,6 +171,7 @@ public class ProfileHelper extends HttpServlet {
 		String yGson = gson.toJson(YObject, gsonType);
 		request.setAttribute("RecipesSuggestions", eGson);
 		request.setAttribute("BusinessSuggestions", yGson);
+		System.out.println(eGson);
 		Recipe[] RecipeFav = LikedRecipes.toArray(new Recipe[LikedRecipes.size()]);
 		Business[] BusinessFav = LikedBusinesses.toArray(new Business[LikedBusinesses.size()]);
 		// PASS ARRAY OF RECIPES AND BUSINESSES BACK

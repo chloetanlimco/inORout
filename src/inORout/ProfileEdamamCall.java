@@ -82,7 +82,7 @@ public class ProfileEdamamCall extends Thread {
 				//recipes = (JsonArray) jE.getAsJsonArray("hits");
 				// figure out what to iterate up to
 				for (int j = 0; j < ((10 < recipes.size()) ? 10 : recipes.size()); j++) {
-					Recipe r = new Recipe(recipes.get(j).getAsJsonObject(), "trash");
+					Recipe r = new Recipe(recipes.get(j).getAsJsonObject());
 					temp.add(r);
 				}
 				p.EObject.put(name, temp);
