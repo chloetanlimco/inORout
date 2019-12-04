@@ -115,6 +115,9 @@ public class Recipe {
 	public String getUri() {
 		return uri;
 	}
+	public int getServings() {
+		return servings;
+	}
 	public String[] getHealthLabels() {
 		return healthLabels;
 	}
