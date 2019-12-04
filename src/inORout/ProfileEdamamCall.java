@@ -72,11 +72,14 @@ public class ProfileEdamamCall extends Thread {
 				// parsing JSON
 	
 				JsonParser jP = new JsonParser();
-	
-				JsonElement jE = jP.parse(new InputStreamReader(eCon.getInputStream(), "UTF-8"));
-				JsonArray recipes;
+				JsonObject jO = (JsonObject) jP
+				.parse(new InputStreamReader(eCon.getInputStream(), "UTF-8"));
+				
+//				JsonElement jE = jP.parse(new InputStreamReader(eCon.getInputStream(), "UTF-8"));
+				JsonArray recipes = jO.getAsJsonArray("hits");
+				//System.out.println(jE);
 
-				recipes = (JsonArray) jE;
+				//recipes = (JsonArray) jE.getAsJsonArray("hits");
 				// figure out what to iterate up to
 				for (int j = 0; j < ((10 < recipes.size()) ? 10 : recipes.size()); j++) {
 					Recipe r = new Recipe(recipes.get(j).getAsJsonObject(), "trash");
