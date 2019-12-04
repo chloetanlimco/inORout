@@ -22,7 +22,7 @@
 			padding: 0;
 			margin: 0;
 			background-size: cover;
-			background-image: url(foodbackground.png);
+			background-image: url(homepagefood.png);
 			background-repeat: no-repeat;
 		}
 
