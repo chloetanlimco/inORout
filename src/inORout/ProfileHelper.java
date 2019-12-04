@@ -30,6 +30,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.Gson;
@@ -119,7 +120,7 @@ public class ProfileHelper extends HttpServlet {
 
 		LikedRecipes = new Vector<Recipe>();
 		LikedBusinesses = new Vector<Business>();
-		LikedRecipes.setSize((BusinessIDs.size() > 3 ? 3 : BusinessIDs.size()));
+		LikedRecipes.setSize((RecipeIDs.size() > 3 ? 3 : RecipeIDs.size()));
 		LikedBusinesses.setSize((BusinessIDs.size() > 3 ? 3 : BusinessIDs.size()));
 
 		session = request.getSession();
@@ -140,8 +141,9 @@ public class ProfileHelper extends HttpServlet {
 		} catch (InterruptedException e1) {
 			e1.printStackTrace();
 		}
+		
 		// RECIPES
-		for (int i = 0; i < (RecipeIDs.size() > 2 ? 2 : RecipeIDs.size()); i++) {
+		for (int i = 0; i < LikedRecipes.size(); i++) {
 			Vector<Recipe> temp = new Vector<Recipe>();
 			String encodedLink = URLEncoder.encode(RecipeIDs.get(i), StandardCharsets.UTF_8.toString());
 			URL url = new URL(
@@ -152,24 +154,36 @@ public class ProfileHelper extends HttpServlet {
 					.parse(new InputStreamReader(edamamCon.getInputStream(), "UTF-8"));
 			// UNSURE IF THIS WORKS
 			JsonObject obj = jsonObject.get(0).getAsJsonObject();
-			LikedRecipes.add(new Recipe(obj));
+			
+			LikedRecipes.set(i, new Recipe(obj, "trash"));
 			String name = obj.getAsJsonPrimitive("label").getAsString();
 			String a = name.substring(0, name.indexOf(' ')); // get first word
+			
 			// SEARCH HERE
 			String params = "q=" + a + "&app_key=" + app_key + "&app_id=" + app_id;
 			URL u = new URL("https://api.edamam.com/search?" + params);
 			HttpURLConnection eCon = (HttpURLConnection) url.openConnection();
-			edamamCon.setRequestMethod("GET");
+			eCon.setRequestMethod("GET");
 			// parsing JSON
+			
 			JsonParser jP = new JsonParser();
-			JsonObject jO = (JsonObject) jP.parse(new InputStreamReader(eCon.getInputStream(), "UTF-8"));
-			JsonArray recipes = jO.getAsJsonArray("hits");
-			// figure out what to iterate up to
-			for (int j = 0; j < 10; j++) {
-				Recipe r = new Recipe(recipes.get(j).getAsJsonObject());
-				temp.add(r);
+			
+			JsonElement jE = jP.parse(new InputStreamReader(eCon.getInputStream(), "UTF-8"));
+			JsonArray recipes;
+			try {
+
+				recipes = (JsonArray) jE; 
+				// figure out what to iterate up to
+				for (int j = 0; j < ((10 < recipes.size()) ? 10 : recipes.size()); j++) {
+					Recipe r = new Recipe(recipes.get(j).getAsJsonObject(), "trash");
+					temp.add(r);
+				}
+				EObject.put(name, temp);
+				
+			} catch (Exception e) {
+				System.out.println("exception reached:" + e.getMessage());
 			}
-			EObject.put(name, temp);
+
 		}
 		// PASS MAP OF SUGGESTIONS BACK
 		Gson gson = new Gson();
@@ -184,13 +198,11 @@ public class ProfileHelper extends HttpServlet {
 		// PASS ARRAY OF RECIPES AND BUSINESSES BACK
 		request.setAttribute("Recipes", RecipeFav);
 		request.setAttribute("Businesses", BusinessFav);
-//		for (int i = 0; i < BusinessFav.length; i++) {
-//			System.out.println(BusinessFav[i].getId());
-//		}
+
 		request.setAttribute("numRecipes", RecipeFav.length);
 		request.setAttribute("numBusinesses", BusinessFav.length);
 		// send it back
-		System.out.println(request.getQueryString());
+		
 		RequestDispatcher dispatch = request.getRequestDispatcher("/Profile.jsp");
 		try {
 			dispatch.forward(request, response);
