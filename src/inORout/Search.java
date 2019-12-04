@@ -73,11 +73,23 @@ public class Search extends HttpServlet {
 			keys.add(p.getProperty("EdamamKey3"));
 			keys.add(p.getProperty("EdamamKey4"));
 			keys.add(p.getProperty("EdamamKey5"));
+			keys.add(p.getProperty("EdamamKey6"));
+			keys.add(p.getProperty("EdamamKey7"));
+			keys.add(p.getProperty("EdamamKey8"));
+			keys.add(p.getProperty("EdamamKey9"));
+			keys.add(p.getProperty("EdamamKey10"));
+			keys.add(p.getProperty("EdamamKey11"));
 			ids.add(p.getProperty("EdamamId"));
 			ids.add(p.getProperty("EdamamId2"));
 			ids.add(p.getProperty("EdamamId3"));
 			ids.add(p.getProperty("EdamamId4"));
 			ids.add(p.getProperty("EdamamId5"));
+			ids.add(p.getProperty("EdamamId6"));
+			ids.add(p.getProperty("EdamamId7"));
+			ids.add(p.getProperty("EdamamId8"));
+			ids.add(p.getProperty("EdamamId9"));
+			ids.add(p.getProperty("EdamamId10"));
+			ids.add(p.getProperty("EdamamId11"));
 			numkeys = keys.size();
 		}
 		catch (FileNotFoundException e) {

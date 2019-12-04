@@ -87,18 +87,30 @@ public class Detail extends HttpServlet {
 		keys.add(p.getProperty("EdamamKey3"));
 		keys.add(p.getProperty("EdamamKey4"));
 		keys.add(p.getProperty("EdamamKey5"));
+		keys.add(p.getProperty("EdamamKey6"));
+		keys.add(p.getProperty("EdamamKey7"));
+		keys.add(p.getProperty("EdamamKey8"));
+		keys.add(p.getProperty("EdamamKey9"));
+		keys.add(p.getProperty("EdamamKey10"));
+		keys.add(p.getProperty("EdamamKey11"));
 		ids.add(p.getProperty("EdamamId"));
 		ids.add(p.getProperty("EdamamId2"));
 		ids.add(p.getProperty("EdamamId3"));
 		ids.add(p.getProperty("EdamamId4"));
 		ids.add(p.getProperty("EdamamId5"));
+		ids.add(p.getProperty("EdamamId6"));
+		ids.add(p.getProperty("EdamamId7"));
+		ids.add(p.getProperty("EdamamId8"));
+		ids.add(p.getProperty("EdamamId9"));
+		ids.add(p.getProperty("EdamamId10"));
+		ids.add(p.getProperty("EdamamId11"));
 		numkeys = keys.size();
 
 		// restaurant details
 		Business b = null;
 		Recipe r = null;
 		boolean fav = false;
-		int sleeptime = 125;
+		int sleeptime = 5;
 		if (restaurant != null) {
 			boolean success = false;
 			while (!success) {
@@ -112,7 +124,7 @@ public class Detail extends HttpServlet {
 					// add headers
 					yelpCon.setRequestProperty("Authorization", "Bearer " + YelpBearerId);
 					yelpCon.setRequestMethod("GET");
-					yelpCon.setConnectTimeout(1000);
+					yelpCon.setConnectTimeout(100);
 
 
 					// parsing JSON
@@ -157,7 +169,7 @@ public class Detail extends HttpServlet {
 					}
 					sleeptime *= 2;
 					System.out.println(sleeptime);
-					if (sleeptime == 2000) {
+					if (sleeptime == 1600) {
 						break;
 					}
 
@@ -193,7 +205,7 @@ public class Detail extends HttpServlet {
 
 					HttpURLConnection edamamCon = (HttpURLConnection) url.openConnection();
 					edamamCon.setRequestMethod("GET");
-					edamamCon.setConnectTimeout(200);
+					edamamCon.setConnectTimeout(100);
 
 
 					// parsing JSON
