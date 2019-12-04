@@ -68,7 +68,7 @@
 
 
 
-				<form name="myform" method="GET" action="Register">
+				<form name="myform" method="POST" action="Register">
 					<div class="form-group row">
 						<label for="inputUsername" class="col-sm-2 col-form-label">Username</label>
 						<div class="col-sm-10">

@@ -2,7 +2,6 @@
 
 *{
 	font-family: Lustria;
-	margin-left: 10px;
 }
 #titleHome
 {
@@ -11,20 +10,6 @@
 	position: relative;
 	font-size: 5vh;
 	background-color: #FC9D90 ! important;
-}
-#ingredients{
-	margin-top: 10vh;
-	margin-left: 10vh;
-}
-#moredetails{
-	margin-top: 13vh;
-	margin-left: 10vh;
-}
-#details{
-	margin-top: 15vh;
-}
-#picture{
-	margin-top: 12vh;
 }
 .header
 {
@@ -57,7 +42,6 @@
 
 .mainBox
 {
-	height: 100vh;
 	border: none;
 	border-radius: 0 !important;
 	padding: 0 ! important;
@@ -84,10 +68,35 @@
 .filterBar
 {
 	position: relative;
-	height: 65vh;
+	width: 100%;
 	font-family: 'Lustria';
 	margin-top: 0vh ! important; 
-	padding: 0vh ! important;
+	padding: 0px 5px ! important;
+	padding-bottom: 40px !important;
+}
+.filterBar h3 {
+	padding: 10px 5px 0px;
+}
+.parentCenter form {
+	width: 100%;
+	text-align: center;
+}
+.filterButton
+{
+	border-color: 3px black ! important;
+	margin: 1vh auto ! important;
+	background-color: #9AADF2 !important;
+	color: white ! important;
+	font-family: 'Lustria';
+	text-align: center ! important;
+	left: 50vh ! important;
+	outline: none !important;
+	width: 150px;
+}
+
+.filterButton.active{
+	box-shadow: inset 0 3px 5px rgba(0,0,0,.3);
+	background-color: #6f8efc !important;
 }
 
 
@@ -95,10 +104,10 @@
   content: "";
   display: table;
   clear: both;
-  
 }
 .parentCenter
 {
+	padding-top: 20px;
 	margin: auto;
 	display: block;
 }
@@ -106,50 +115,90 @@
 {
 	font-family: 'Lustria';
 }
-#mainBlock
+#restaurantDiv
 {
 	font-family: 'Lustria';
-	margin-left: 13vh;
+	color: black;
+	text-align: left;
 }
 #recipeDiv
 {
 	font-family: 'Lustria';
 	color: black;
+	text-align:left;
 }
 .row
 {
 	font-family: 'Lustria' ! important;
 	color: black;
-	margin-bottom:35px; 
-	margin-top:10px;
+	padding: 20px;
+	padding-left: 30px;
 }
-.grid{
-	padding-left: 50px;
+.image
+{
+	margin: 0 auto;
+	background-color: red;
+	position: relative;
+	width: 20vh;
+	height:20vh ! important;
+	font-size: 0.00001vh;
+	background-repeat: no-repeat;
+  	display: block;
+  	background-size:cover;
 }
 h4, h5
 {
 	font-family: 'Lustria' ! important;
 	color: black;
 }
-#res{
-	margin-top:10vh;
+
+#filter-header{
+	text-align: center;
 }
-#resdetails{
-	margin-top:10vh;
-}
-#det{
-	margin-top:12vh;
-	margin-left:10vh;
-}
-#det1{
-	margin-top:20vh;
-}
-#favButton{
-	background-color: #FC9D90;
-	border-radius:8px;
+
+h3{
+	margin-top: 10px !important;
+	padding-top: 0px !important;
+	margin-bottom: 0px !important;
 }
 .star
 {
 	height: 2vh;
 	width: 2vh;
+}
+
+.mycontainer{
+	padding-left: 0 !important;
+	padding-right: 0 !important;
+	padding-top: 0 !important;
+}
+.labelling
+{
+	font-size: 0.0000000001vh;
+}
+#det{
+	margin-top:15vh;
+	margin-left:7vh;
+}
+#det1{
+	margin-top:22vh;
+}
+#ingredients{
+	margin-top: 10vh;
+	margin-left: 10vh;
+}
+#moredetails{
+	margin-top: 13vh;
+	margin-left: 10vh;
+}
+#details{
+	margin-top: 15vh;
+}
+#picture{
+	margin-top: 9vh;
+	margin-left: 6vh;
+}
+#favButton{
+	background-color: #FC9D90;
+	border-radius:8px;
 }

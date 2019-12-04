@@ -23,8 +23,11 @@ public class Recipe {
 		image = recipe.getAsJsonPrimitive("image").getAsString();
 		uri = recipe.getAsJsonPrimitive("uri").getAsString();
 		servings = recipe.getAsJsonPrimitive("yield").getAsString();
+<<<<<<< HEAD
 		url = recipe.getAsJsonPrimitive("url").getAsString();
 		
+=======
+>>>>>>> 32611e3d701ff866518c038d241fbbd0695b421b
 		JsonArray health = recipe.getAsJsonArray("healthLabels");
 		if (health.size() > 0) {
 			healthLabels = new String[health.size()];

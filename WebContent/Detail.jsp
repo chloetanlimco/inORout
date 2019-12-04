@@ -45,6 +45,19 @@
 			div.appendChild(el);
 		}
 	}
+  function callFavoriteRestaurant(){
+	  	if (document.getElementById("favButton").getAttribute("value")=="Add to favorites"){
+	  		document.getElementById("favButton").setAttribute("value", "Remove from favorites");
+	  	}
+		else{
+			document.getElementById("favButton").setAttribute("value", "Add to favorites");
+		}
+		var xhttp = new XMLHttpRequest();
+		xhttp.open("GET","AddRemFav?restaurant="+"<%=((Business)request.getAttribute("business")).getId()%>",false);
+		xhttp.send();
+	}
+
+
   function loadResults()
 	{
 		
@@ -76,7 +89,9 @@
 			var rec = "<%=request.getAttribute("recipe")%>";
 			var res = "<%=request.getAttribute("restaurant")%>";
 			
-			<% if(request.getAttribute("recipe") == null) //BUSINESS
+			<% if (fav){System.out.println("IM IN FAVORITES");}
+			else {System.out.println("I AM NOT IN FAVORITES");}
+			if(request.getAttribute("recipe") == null) //BUSINESS
 			{%>
 			
 				var busDetails="";
@@ -89,7 +104,7 @@
 				
 					
 					
-					var stars = "<%=business.getRating()%>";
+					var stars = "<%=(int)business.getRating()%>";
 		   			var rate ="";
 		       		for(var j=0; j < stars; j++)
 		       		{
@@ -102,15 +117,19 @@
 					
 				busDetails += "<div class=\"col-sm-3\" id = \"det\">";
 				busDetails += "<div style=\"font-weight:bold;font-size:200%\">"+"<%=business.getName()%></div>";
-				busDetails+="<br>"+rate+"<br><br>  "+"<%=business.getPrice()%>"+"<br>";
-				
+				busDetails+="<br>"+rate+"<br><br>  "+"<%=business.getPrice()%>"+"<br><br>";
 				
 				busDetails +="Categories: "+"<%=business.getCategories()%>"+"<br>";
 				
 				<% if (session.getAttribute("Current user")!=null && !fav){%>
-				busDetails+= "<br><br><form action = \"AddRemFav\" method = \"GET\">";
-				busDetails += "<input type=\"hidden\" name=\"restaurant\" value=\""+"<%=business.getId()%>"+"\"></input>";
+				busDetails+= "<br><br><form id=\"myform\">";
+				busDetails += "<input type=\"hidden\" id=\"keyid\" value=\""+"<%=business.getId()%>"+"\"></input>";
 				busDetails+= "<input id = \"favButton\" type =\"submit\" value = \"Add to favorites\"></input></form>";
+			<%}
+			else if (session.getAttribute("Current user")!=null){%>
+				busDetails+= "<br><br><form id=\"myform\">";
+				busDetails += "<input type=\"hidden\" id=\"keyid\" value=\""+"<%=business.getId()%>"+"\"></input>";
+				busDetails+= "<input id = \"favButton\" type =\"submit\" value = \"Remove from favorites\"></input></form>";
 			<%}%>
 				
 				busDetails += "</div>";
@@ -121,7 +140,7 @@
 				//busDetails += "<div class=\"col-sm-6\" id = \"address\">";
 				
 				busDetails += "<div class=\"col-sm-3\" id = \"det1\">";
-				busDetails +="Distance: "+"<%=business.getDistance()%>"+" miles<br><br>";
+				busDetails +="Distance: "+"<%=Math.abs(business.getDistance())%>"+" miles<br><br>";
 				
 				busDetails += "Address: "+"<%=business.getDisplayAddress().substring(0,business.getDisplayAddress().indexOf("\n"))%>"+"<br><br>";
 				
@@ -179,8 +198,8 @@
 				}%>
 				
 				<% if (session.getAttribute("Current user")!=null && !fav){%>
-				recipeDetails+= "<br><form action = \"AddRemFav\" method = \"GET\">";
-				recipeDetails += "<input type=\"hidden\" name=\"recipe\" value=\""+"<%=recipe.getUri()%>"+"\"></input>";
+				recipeDetails+= "<br><form id=\"myform\">";
+				recipeDetails += "<input type=\"hidden\" id=\"keyid\" value=\""+"<%=recipe.getUri()%>"+"\"></input>";
 				recipeDetails+= "<input id = \"favButton\" type =\"submit\" value = \"Add to favorites\"></input></form>";
 			<%}%>
 				recipeDetails +="</div>";
@@ -204,56 +223,38 @@
 	</script>
 </head>
 <body onload="profile(); loadResults();">
+	<div class="container-fluid mycontainer">
 
-<div class="container-fluid">
-
-  <div class="header">
-	  <div class="container">
-	  <div class="row">
-	    <div class="col-sm-2">
-	    <a href="HomePage.jsp" class="btn btn-default homeButton" id="titleHome">in-or-out</a>
-	    </div>
-	    <div class="searchSection">
-		  <form action="Search">
-		  <div class="col-sm-3">
-		    <div class="form-group">
-		      <input type="text" class="form-control" id="foodSearch" placeholder="Find fries, sushi, pizza..." name="searchTerm">
-		    </div>
-		  </div>
-		    <div class="col-sm-3">
-		    	<input type="submit" class="btn btn-default searchButton" name="searchType" value="Search by Restaurant">
-		    	<input type="submit" class="btn btn-default searchButton" name="searchType" value="Search by Recipe">
-		     </div>
-		  </form>
-		  </div>
-	    <div class="col-sm-3">
-	    <form action="Logger.java" id="buttonLog">
-	    </form>
-	    </div>
-	  </div>
-	  </div>
+		<div class="header">
+			<div class="row">
+				<div class="col-sm-2">
+					<a href="HomePage.jsp" class="btn btn-default homeButton"
+						id="titleHome">in-or-out</a>
+				</div>
+				<div class="searchSection">
+					<form action="Search">
+						<div class="col-sm-3">
+							<div class="form-group">
+								<input type="text" class="form-control" id="foodSearch"
+									placeholder="Find fries, sushi, pizza..." name="searchTerm">
+							</div>
+						</div>
+						<div class="col-sm-3">
+							<input type="submit" class="btn btn-default searchButton"
+								name="searchType" value="Search by Restaurant"> <input
+								type="submit" class="btn btn-default searchButton"
+								name="searchType" value="Search by Recipe">
+						</div>
+					</form>
+				</div>
+				<div class="col-sm-4">
+					<form action="Logger" id="buttonLog"></form>
+				</div>
+			</div>
+		</div>
 	</div>
-  	<div class="main">
-  	<div id="error"></div>
-		<div class="row">
-	    	<div id="mainBlock">
-	    	
-	    	<div class="tab-content">
-		    <div id="detailsDiv1">
-		    <div id="detailsDiv2">
-		    
-		    
-		    
-		    </div>
-
-		    </div>
-	    	
-	    	
-	    	</div>
-	    </div>
-    </div>
-	
-</div>
+	<div id = "detailsDiv1"></div>
+	<div id = "detailsDiv2"></div>
 
 </body>
 </html>
