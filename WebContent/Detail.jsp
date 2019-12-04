@@ -215,6 +215,7 @@
 			%>
 			 
 		}
+		<%System.out.println("r is " + r);%>
 		document.getElementById("myform").onsubmit = function(e){
 			e.preventDefault();
 			console.log("good");
@@ -222,7 +223,7 @@
 				method : "GET",
 				url : "AddRemFav?",
 				data : {
-					recipe: "<%=r? "true" : "false"%>",
+					recipe: "<%=r == true ? "true" : "false"%>",
 					id: e.target.firstElementChild.value
 				}
 			});  

@@ -47,7 +47,12 @@ public class AddRemFav extends HttpServlet {
 //			}
 //		});  
 		String username = (String) request.getSession().getAttribute("Current user");
-		boolean isrecipe = Boolean.getBoolean(request.getParameter("recipe"));
+		
+		boolean isrecipe = false;
+				
+		if(request.getParameter("recipe").contentEquals("true")){
+			isrecipe = true;
+		}
 
 		String restaurant = null;
 		String recipe = null;
@@ -56,6 +61,9 @@ public class AddRemFav extends HttpServlet {
 		} else {
 			restaurant = request.getParameter("id");
 		}
+		System.out.println(request.getParameter("recipe"));
+		System.out.println(isrecipe);
+		System.out.println(recipe);
 
 		// if user not logged in
 

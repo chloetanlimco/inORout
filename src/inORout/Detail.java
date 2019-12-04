@@ -219,7 +219,7 @@ public class Detail extends HttpServlet {
 							fav = true;
 						}
 					}
-					break;
+					current = numkeys;
 				} catch (Exception e) {
 					e.printStackTrace();
 					current = current + 1;
